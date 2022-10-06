@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bán hàng nông sản</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- MATERIAL DESIGN ICONIC FONT -->
+<link rel="stylesheet"
+	href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+<!-- STYLE CSS -->
+<link rel="stylesheet" href="css/style2.css">
+</head>
+
+<body>
+
+	<div class="wrapper" style="background-image: url('images/d2.jpg');">
+		<div class="inner" style="width: 600px;">
+			<form th:object="${registration}" th:action="@{/registration}"
+				method="post" onsubmit="return checkempty(form)" name="form" style="width: 100%;">
+				<h3>Đăng ký</h3>
+				<div class="form-wrapper">
+					<input type="text" placeholder="Họ Tên" class="form-control"
+						name="fullname" th:field="*{fullname}"> <i
+						class="zmdi zmdi-account"></i>
+				</div>
+				<div class="error">
+					<span id="ten"></span>
+				</div>
+				<div class="form-wrapper">
+					<input type="password" placeholder="Mật khẩu" name="password"
+						class="form-control" th:field="*{password}"> <i
+						class="zmdi zmdi-lock"></i>
+				</div>
+				<div class="error">
+					<span id="matkhau"></span>
+				</div>
+				<div class="form-wrapper">
+					<input type="password" placeholder="Nhập lại mật khẩu"
+						name="repass" class="form-control"> <i
+						class="zmdi zmdi-lock"></i>
+				</div>
+				<div class="error">
+					<span id="nhaplaimatkhau"></span>
+				</div>
+				<div class="form-check-inline">
+					<label style="padding-right: 20px; font-size: 17px;">Giới
+						tính:</label> <label class="form-check-label" for="radio1"
+						style="font-size: 17px;"> <input type="radio"
+						class="form-check-input" id="radio1" name="optradio" value="false"
+						checked th:field="*{gender}">Nam
+					</label> <label class="form-check-label" for="radio2"
+						style="font-size: 17px;"> <input type="radio"
+						class="form-check-input" id="radio2" name="optradio" value="true"
+						th:field="*{gender}">Nữ
+					</label>
+				</div>
+				<br>
+				<div class="form-wrapper">
+					<input type="text" placeholder="Số điện thoại" class="form-control"
+						th:field="*{phone}" name="phone"> <i
+						class="zmdi zmdi-code-smartphone"></i>
+				</div>
+				<div class="error">
+					<span id="sdt"></span>
+					<span th:text="${error}"></span>
+				</div>
+				<div class="form-wrapper">
+					<input type="date" placeholder="birthday" class="form-control"
+						th:field="*{birthday}" name="birthday"> <i
+						class="zmdi zmdi-code-smartphone"></i>
+				</div>
+				<div class="error">
+					<span id="ngaysinh"></span>
+				</div>
+				<div class="form-wrapper">
+					<input type="text" placeholder="Địa chỉ" class="form-control"
+						th:field="*{address}"> <i class="zmdi zmdi-pin"></i>
+				</div>
+				<button style="width: 100%; border-radius: 16px; margin-top: 0px;">Đăng ký</button>
+				<a th:href="@{/login}" style="text-align: center;color: white;font-size: 18px; text-decoration: none;margin-top: 20px; "><div
+						style="width: 100%; border-radius: 16px; background:rgb(8, 167, 100); height: 40px; margin-top: 10px; padding-top: 10px;">Bạn đã có tài khoản</div></a>
+			</form>
+		</div>
+	</div>
+
+</body>
+<script src="js/validate.js"></script>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Bán Hàng Nông Sản</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link
+		href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+		rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+		rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+		rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
+		rel="stylesheet">
+	
+	<link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/animate.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/aos.css}">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+	<link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/flaticon.css}">
+	<link rel="stylesheet" th:href="@{/css/icomoon.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/style1.css}">
+	<link rel="stylesheet" th:href="@{/css/slick-theme.css}">
+	<link rel="stylesheet" th:href="@{/css/slick.css}">
+	<link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
+</head>
+<body class="goto-here">
+	<!-- Header -->
+	<div th:replace="fragment/header::header"></div>
+
+	<!-- Image Header -->
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('/images/item3.jpg');">
+
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span>Giới
+							Thiệu</span>
+					</p>
+					<h1 class="mb-0 bread">Giới Thiệu</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Conten about -->
+	<section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center"
+					style="background-image: url(/images/item2.jpg);">
+					<a href="https://vimeo.com/45830194"
+						class="icon popup-vimeo d-flex justify-content-center align-items-center">
+						<span class="icon-play"></span>
+					</a>
+				</div>
+				<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
+					<div class="heading-section-bold mb-4 mt-md-5">
+						<div class="ml-md-0">
+							<h2 class="mb-4"> Chào mừng bạn đến với Website chúng tôi. </h2>
+						</div>
+					</div>
+					<div class="pb-md-5">
+						<p></p>
+						<p></p>
+						<p> <a th:href="@{/index/product}" class="btn btn-primary">Mua ngay</a> </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Email feedback -->
+	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+		<div class="container py-4">
+			<div class="row d-flex justify-content-center py-5">
+				<div class="col-md-6">
+					<h2 style="font-size: 22px;" class="mb-0">Theo dõi bản tin của
+						chúng tôi</h2>
+					<span>Nhận cập nhật e-mail về các cửa hàng mới nhất của
+						chúng tôi và ưu đãi đặc biệt</span>
+				</div>
+				<div class="col-md-6 d-flex align-items-center">
+					<form action="#" class="subscribe-form">
+						<div class="form-group d-flex">
+							<input type="text" class="form-control"
+								placeholder="Enter email address"> <input type="submit"
+								value="Subscribe" class="submit px-3">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Email feedback -->
+	<section class="ftco-section testimony-section">
+		<div class="container">
+			<div class="row justify-content-center mb-5 pb-3">
+				<div class="col-md-7 heading-section ftco-animate text-center">
+					<span class="subheading">Ý Kiến</span>
+					<h2 class="mb-4">Ý kiến phản hồi của khách hàng</h2>
+					<p>Far far away, behind the word mountains, far from the
+						countries Vokalia and Consonantia, there live the blind texts.
+						Separated they live in</p>
+				</div>
+			</div>
+			<div class="row ftco-animate">
+				<div class="col-md-12">
+					<div class="carousel-testimony owl-carousel">
+						<div class="item">
+							<div class="testimony-wrap p-4 pb-5">
+								<div class="user-img mb-5"
+									style="background-image: url(/images/person_1.jpg)">
+									<span
+										class="quote d-flex align-items-center justify-content-center">
+										<i class="icon-quote-left"></i>
+									</span>
+								</div>
+								<div class="text text-center">
+									<p class="mb-5 pl-4 line">Far far away, behind the word
+										mountains, far from the countries Vokalia and Consonantia,
+										there live the blind texts.</p>
+									<p class="name">Garreth Smith</p>
+									<span class="position">Marketing Manager</span>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap p-4 pb-5">
+								<div class="user-img mb-5"
+									style="background-image: url(/images/person_2.jpg)">
+									<span
+										class="quote d-flex align-items-center justify-content-center">
+										<i class="icon-quote-left"></i>
+									</span>
+								</div>
+								<div class="text text-center">
+									<p class="mb-5 pl-4 line">Far far away, behind the word
+										mountains, far from the countries Vokalia and Consonantia,
+										there live the blind texts.</p>
+									<p class="name">Garreth Smith</p>
+									<span class="position">Interface Designer</span>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap p-4 pb-5">
+								<div class="user-img mb-5"
+									style="background-image: url(/images/person_3.jpg)">
+									<span
+										class="quote d-flex align-items-center justify-content-center">
+										<i class="icon-quote-left"></i>
+									</span>
+								</div>
+								<div class="text text-center">
+									<p class="mb-5 pl-4 line">Far far away, behind the word
+										mountains, far from the countries Vokalia and Consonantia,
+										there live the blind texts.</p>
+									<p class="name">Garreth Smith</p>
+									<span class="position">UI Designer</span>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap p-4 pb-5">
+								<div class="user-img mb-5"
+									style="background-image: url(/images/person_1.jpg)">
+									<span
+										class="quote d-flex align-items-center justify-content-center">
+										<i class="icon-quote-left"></i>
+									</span>
+								</div>
+								<div class="text text-center">
+									<p class="mb-5 pl-4 line">Far far away, behind the word
+										mountains, far from the countries Vokalia and Consonantia,
+										there live the blind texts.</p>
+									<p class="name">Garreth Smith</p>
+									<span class="position">Web Developer</span>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap p-4 pb-5">
+								<div class="user-img mb-5"
+									style="background-image: url(/images/person_1.jpg)">
+									<span
+										class="quote d-flex align-items-center justify-content-center">
+										<i class="icon-quote-left"></i>
+									</span>
+								</div>
+								<div class="text text-center">
+									<p class="mb-5 pl-4 line">Far far away, behind the word
+										mountains, far from the countries Vokalia and Consonantia,
+										there live the blind texts.</p>
+									<p class="name">Garreth Smith</p>
+									<span class="position">System Analyst</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="ftco-footer ftco-section"
+		th:replace="fragment/footer::footer"></footer>
+
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/aos.js}"></script>
+	<script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/scrollax.min.js}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script th:src="@{/js/google-map.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

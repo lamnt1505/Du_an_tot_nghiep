@@ -1,0 +1,40 @@
+#anh {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.info {
+	width: 86%;
+	height: 500px;
+	background-color: #fcfcfc;
+	border-radius: 5px;
+	margin-left: 80px;
+	box-shadow: 0px 0px 2px #808080;
+}
+
+.image {
+	width: 38%;
+	height: 80%;
+	float: left;
+	margin-top: 48px;
+	margin-left: 30px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 2px #808080;
+}
+
+.information {
+	width: 50%;
+	height: 100%;
+	float: right;
+}
+
+.information h1 {
+	padding-top: 40px;
+	padding-bottom: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	}
+.information p{
+	font-size: 20px;
+}

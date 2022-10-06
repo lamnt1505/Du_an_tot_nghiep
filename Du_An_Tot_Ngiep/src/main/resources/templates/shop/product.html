@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Bán hàng nông sản</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<script th:src="@{/js/jquery.simplePagination.js}"></script>
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+	
+	<link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/animate.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/aos.css}">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+	<link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/flaticon.css}">
+	<link rel="stylesheet" th:href="@{/css/icomoon.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/style1.css}">
+	<link rel="stylesheet" th:href="@{/css/slick-theme.css}">
+	<link rel="stylesheet" th:href="@{/css/slick.css}">
+	<link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
+
+</head>
+<body class="goto-here">
+	<!-- Header -->
+	<div th:replace="fragment/header::header"></div>
+	
+	<!-- Image header -->
+	<div class="hero-wrap hero-bread"  id="imageBack" style="background-image: url('/images/item3.jpg')">
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span>Products</span>
+					</p>
+					<h1 class="mb-0 bread">Products</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Content product -->
+	<section class="ftco-section">
+		<div class="dropdown" style="margin-left: 120px;">
+			<button class="btn btn-primary" style="margin-right: 10px;"
+				data-toggle="modal" data-target="#modalFilter">Lọc theo danh mục</button>
+			<a style="margin-right: 10px;" href="#">Sắp Xếp theo:</a>
+			<button class="btn btn-primary" type="button"
+				onclick="listProductNewBest()">Mới Nhất</button>
+			<button class="btn btn-primary dropdown-toggle" type="button"
+				data-toggle="dropdown">
+				Giá <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><button style="hover: color=red;" class="dropdown-item"
+						onclick="listProductPriceDesc()">Giá cao đến thấp</button></li>
+				<li><button class="dropdown-item"
+						onclick="listProductPriceAsc()">Giá thấp đến cao</button></li>
+			</ul>
+		</div>
+		<div class="container">
+			<div class="row" id="dataProduct"></div>
+		</div>
+		<div class="container">
+			<div class="row" id="pageproduct"></div>
+		</div>
+	</section>
+	
+	<!-- Email contact -->
+	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+		<div class="container py-4">
+			<div class="row d-flex justify-content-center py-5">
+				<div class="col-md-6">
+					<h2 style="font-size: 22px;" class="mb-0">Theo dõi bản tin của chúng tôi</h2>
+					<span>Nhận cập nhật e-mail về các cửa hàng mới nhất của chúng tôi và ưu đãi đặc biệt</span>
+				</div>
+				<div class="col-md-6 d-flex align-items-center">
+					<form action="#" class="subscribe-form">
+						<div class="form-group d-flex">
+							<input type="text" class="form-control"
+								placeholder="Enter email address"> <input type="submit"
+								value="Subscribe" class="submit px-3">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Footer -->
+	<footer class="ftco-footer ftco-section" th:replace="fragment/footer::footer"> </footer>
+
+	<!-- Modal filter -->
+	<div id="modalFilter" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Danh mục</h4>
+				</div>
+				<div class="modal-body" th:each="cate : ${category}">
+					<ul>
+						<li><input type="radio" name="idCategory"
+							th:value="${cate.idCategory}"> <span
+							th:text="${cate.name}"></span></li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button onclick="showListProductByIdFilter()" type="button"
+						class="btn btn-default" data-dismiss="modal">Lọc</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/aos.js}"></script>
+	<script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/scrollax.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/simple.money.format.js}"></script>
+	<script th:src="@{/js/jquery.number.js}"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			getProducts();
+		});
+		
+		var listProduct = [];
+		var origin   = window.location.origin;
+		var pathname = $(location).attr('pathname');
+		pathname.indexOf(1);
+		pathname.toLowerCase();
+		pathname = pathname.split("/")[1];
+		var pageTotal = 0;
+		var pageCurrent = 6;
+		var pageCheck = 1;
+		var pageLimit = 6
+		var pageProduct = 12;
+		var pageNext = 0;
+		
+		// format price
+		$('.price-sale').on('.price-sale', function(e){        
+		    $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
+		}).on('keypress',function(e){
+		    if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+		}).on('paste', function(e){    
+		    var cb = e.originalEvent.clipboardData || window.clipboardData;      
+		    if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
+		});
+		function formatCurrency(number){
+		    var n = number.split('').reverse().join("");
+		    var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
+		    return  n2.split('').reverse().join('') + 'VNĐ';
+		}
+		
+		function getProducts(){
+			$.ajax({
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : 'json',
+				url : "/index/listProductAjax",
+				success : function(result){
+					listProduct = result;
+					pageTotal = listProduct.length / pageProduct;
+					detailHtml(pageTotal,listProduct.length);
+				},
+				error: function(result){
+					console.log(result);
+					alert('failed');
+				}
+			});
+		}
+			
+		var dataPageProduct = "1";
+		function detailHtml(pageTotal,max){
+			if(listProduct == null){
+				alert("Failed");
+			}else{
+				listPageProduct(0,max,true);
+			 }	
+		}
+		
+		function listPageProduct(start, max, donit){
+			$('#dataProduct').empty();
+			var j = 0;
+			for(var i = start; i < max; i++){
+				if(j == pageProduct) break;
+				/* console.log(listProduct) */
+				var html = '<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">'
+					+'<div class="product">'
+				+ '<a href="' + origin +'/'+ pathname + '/showProductSingle/'+ listProduct[i]['idProduct']+ '" class="img-prod">'
+			 	+'<div style="width: 74%; margin: 0 auto;">'
+				+'<img class="img-fluid" style="text-align: center;" src="data:image/png;base64,'+listProduct[i]['imageBase64']+'" alt="Colorlib Template">'
+				+'</div> </a>'
+					+'<div class="text py-3 pb-4 px-3 text-center">'
+						+'<h3>'
+							+'<a href="#">' +listProduct[i]['name']+ '</a>'
+						+'</h3>'
+						+'<div class="d-flex">'
+							+'<div class="pricing">'
+							+'<p class="price">'
+							+'<span class="price-sale formatPrice" id="fomatPrice">' +listProduct[i]['price']+ '</span> <span class="price-sale"> đ</span>'
+							+'</p>'
+							+'</div>'
+							+'</div>'
+							+'<div class="bottom-area d-flex px-3">'
+							+'<div class="m-auto d-flex">'
+							+'<a class="buy-now d-flex justify-content-center align-items-center mx-1">'
+							+'<span class="procart" data-productid='+ listProduct[i]['idProduct']+'><i class="ion-ios-cart"></i></span>'
+							+'</a>'
+							+'</div>'
+							+'</div>'
+							+'</div>'
+					+'</div>'
+					+'</div>';
+					$('.formatPrice').number( true, 0,',','.');
+					$('#dataProduct').append(html);
+					j++ ;
+					
+					
+			}
+			if(donit){
+				detailHtmlPage(0,pageTotal,"1")
+			}
+			$('.formatPrice').number( true, 0,',','.');
+			
+		}
+		
+		$(function(){
+			
+			// Xử lý khi người dùng gõ dữ liệu vào ô text			
+			$('.price').on('change',function(){ 
+				var val = $('.price').val();
+				$('#the_number').text( val !== '' ? val : '(empty)' );
+			});
+			
+			$('.price').change(function(){
+				console.log('Second change event...');
+			});	
+						
+			// Hàm chuyển đổi định dạng mặc định phân cách phần nguyên là dấu ., và phần thập phân là dấu , có 3 chữ số đằng sau.			
+			$('.price').number( true, 0,',','.' );			
+						
+			// thực hiện lấy dữ liệu 
+			$('#get_number').on('click',function(){					
+				var val = $('.price').val();					
+				$('#the_number').text( val !== '' ? val : '(empty)' );
+			});
+		});
+		
+					
+		function detailHtmlPage(indexPage , page, active ){
+			$('#pageproduct').empty();
+		 	var html = 
+				'<div class="col text-center">'
+				+'<div class="block-27">'
+				+'<button class="btn btn-primary" id="preeValue" style="margin-right:2px; "><</button>'
+				+'<span id="pageNumbers"></span>'
+				+'<button class="btn btn-primary" id="nextValue">></button>'
+				+'</div>'
+				+'</div>';
+				$('#pageproduct').append(html);
+				var i = 0;
+			 for(var j = indexPage ; j <= page ; j++){
+				 if(i == 6)break;
+				 var active = "";
+				 var index = j + 1;
+				 if(j == 0){
+					 item = '<button class="btn btn-primary pageNumber '+active+'" attr-start= "0" style="margin-right:2px;" data-page="'+index+'">'+index+'</button>';
+				 }else {
+					 var start = j * pageProduct -1 ;
+					 item = '<button class="btn btn-primary pageNumber " attr-start= '+start+' style="margin-right:2px;" data-page="'+index+'">'+index+'</button>';
+				 }	
+				 $('#pageNumbers').append(item);
+				 i++;
+			 }
+			 
+			 $.each($('#pageNumbers .pageNumber'), function(i, page){
+				 if($(page).attr("data-page") == pageCheck){
+					 $(page).addClass("active");
+				 }
+			 });
+			 
+			 if(pageTotal <= pageCurrent) $('button#nextValue').prop('disabled', true);
+			 if(indexPage == 0) $('button#preeValue').prop('disabled', true);
+			 $('.pageNumber').click(function(){
+					$('#pageNumbers .pageNumber.active ').removeClass("active")
+					$(this).addClass("active");
+					var attr = $(this).attr("attr-start");
+					listPageProduct(attr,listProduct.length,false);
+					pageCheck = $(this).attr("data-page");
+			});
+			 
+			 $('#nextValue').click(function(){
+				var numberPage = pageTotal - pageCurrent ;
+				pageCurrent = pageCurrent + pageLimit;
+				var button = $('#pageNumbers .pageNumber')[$('#pageNumbers .pageNumber').length - 1];
+				pageNext = parseInt($(button).attr("data-page"));
+				detailHtmlPage(pageNext,pageTotal);
+			});
+		
+			$('#preeValue').click(function(){
+				var numberPage = pageTotal - pageCurrent ;
+				pageCurrent = pageCurrent - pageLimit;
+				var button = $('#pageNumbers .pageNumber')[$('#pageNumbers .pageNumber').length - 1];
+				pageNext = pageNext - pageLimit ;
+				detailHtmlPage(pageNext,pageTotal);
+			});
+		}
+		
+		function listProductNewBest(){
+				$.ajax({
+					type: "GET",
+					contentType : "application/json; charset=utf-8",
+					dataType : 'json',
+					async : false,
+					url : "/index/listProductNewBest",
+					success : function(result){
+						listProduct = result;
+						pageCheck = 1;
+						pageTotal = listProduct.length / pageProduct;
+						detailHtml(pageTotal,listProduct.length);
+					},
+					error: function(result){
+						
+						console.log(result);
+						alert('failedd');
+					}
+					
+				});
+			}
+		function listProductPriceDesc(){
+				$.ajax({
+					type: "GET",
+					contentType : "application/json; charset=utf-8",
+					dataType : 'json',
+					url : "/index/listProductPriceDesc",
+					success : function(result){
+						listProduct = result;
+						pageCheck = 1;
+						pageTotal = listProduct.length / pageProduct;
+						detailHtml(pageTotal,listProduct.length);
+					},
+					error: function(result){
+						alert('failedd');
+					}
+				});
+			}
+		
+		function listProductPriceAsc(){
+				$.ajax({
+					type: "GET",
+					contentType : "application/json; charset=utf-8",
+					dataType : 'json',
+					url : "/index/listProductPriceAsc",
+					success : function(result){
+						listProduct = result;
+						pageCheck = 1;
+						pageTotal = listProduct.length / pageProduct;
+						detailHtml(pageTotal,listProduct.length);
+					},
+					error: function(result){
+						alert('failedd');
+					}
+				});
+			}
+				
+			// filter
+		function showListProductByIdFilter(){
+			var id = [];
+		       $.each($("input[name='idCategory']:checked"), function(){
+		           id.push($(this).val());
+		       });
+			$.ajax({
+				type: "POST",
+				contentType : "application/json; charset=utf-8",
+				dataType : 'json',
+				url : "/index/listProductByIdCategoryFilter/" +id,
+				success : function(result){
+					listProduct = result;
+					pageTotal = listProduct.length / pageProduct;
+					detailHtml(pageTotal,listProduct.length);
+					pageCheck = 1;
+				},
+				error: function(result){
+					alert('failed');
+				}
+				
+			});
+		}
+		
+		$(document).ready(function() {
+		
+			$(document).on('click',".procart",function(e) {
+				e.preventDefault();
+				console.log("---start function--");
+				//var amount = parseInt($('#quantity').val());
+				var amount = 1;
+				var idproduct = $(this).data('productid');
+				$.post("/insertproduct}",
+						{
+							idproduct: idproduct,
+							amount: amount
+						},
+						function (data, status) {
+							console.log(data);
+							if (data =="1") { // them thanh cong. san pham chua nam trong gio hang
+								Swal.fire({
+									  icon: 'success',
+									  title: 'Thêm sản phẩm thành công'
+									})
+								var so_luong = parseInt($("#so_luong_in_cart").html());
+								so_luong++;
+								$("#so_luong_in_cart").html(so_luong);
+							} else if (data == "5") { // them thanh cong, san pham da nam trong gio hang
+								Swal.fire({
+									  icon: 'success',
+									  title: 'Đã cộng thêm một sản phẩm vào giỏ hàng'
+									})
+							}else if (data == "2") {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Thêm sản phẩm thất bại'
+									})
+							} else if (data == "3") {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Lỗi'
+									})
+							}else if (data == "4") {
+								Swal.fire({
+									  icon: 'success',
+									  title: 'Đã cộng thêm một sản phẩm vào giỏ hàng'
+									})
+							}
+							else alert("error:"+data)
+						});
+			});
+		});
+		
+		
+	</script>
+</body>
+</html>
+

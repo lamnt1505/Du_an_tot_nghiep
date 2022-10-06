@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+<!-- plugins:css -->
+<link rel="stylesheet"
+	href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/ionicons/css/ionicons.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/typicons/src/font/typicons.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet"
+	href="../assets/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="../assets/vendors/css/vendor.bundle.addons.css">
+<!-- endinject -->
+<!-- plugin css for this page -->
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+<link rel="stylesheet" th:href="@{/assets/css/shared/style.css}">
+<!-- endinject -->
+<!-- Layout styles -->
+<link rel="stylesheet" th:href="@{/assets/css/demo_1/style.css}">
+<!-- End Layout styles -->
+<link rel="shortcut icon" href="/assets/images/favicon.png" />
+<link rel="stylesheet" th:href="@{/css/info.css}" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container-scroller">
+		<!-- partial:partials/_navbar.html -->
+		<nav
+			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+			th:replace="manager/fragment/listNav::nav"></nav>
+
+
+
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:partials/_sidebar.html -->
+			<nav class="sidebar sidebar-offcanvas" id="sidebar"
+				th:replace="manager/fragment/listNav_1::nav_1"></nav>
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<div th:if="${success}"
+										class="row alert alert-success alert-dismissible"
+										style="width: 850px; margin-left: 150px;">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<span th:text="${success}"></span>
+									</div>
+									<h4 class="card-title">Thông tin tài khoản</h4><i class="zmdi zmdi-email"></i>
+									<p class="card-description">
+										<a class="btn btn-inverse-success btn-fw"
+											th:href="@{'/manager/updateUser/'+${ma}}">Cập nhật thông
+											tin cá nhân </a>
+									</p>
+									<div class="info">
+										<div class="image">
+											<img id="anh" th:src="@{'data:image/png;base64,' + ${image}}">
+										</div>
+										<div class="information">
+											<h1 th:text="${fullname}"></h1>
+<!-- 											<i class="fab fa-500px"></i> -->
+											<p th:text="'Số điện thoại: '+${phone}"></p>
+											<p th:text="'Ngày sinh: '+${#dates.format(birthday,'dd-MM-yyyy')}"></p>
+											<p th:text="${gender}?'Giới tính: Nữ':'Giới tính: Nam'"></p>
+											<p th:text="${role}?'Chức vụ: Nhân viên':'Chức vụ: Admin'"></p>
+											<p th:text="'Địa chỉ: '+${address}"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<footer class="footer" th:replace="manager/fragment/footer::footer"></footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+
+
+
+	<!-- container-scroller -->
+	<!-- plugins:js -->
+	<script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+	<script src="../assets/vendors/js/vendor.bundle.addons.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page-->
+	<!-- End plugin js for this page-->
+	<!-- inject:js -->
+	<script src="../assets/js/shared/off-canvas.js"></script>
+	<script src="../assets/js/shared/misc.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="../assets/js/demo_1/dashboard.js"></script>
+	<!-- End custom js for this page-->
+	<!-- DataTables -->
+	<script th:src="@{/assets/vendors/datatables/jquery.dataTables.js}"></script>
+	<script th:src="@{/assets/vendors/datatables/dataTables.bootstrap4.js}"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Bán Hàng Nông Sản</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
+	rel="stylesheet">
+
+
+<link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/animate.css}">
+
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+
+<link rel="stylesheet" th:href="@{/css/aos.css}">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+<link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+
+<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+
+
+<link rel="stylesheet" th:href="@{/css/flaticon.css}">
+<link rel="stylesheet" th:href="@{/css/icomoon.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/style1.css}">
+<link rel="stylesheet" th:href="@{/css/slick-theme.css}">
+<link rel="stylesheet" th:href="@{/css/slick.css}">
+<link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
+
+<style type="text/css">
+#idImage {
+	height: 350px;
+	width: 400px;
+}
+</style>
+</head>
+<body class="goto-here">
+		<div th:replace="fragment/header::header"></div>
+		<!-- END nav -->
+
+		<div class="hero-wrap hero-bread"
+			style="background-image: url('/images/bg_1.jpg');">
+			<div class="container">
+				<div
+					class="row no-gutters slider-text align-items-center justify-content-center">
+					<div class="col-md-9 ftco-animate text-center">
+						<p class="breadcrumbs">
+							<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span
+								class="mr-2"><a th:href="@{/index/product}">Product</a></span> <span>Product
+								Single</span>
+						</p>
+						<h1 class="mb-0 bread">Chi Tiết Sản Phẩm</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row" th:object="${showProductSingle}">
+					<input id="idProduct" hidden=true th:value="*{idProduct}">
+					<div class="col-lg-6 mb-5 ftco-animate">
+						<a href="#" class="image-popup"><img id="idImage"
+							th:src="@{'data:image/png;base64,' + *{getImageBase64()}}"
+							class="img-fluid" alt="Colorlib Template"></a>
+					</div>
+					<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+						<h3 th:text="*{name}"></h3>
+						<h2 th:text="*{#numbers.formatCurrency(price)}"></h2>
+						<ul class="list">
+							<li><span>Danh mục: </span><a class="active" href="#"
+								th:text=*{category.name}></a></li>
+							<li><span>Nguồn gốc: </span><a href="#" th:text="*{origin}"></a></li>
+							<li><span>Ngày hết hạn: </span><a href="#"
+								th:text="*{dateOfManufacture}"></a></li>
+						</ul>
+						<p>
+							<span>Thông tin chi tiết: </span>
+						<p th:text="*{description}"></p>
+						</p>
+						<div class="card_area">
+							<p>
+								<a class="btn btn-black py-3 px-5" id="themclick1" style="color: white;">Thêm</a>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center mb-3 pb-3">
+					<div class="col-md-12 heading-section text-center ftco-animate">
+						<span class="subheading">Sản Phẩm</span>
+						<h2 class="mb-4">Sản phẩm liên quan</h2>
+						<!-- <p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia</p> -->
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 ftco-animate" th:each="p : ${showProductByCategory}">
+						<div class="product">
+							<a href="#" class="img-prod"><img class="img-fluid"
+								th:src="@{'data:image/png;base64,' + ${p.getImageBase64()}}" alt="Colorlib Template"> 
+								<!-- <span class="status">30%</span> -->
+								</a>
+							<div class="text py-3 pb-4 px-3 text-center">
+								<h3>
+									<a href="#" th:text="${p.name}"></a>
+								</h3>
+								<div class="d-flex">
+									<div class="pricing">
+										<p class="price">
+											<!-- <span class="mr-2 price-dc">$120.00</span> -->
+											<span class="price-sale" th:text="${p.price}"></span>
+										</p>
+									</div>
+								</div>
+								<div class="bottom-area d-flex px-3">
+									<div class="m-auto d-flex">
+										<a href="#"
+											class="buy-now d-flex justify-content-center align-items-center mx-1">
+											<span><i class="ion-ios-cart"></i></span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+
+		<!-- Email feedback -->
+		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+			<div class="container py-4">
+				<div class="row d-flex justify-content-center py-5">
+					<div class="col-md-6">
+						<h2 style="font-size: 22px;" class="mb-0">Theo dõi bản tin
+							của chúng tôi</h2>
+						<span>Nhận cập nhật e-mail về các cửa hàng mới nhất của
+							chúng tôi và ưu đãi đặc biệt</span>
+					</div>
+					<div class="col-md-6 d-flex align-items-center">
+						<form action="#" class="subscribe-form">
+							<div class="form-group d-flex">
+								<input type="text" class="form-control"
+									placeholder="Enter email address"> <input type="submit"
+									value="Subscribe" class="submit px-3">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+	<!-- Footer -->	
+	<footer class="ftco-footer ftco-section" th:replace="fragment/footer::footer"></footer>
+
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=414066249542428&autoLogAppEvents=1"></script>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=493676438025990&autoLogAppEvents=1"></script>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=493676438025990&autoLogAppEvents=1"></script>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/aos.js}"></script>
+	<script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/scrollax.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	<script>
+		$(document).ready(function() {
+
+			var quantitiy = 0;
+			$('.quantity-right-plus').click(function(e) {
+
+				// Stop acting like a button
+				e.preventDefault();
+				// Get the field name
+				var quantity = parseInt($('#quantity').val());
+
+				// If is not undefined
+
+				$('#quantity').val(quantity + 1);
+
+				// Increment
+
+			});
+
+			$('#themclick1').click(function(e) {
+				e.preventDefault();
+				var amount = parseInt($('#quantity').val());
+				amount = 1;
+				var idProduct = parseInt($('#idProduct').val());
+				$.post("/insertproduct}",
+						{
+							idproduct: idProduct,
+							amount: amount
+						},
+						function (data, status) {
+							console.log(data);
+							if (data =="1") { // them thanh cong. san pham chua nam trong gio hang
+								alert("Thêm thành công !");
+								var so_luong = parseInt($("#so_luong_in_cart").html());
+								so_luong++;
+								$("#so_luong_in_cart").html(so_luong);
+							} else if (data == "5") { // them thanh cong, san pham da nam trong gio hang
+								Swal.fire({
+									  icon: 'success',
+									  title: 'Đã cộng thêm một sản phẩm vào giỏ hàng'
+									})
+							}else if (data == "2") {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Thêm sản phẩm thất bại'
+									})
+							} else if (data == "3") {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Lỗi'
+									})
+							}else if (data == "4") {
+								Swal.fire({
+									  icon: 'success',
+									  title: 'Đã cộng thêm một sản phẩm vào giỏ hàng'
+									})
+							}
+							else alert("error:"+data)
+						});
+
+			});
+
+			$('.quantity-left-minus').click(function(e) {
+				// Stop acting like a button
+				e.preventDefault();
+				// Get the field name
+				var quantity = parseInt($('#quantity').val());
+
+				if (quantity > 0) {
+					$('#quantity').val(quantity - 1);
+				}
+			});
+
+		});
+	</script>
+
+</body>
+</html>

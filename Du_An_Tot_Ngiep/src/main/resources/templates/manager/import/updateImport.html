@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+<!-- plugins:css -->
+<link rel="stylesheet"
+	href="/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet"
+	href="/assets/vendors/iconfonts/ionicons/css/ionicons.css">
+<link rel="stylesheet"
+	href="/assets/vendors/iconfonts/typicons/src/font/typicons.css">
+<link rel="stylesheet"
+	href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="/assets/vendors/css/vendor.bundle.addons.css">
+<!-- endinject -->
+<!-- plugin css for this page -->
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+<link rel="stylesheet" href="/assets/css/shared/style.css">
+<!-- endinject -->
+<!-- Layout styles -->
+<link rel="stylesheet" href="/assets/css/demo_1/style.css">
+<!-- End Layout styles -->
+<link rel="shortcut icon" href="/assets/images/favicon.png" />
+<style type="text/css">
+span {
+	color: red;
+}
+</style>
+</head>
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:partials/_navbar.html -->
+		<nav
+			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+			th:replace="manager/fragment/listNav::nav"></nav>
+
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:partials/_sidebar.html -->
+
+			<nav class="sidebar sidebar-offcanvas" id="sidebar"
+				th:replace="manager/fragment/listNav_1::nav_1"></nav>
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+
+
+						<div id="textCenter" class="col-lg-6 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Sửa Danh Mục</h4>
+									<form th:action="@{/manager/updateImport}"
+										th:object="${import}" method="post"
+										onsubmit="return checkempty(form)" name="form">
+										<div class="form-group">
+											<div class="input-group">
+												<input type="hidden" th:field="*{idImport}">
+
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="label">Nhân viên</label>
+											<div class="input-group">
+												<input readonly="readonly" th:value="${fullname}"
+													class="form-control">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="label">Sản phẩm</label>
+											<div class="input-group">
+												<select th:field="*{product}" class="form-control">
+													<option th:each="product : ${listProduct}"
+														th:value="${product.idProduct}" th:utext="${product.name}">
+													</option>
+												</select>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label class="label">Số lượng</label>
+											<div class="input-group">
+												<input th:field="*{quantity}" name="quantity" type="number"
+													class="form-control">
+											</div>
+										</div>
+										<div class="error">
+											<span id="soluong"></span>
+										</div>
+										<div class="form-group">
+											<button class="btn btn-primary">Sửa</button>
+										</div>
+
+
+									</form>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer" th:replace="manager/fragment/footer::footer"></footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<!-- plugins:js -->
+	<script src="/js/validateimport.js"></script>
+	<script src="/assets/vendors/js/vendor.bundle.base.js"></script>
+	<script src="/assets/vendors/js/vendor.bundle.addons.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page-->
+	<!-- End plugin js for this page-->
+	<!-- inject:js -->
+	<script src="/assets/js/shared/off-canvas.js"></script>
+	<script src="/assets/js/shared/misc.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="/assets/js/demo_1/dashboard.js"></script>
+	<!-- End custom js for this page-->
+</body>
+
+</html>

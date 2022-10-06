@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Bán Hàng Organic Food</title>
+<meta charset="utf-8">
+<link rel="icon" href="static/images/logo_s.png" type="image/x-icon">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
+	rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/animate.css}">
+
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+
+<link rel="stylesheet" th:href="@{/css/aos.css}">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+<link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+
+<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+
+<link rel="stylesheet" th:href="@{/css/flaticon.css}">
+<link rel="stylesheet" th:href="@{/css/icomoon.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/style1.css}">
+<link rel="stylesheet" th:href="@{/css/slick-theme.css}">
+<link rel="stylesheet" th:href="@{/css/slick.css}">
+<link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
+<script type="text/javascript" th:href="@{/js/jquery-3.2.1.min.js}"></script>
+</head>
+
+<body class="goto-here">
+	<!-- Header -->
+	<div th:replace="fragment/header::header"></div>
+
+	<!-- Image header -->
+	<section id="home-section" class="hero">
+		<div class="home-slider owl-carousel">
+			<div class="slider-item"
+				style="background-image: url(/images/bana.jpg);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div
+						class="row slider-text justify-content-center align-items-center"
+						data-scrollax-parent="true">
+						<div class="col-md-12 ftco-animate text-center">
+							<h1 class="mb-2">Chúng tôi phục vụ các mặt hàng nông sản
+								chất lượng</h1>
+							<p>
+								<a th:href="@{/index/product}" class="btn btn-primary">Xem
+									Chi Tiết</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="slider-item"
+				style="background-image: url(/images/item3.jpg);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div
+						class="row slider-text justify-content-center align-items-center"
+						data-scrollax-parent="true">
+						<div class="col-sm-12 ftco-animate text-center">
+							<h1 class="mb-2">100% chất lượng an toàn</h1>
+							<p>
+								<a th:href="@{/index/product}" class="btn btn-primary">Xem
+									Chi Tiết</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Prototype -->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row no-gutters ftco-services">
+				<div
+					class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div
+							class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-shipped"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Miễn Phí Vận Chuyển</h3>
+							<span>Khách Hàng Đặt Hàng Trên 50$ </span>
+						</div>
+					</div>
+				</div>
+				<div
+					class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div
+							class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-diet"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Giá Cả</h3>
+							<span>Giá sản phẩm tốt trên thị trường</span>
+						</div>
+					</div>
+				</div>
+				<div
+					class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div
+							class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-award"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Chất Lượng</h3>
+							<span>Sảm phẩm luôn an toàn</span>
+						</div>
+					</div>
+				</div>
+				<div
+					class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div
+							class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-customer-service"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Hỗ Trợ</h3>
+							<span>Hỗ Trợ 24/7</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Content index -->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center mb-3 pb-3">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Sản phẩm nổi bật</span>
+					<h2 class="mb-4">Sản phẩm của chúng tôi</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-3 ftco-animate"
+					th:each="product : ${showProduct}">
+					<div class="product">
+						<a th:href="@{'/index/showProductSingle/'+${product.idProduct}}"
+							class="img-prod">
+							<div style="width: 74%; margin: 0 auto;">
+								<img class="img-fluid"
+									th:src="'data:image/png;base64,' + ${product.getImageBase64()}"
+									alt="Colorlib Template">
+							</div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3>
+								<a href="#" th:text="${product.name}"></a>
+							</h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price">
+										<span class="price-sale"
+											th:text="${#numbers.formatCurrency(product.price)}"></span>
+									</p>
+								</div>
+							</div>
+							<div class="bottom-area d-flex px-3">
+								<div class="m-auto d-flex">
+									<a
+										class="buy-now d-flex justify-content-center align-items-center mx-1">
+										<span class="procart"
+										th:attr="data-productid=${product.idProduct}"><i
+											class="ion-ios-cart"></i></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Feedback -->
+	<section class="ftco-section testimony-section">
+		<div class="container">
+			<div class="row justify-content-center mb-5 pb-3">
+				<div class="col-md-7 heading-section ftco-animate text-center">
+					<span class="subheading">Ý Kiến</span>
+					<h2 class="mb-4">Ý kiến phản hồi của khách hàng</h2>
+					<p>Chúng tôi cũng hiểu rằng, ăn thực phẩm sạch là quyền lợi của mỗi người tiêu dùng. Tuy nhiên trong điều kiện hiện tại của Việt Nam, thực phẩm an toàn đang là điều xa xỉ thì thực phẩm hữu cơ lại càng khó tiếp cận cả về nguồn cung cấp lẫn giá cả.</p>
+				</div>
+			</div>
+			<div class="row ftco-animate">
+				<div class="col-md-12">
+					<div class="carousel-testimony owl-carousel">
+						<div class="item" th:each="feed : ${feedback}">
+							<div class="testimony-wrap p-4 pb-5">
+								<div class="user-img mb-5"
+									style="background-image: url(/images/person_1.jpg)">
+									<span
+										class="quote d-flex align-items-center justify-content-center">
+										<i class="icon-quote-left"></i>
+									</span>
+								</div>
+								<div class="text text-center">
+									<p class="mb-5 pl-4 line" th:text="${feed.content}"></p>
+									<p class="name" th:text="${feed.name}"></p>
+									<span class="position" th:text="${feed.subjects}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr>
+
+	<!-- Email feedback -->
+	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+		<div class="container py-4">
+			<div class="row d-flex justify-content-center py-5">
+				<div class="col-md-6">
+					<h2 style="font-size: 22px;" class="mb-0">Theo dõi bản tin của
+						chúng tôi</h2>
+					<span>Nhận cập nhật e-mail về các cửa hàng mới nhất của
+						chúng tôi và ưu đãi đặc biệt</span>
+				</div>
+				<div class="col-md-6 d-flex align-items-center">
+					<form action="#" class="subscribe-form">
+						<div class="form-group d-flex">
+							<input type="text" class="form-control"
+								placeholder="Enter email address"> <input type="submit"
+								value="Subscribe" class="submit px-3">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="ftco-footer ftco-section"
+		th:replace="fragment/footer::footer">
+	</footer>
+
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/aos.js}"></script>
+	<script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/scrollax.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/addtocart.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+</body>
+</html>

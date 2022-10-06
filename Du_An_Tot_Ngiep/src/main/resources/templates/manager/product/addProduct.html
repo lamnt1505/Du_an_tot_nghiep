@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+<!-- plugins:css -->
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/ionicons/css/ionicons.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/typicons/src/font/typicons.css">
+<link rel="stylesheet"
+	href="../assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet"
+	href="../assets/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="../assets/vendors/css/vendor.bundle.addons.css">
+<!-- endinject -->
+<!-- plugin css for this page -->
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+<link rel="stylesheet" href="../assets/css/shared/style.css">
+<!-- endinject -->
+<!-- Layout styles -->
+<link rel="stylesheet" href="../assets/css/demo_1/style.css">
+<!-- End Layout styles -->
+<link rel="shortcut icon" href="../assets/images/favicon.png" />
+<style type="text/css">
+span {
+	color: red;
+}
+</style>
+</head>
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:partials/_navbar.html -->
+		<nav
+			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+			th:replace="manager/fragment/listNav::nav"></nav>
+
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:partials/_sidebar.html -->
+
+			<nav class="sidebar sidebar-offcanvas" id="sidebar"
+				th:replace="manager/fragment/listNav_1::nav_1"></nav>
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+
+
+						<div id="textCenter" class="col-lg-6 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Thêm Sản Phẩm</h4>
+									<form th:object="${product}" th:action="@{/manager/addProduct}"
+										method="post" name="form" enctype="multipart/form-data" action="/">
+										<div class="col-lg-12">
+											<div class="row">
+												<div class="col-lg-6">
+													<div class="form-group">
+														<label class="label">Tên danh mục sản phẩm</label>
+														<div class="input-group">
+															<select th:field="*{category}" class="form-control">
+																<option th:each="category : ${listCategory}"
+																	th:value="${category.idCategory}"
+																	th:utext="${category.name}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="label">Tên sản phẩm</label>
+														<div class="input-group">
+															<input th:field="*{name}" name="name" type="text"
+																class="form-control">
+														</div>
+													</div>
+													<div class="error">
+														<span id="ten"></span>
+													</div>
+													<div class="form-group">
+														<label class="label">Ảnh</label>
+														<div class="input-group">
+															<input th:field="*{image}" name="image" type="file"
+																onchange="readURL(this);"
+																accept="image/x-png,image/jpeg,image/jpg">
+
+														</div>
+														<div
+															style="height: 150px; width: 120px; border: 1px solid black; margin-top: 10px; margin-left: 0px;">
+															<img style="height: 150px; width: 120px;" id="blah" />
+														</div>
+
+													</div>
+													<div class="error">
+														<span id="anh"></span>
+													</div>
+												</div>
+												<div class="col-lg-6">
+													<div class="form-group">
+														<label class="label">Giá</label>
+														<div class="input-group">
+															<input th:field="*{price}" name="price" type="number"
+																class="form-control">
+														</div>
+													</div>
+													<div class="error">
+														<span id="tien"></span>
+													</div>
+													<div class="form-group">
+														<label class="label">Ngày Hết Hạn</label>
+														<div class="input-group">
+															<input th:field="*{dateOfManufacture}"
+																name="dateOfManufacture" type="date"
+																class="form-control">
+														</div>
+													</div>
+													<div class="error">
+														<span id="ngayhethang"></span>
+													</div>
+													<div class="form-group">
+														<label class="label">Nguồn Gốc Sản Phẩm</label>
+														<div class="input-group">
+															<input th:field="*{origin}" name="origin" type="text"
+																class="form-control">
+														</div>
+													</div>
+													<div class="error">
+														<span id="nguongoc"></span>
+													</div>
+													<div class="form-group">
+														<label class="label">Chi Tiết Sản Phẩm</label>
+														<div class="input-group">
+															<textarea class="form-control" th:field="*{description}"
+																name="description" rows="4" cols="30"></textarea>
+														</div>
+													</div>
+													
+
+
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary">Thêm</button>
+											<a th:href="@{/manager/listCategory}">Quay Về</a>
+										</div>
+									</form>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer" th:replace="manager/fragment/footer::footer"></footer>
+
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<!-- plugins:js -->
+	<script src="../js/validateproduct.js"></script>
+	<script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+	<script src="../assets/vendors/js/vendor.bundle.addons.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page-->
+	<!-- End plugin js for this page-->
+	<!-- inject:js -->
+	<script src="../assets/js/shared/off-canvas.js"></script>
+	<script src="../assets/js/shared/misc.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="../assets/js/demo_1/dashboard.js"></script>
+
+	<script type="text/javascript">
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#blah').attr('src', e.target.result).width(120).height(
+							150);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL_2(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#blah2').attr('src', e.target.result).width(120).height(
+							150);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL_1(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#blah1').attr('src', e.target.result).width(120).height(
+							150);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+	<!-- End custom js for this page-->
+</body>
+
+</html>

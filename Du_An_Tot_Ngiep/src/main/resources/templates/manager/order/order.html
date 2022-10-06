@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+	<!-- plugins:css -->
+	
+	<link rel="stylesheet"
+		href="../assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet"
+		href="../assets/vendors/iconfonts/ionicons/css/ionicons.css">
+	<link rel="stylesheet"
+		href="../assets/vendors/iconfonts/typicons/src/font/typicons.css">
+	<link rel="stylesheet"
+		href="../assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet"
+		href="../assets/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet"
+		href="../assets/vendors/css/vendor.bundle.addons.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/assets/css/shared/style.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/demo_1/style.css}">
+	<!-- End Layout styles -->
+	<link rel="shortcut icon" th:href="@{/assets/images/favicon.png}" />
+	<style>
+		.table td {
+			max-width: 200px;
+			white-space: normal;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-scroller">
+		<!-- partial:partials/_navbar.html -->
+		 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row" th:replace="manager/fragment/listNav::nav"></nav>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:partials/_sidebar.html -->
+			 <nav class="sidebar sidebar-offcanvas" id="sidebar" th:replace="manager/fragment/listNav_1::nav_1"></nav>
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Danh Sách Hóa Đơn</h4>
+									<p class="card-description">
+									<!-- <a class="btn btn-inverse-success btn-fw" th:href="@{/manager/orderDetail}">Xem Hóa Đơn Chi Tiết</a> -->
+									</p>
+
+									<div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true" style="display: none;">
+										<div class="modal-dialog modal-sm" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel-3">Trạng thái</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="form-group text-center">
+														<select class="form-control optionorder">
+															<option  selected value="Chờ duyệt" name="choduyet">Chờ duyệt</option>
+															<option  value="Hoàn thành" name="hoanthanh">Hoàn thành</option>
+															<option  value="Đã hủy"name="dahuy">Đã hủy</option>
+														</select>
+													</div>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-success submitstatus">Duyệt</button>
+													<button type="button" class="btn btn-light" data-dismiss="modal">Thoát</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<table id="dataTable-listProduct" class="table table-hover">
+										<thead>
+											<tr>
+												<th>Mã Hóa Đơn</th>
+												 <th>SĐT khách hàng</th> 
+												<th>Ngày đặt hàng</th>
+												<th>Trạng Thái</th>
+												<th>Tổng Tiền</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody id="myTable">
+											<tr th:each="order : ${listOrder}">
+												<td>
+												   <a class="btn btn-inverse-success btn-fw" th:href="@{'/manager/orderDetail/'+${order.invoiceId}}" th:text="${order.invoiceId}"> </a>
+												</td> 
+												<td th:text="${order.customerId.phone}"></td>
+												<td th:text="${order.dateorders}"></td>
+												<td th:text="${order.status}" class="status">
+												</td>
+												<td th:text="${#numbers.formatCurrency(order.total)}"></td>
+												<td>
+													<button th:attr="data-orderid=${order.invoiceId}" type="button" class="btn btn-primary editmodal" data-toggle="modal" data-target="#exampleModal-3">Duyệt</button>
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- content-wrapper ends -->
+				 <footer class="footer" th:replace="manager/fragment/footer::footer"></footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	
+	<script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+	<script src="../assets/vendors/js/vendor.bundle.addons.js"></script>
+	<!-- endinject -->
+	<script src="../assets/js/shared/off-canvas.js"></script>
+	<script src="../assets/js/shared/misc.js"></script>
+	<!-- <script th:src="@{/assets/js/shared/modal-demo.js}"></script> -->
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="../assets/js/demo_1/dashboard.js"></script>
+
+	<!-- DataTables -->
+	<script th:src="@{/assets/vendors/datatables/jquery.dataTables.js}"></script>
+	<script th:src="@{/assets/vendors/datatables/dataTables.bootstrap4.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	</script>
+
+
+
+	<script>
+		$(document).ready(function() {
+
+			var orderid =0;
+
+			$(".editmodal").click(function(e) {
+				e.preventDefault();
+
+				var status = $(this).parents('tr').find('.status').text();
+				orderid = $(this).data('orderid');
+
+				console.log(status);
+
+				$(".optionorder").val(status).change();
+			});
+
+			$(".submitstatus").click(function(e) {
+				e.preventDefault();
+
+				var newstatus = $(".optionorder").val();
+				console.log(newstatus);
+				console.log(orderid);
+
+				$.post("/updatestatus",{
+					"orderid":orderid,
+					"status":newstatus}
+					)
+						.done(function(data,status) {
+							var quantity = parseInt(data);
+							console.log(quantity);
+							if (quantity==0) {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Có lỗi ! Vui lòng thử lại...'
+									})
+							}
+							else if (quantity==-1) {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Số lượng trong kho không đủ !'
+									})
+							}
+							else if (quantity==-2) {
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Sản phẩm chưa được cập nhật trong kho !'
+									})
+							}
+							else if (quantity==1) {
+								Swal.fire({
+									  icon: 'success',
+									  title: 'Thêm thành công !'
+									})
+							}
+							else if (quantity<0) {
+								alert("Có gì đó sai sai...^^ !");
+							}
+							setTimeout(function(){
+								window.location.reload();
+							}, 2000);
+						});
+
+			});
+		});
+	</script>
+
+
+</body>
+</html>

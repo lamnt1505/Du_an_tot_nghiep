@@ -1,0 +1,5 @@
+git branch <name branch>
+git checkout <name branch>
+git add .
+git commit -m
+git push origin <name branch>

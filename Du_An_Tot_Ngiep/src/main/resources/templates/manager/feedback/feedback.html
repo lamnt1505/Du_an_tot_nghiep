@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../assets/vendors/iconfonts/ionicons/css/ionicons.css">
+    <link rel="stylesheet" href="../assets/vendors/iconfonts/typicons/src/font/typicons.css">
+    <link rel="stylesheet" href="../assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.addons.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="../assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../assets/css/demo_1/style.css">
+    <!-- End Layout styles -->
+		<link rel="shortcut icon" href="../assets/images/favicon.png" />
+			<style>
+		.table td {
+			max-width: 300px;
+			white-space: normal;
+		}
+		tbody th{
+			max-width: 300px;
+			white-space: normal;
+		}
+		.btn{
+			margin-right: 10px;
+		}
+	</style>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+       <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row" th:replace="manager/fragment/listNav::nav"></nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar" th:replace="manager/fragment/listNav_1::nav_1"></nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+           <div class="row">
+              
+             
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Danh Sách Góp Ý</h4>
+                    
+                    <table id="dataTable-listCategory" class="table table-hover">
+                      <thead>
+                        <tr>
+                         <th> Id </th>
+                          <th> Tên  </th>
+                          <th> Email</th>
+                          <th> Sản Phẩm Góp Ý </th>
+                          <th> Nội dung</th>
+                          <th>Ngày Góp Ý</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="dataForm">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+             
+              
+              </div>
+            </div>
+          </div>
+           <footer class="footer" th:replace="manager/fragment/footer::footer"></footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    
+    <!-- Modal -->
+		
+		<div id=deleteFeedBack class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title">Bạn thật sự muốn xóa thông tin này</h4>
+		      </div>
+		      <div class="modal-footer">
+		      <input type="hidden" id="idFeedBackDelete" />
+		        <button type="button" class="btn btn-primary" onclick="deleteFeedback()" data-dismiss="modal">Xóa</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+		
+		<!-- deleteFeedback -->
+		
+		<div id="detailFeedback" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title">Thông tin chi tiết</h4>
+		      </div>
+		      <div class="modal-body">
+		      <input id="idFeedBackDetail" type="hidden">
+		     	 <div class="form-group">
+		      		<input id="nameDetail" class="form-control" readonly="readonly">
+		      		</div>
+		      		<div class="form-group">
+		      		<input id="emailDetail" class="form-control" readonly="readonly">
+		      		</div>
+		      		<div class="form-group">
+		      		<input id="subjectsFeedbackDetail" class="form-control" readonly="readonly">
+		      		</div>
+		      		<div class="form-group">
+		      		<input id="createDateDetail" class="form-control" readonly="readonly">
+		      		</div>
+		      		<div class="form-group">
+		      		<textarea id="contentDetail" class="form-control" readonly="readonly"></textarea>
+		      		</div>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			  crossorigin="anonymous"></script>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../assets/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="../assets/js/shared/off-canvas.js"></script>
+    <script src="../assets/js/shared/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../assets/js/demo_1/dashboard.js"></script>
+    <!-- End custom js for this page-->
+    
+    <!-- DataTables -->
+	<script th:src="@{/assets/vendors/datatables/jquery.dataTables.js}"></script>
+	<script th:src="@{/assets/vendors/datatables/dataTables.bootstrap4.js}"></script>
+	<script type="text/javascript">
+	
+	$( document ).ready(function() {
+		listFeedBack();
+	});
+	 function dataHtml(result){
+		 var listFeedback = result;
+		 
+		 if(listFeedback == null){
+			 alert('failed');
+		 }else{
+			 $('#dataForm').empty();
+			 $.each(listFeedback, function(i, item){
+				 var convertCreateDate = new Date(item.createDate);
+				 var html = '<tr>'
+					 	 +'<td id="idFeedback-'+item.idFeedback+'">'+item.idFeedback+'</td>' 
+	                    +'<td id="nameFeedback-'+item.idFeedback+'">'+item.name+'</td>'
+	                    +'<td id="emailFeedback-'+item.idFeedback+'">'+item.email+'</td>' 
+	                    +'<td id="subjectsFeedback-'+item.idFeedback+'">'+item.subjects+'</td>'
+	                    +'<td id="contentFeedback-'+item.idFeedback+'">'+item.content+'</td>' 
+	                    +'<td id="createDateFeedback-'+item.idFeedback+'">'+convertCreateDate.toLocaleString()+'</td>'
+	                    +'<th>'
+	                   		+'<button class="btn btn-info" onclick="setDateDetailFeedBack('+item.idFeedback+')" data-toggle="modal" data-target="#detailFeedback">Xem chi tiết</button>'
+	                        +'<button class="btn btn-info">Phản hồi</button>'
+	                        +'<button class="btn btn-danger" data-toggle="modal" data-target="#deleteFeedBack" onclick="setDataDeleteFeedBack('+item.idFeedback+')">Xóa</button>'
+	                    +'</th>'
+	                  +'</tr>';
+						
+						$('#dataForm').append(html);
+			 });
+		 }
+	 }
+	 function listFeedBack(){
+		 $.ajax({
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : 'json',
+				url : "/manager/listFeedBack",
+				success : function(result){
+					dataHtml(result);
+				},
+				error: function(result){
+					
+					alert('failedd');
+				}
+			});
+	 }
+	 function setDateDetailFeedBack(feedbackId){
+		 $('#idFeedBackDetail').val($('#idFeedback-'+feedbackId).text());
+		 $('#nameDetail').val($('#nameFeedback-'+feedbackId).text());
+		 $('#emailDetail').val($('#emailFeedback-'+feedbackId).text());
+		 $('#subjectsFeedbackDetail').val($('#subjectsFeedback-'+feedbackId).text());
+		 $('#createDateDetail').val($('#createDateFeedback-'+feedbackId).text());
+		 $('#contentDetail').val($('#contentFeedback-'+feedbackId).text());
+	 }
+	 function setDataDeleteFeedBack(feedbackId){
+		 $('#idFeedBackDelete').val($('#idFeedback-'+feedbackId).text());
+	 }
+	 function deleteFeedback(){
+		 var idFeedback = parseInt($('#idFeedBackDelete').parent().find('#idFeedBackDelete').val());
+		 $.ajax({
+				type : "POST",
+				contentType : "application/json; charset=utf-8",
+				dataType : 'json',
+				url : "/manager/deleteFeedBack/" +idFeedback,
+				success : function(result){
+					dataHtml(result);
+				},
+				error : function(result){
+					 alert('failed');
+				}
+				
+			});
+	 }
+	</script>
+	</body>
+</html>
