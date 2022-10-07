@@ -188,7 +188,7 @@ public class HomeController {
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 		List<Product> products = this.productService.searchListProductByIdCategory(key);
-		// show user
+		
 		getName(request, model);
 		initHomeResponse(model);
 

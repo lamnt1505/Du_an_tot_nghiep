@@ -155,7 +155,8 @@ public class ManagerController {
 
 	@GetMapping(value = "/manager/updateCategory/{idCategory}")
 	public String updateCategory(ModelMap model, @PathVariable(name = "idCategory") int idCategory,
-			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request) {//chinh sua tt entity
+			@CookieValue(value = "accountuser", required = false) String username, 
+			HttpServletRequest request) {//chinh sua tt entity
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; ++i) {
@@ -178,19 +179,19 @@ public class ManagerController {
 		return "redirect:/manager/listCategory";//action chuyen huong den list
 	}
 
-	@GetMapping(value = "/manager/deleteCategory/{idCategory}")
-	public String deleteCategory(@PathVariable(name = "idCategory") int idCategory,
+	@GetMapping(value = "/manager/deleteCategory/{idCategory}")//truyền vào idcategory 
+	public String deleteCategory(@PathVariable(name = "idCategory") int idCategory,//khai báo PathVariable
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			RedirectAttributes redirect) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; ++i) {
 				if (cookies[i].getName().equals("accountuser")) {
-					this.userService.findByPhone(cookies[i].getValue()).get();
+					this.userService.findByPhone(cookies[i].getValue()).get();//goi thực hiện pt find byphone để lấy user
 
-					this.categoryService.deleteById(idCategory);
-					redirect.addFlashAttribute("success", "Xóa danh mục thành công!");
-					return "redirect:/manager/listCategory";
+					this.categoryService.deleteById(idCategory);//gọi thực hiện deletedbyid truyền vào id xóa theo category id
+					redirect.addFlashAttribute("success", "Xóa danh mục thành công!");//đưa ra tb đã xóa thành công
+					return "redirect:/manager/listCategory";//sử dụng kỹ thuật redirect trả về trang list category
 				}
 
 			}
@@ -208,8 +209,9 @@ public class ManagerController {
 		return "redirect:/listProduct/page/1";
 	}
 
-	@GetMapping(value = "/listProduct/page/{pageNumber}")
-	public String showProduct(@CookieValue(value = "accountuser") String username, HttpServletRequest request,
+	@GetMapping(value = "/listProduct/page/{pageNumber}")//cho phep tìm kiếm và phân trang
+	public String showProduct(@CookieValue(value = "accountuser") String username,
+	        HttpServletRequest request,
 			HttpServletResponse response, @PathVariable int pageNumber, Model model) {
 
 		Cookie[] cookies = request.getCookies();
@@ -233,7 +235,7 @@ public class ManagerController {
 
 					request.getSession().setAttribute("product", pages);
 					int current = pages.getPage() + 1;
-					int begin = Math.max(1, current - list.size());
+					int begin = Math.max(1, current - list.size());//thực hiện tính toán kích thức của trang
 					int end = Math.min(begin + 5, pages.getPageCount());
 					int totalPageCount = pages.getPageCount();
 					String baseUrl = "/listProduct/page/";

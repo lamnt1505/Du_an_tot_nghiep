@@ -10,8 +10,7 @@
 								<ul class="header-links pull-left">
 									<li><a href="#"><i class="fa fa-phone"></i>
 											+84 916 808 376 </a></li>
-									<li><a href="#"><i class="fa fa-map-marker"></i>137 Nguyá»…n Thá»‹ Tháº­p PhÆ°á»�ng HÃ²a Minh
-											Quáº­n LiÃªn Chiá»ƒu</a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i>137 Nguyễn Thị Thập Phường Hòa Minh Quận Liên Chiểu</a></li>
 								</ul>
 							</span>
 						</div>
@@ -20,8 +19,7 @@
 							<span th:if="${fullname == null}" class="text" style="margin-left: 320px;">
 								<ul class="header-links pull-right">
 									<li>
-										<a th:href="@{/login}"><i class="fa fa-user-o"></i>Ä�Äƒng
-											Nháº­p
+										<a th:href="@{/login}"><i class="fa fa-user-o"></i>Đăng Nhập
 									</a>
 									</li>
 								</ul>
@@ -34,8 +32,7 @@
 							<span class="text"
 								th:if="${fullname != null}" style="width: 150px; margin-left: 50px; cursor: pointer;">
 								<a
-									th:href="@{/index/logout}" style="color: white;"><i class="fa fa-user-o"></i> Ä�Äƒng
-									xuáº¥t
+									th:href="@{/index/logout}" style="color: white;"><i class="fa fa-user-o"></i>Đăng Xuất
 								</a>
 							</span>
 						</div>
@@ -61,7 +58,7 @@
 							<div class="header-search">
 								<form th:action="@{/index/searchProduct}" method="get">
 									<input type="search" name="key" class="input" placeholder="tá»« khÃ³a">
-									<button type="submit" class="search-btn">TÃ¬m</button>
+									<button type="submit" class="search-btn">Tìm</button>
 								</form>
 							</div>
 						</span>
@@ -83,19 +80,19 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a th:href="@{/index}" class="nav-link">trang chá»§</a></li>
+					<li class="nav-item active"><a th:href="@{/index}" class="nav-link">Trang Chủ</a></li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown04"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh
-							Má»¥c</a>
+							Mục</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a th:each="cate : ${category}" class="dropdown-item"
 								th:href="@{'/index/showProductByIdCategory/'+${cate.idCategory}}"
 								th:value="${cate.idCategory}" th:utext="${cate.name}"></a>
 						</div>
 					</li>
-					<li class="nav-item"><a th:href="@{/index/product}" class="nav-link">Sáº£n Pháº©m</a></li>
-					<li class="nav-item"><a th:href="@{/index/about}" class="nav-link">Giá»›i Thiá»‡u</a></li>
-					<li class="nav-item"><a th:href="@{/index/feedback}" class="nav-link">LiÃªn Há»‡</a></li>
+					<li class="nav-item"><a th:href="@{/index/product}" class="nav-link">Sản Phẩm</a></li>
+					<li class="nav-item"><a th:href="@{/index/about}" class="nav-link">Giới Thiệu</a></li>
+					<li class="nav-item"><a th:href="@{/index/feedback}" class="nav-link">Liên Hệ</a></li>
 					<li class="nav-item cta cta-colored">
 						<a th:href="@{/cart}" class="nav-link"><span id="so_luong_in_cart" class="icon-shopping_cart"
 							th:utext="${#lists.size(session.cart)}">  
