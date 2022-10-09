@@ -99,14 +99,15 @@ public class ManagerController {
 
 	}
 
-	@GetMapping(value = "/manager/listCategory")
+	@GetMapping(value = "/manager/listCategory")//kich hoat action pt get
 	public String listCategory(Model model, @CookieValue(value = "accountuser", required = false) String username,
 			HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) {
 
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
-				if (cookies[i].getName().equals("accountuser")) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			  //sd length lấy tt phần tử cookies
+				if (cookies[i].getName().equals("accountuser")) {//kiểm tra cookie
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
 					if (model.asMap().get("success") != null)
 						redirect.addFlashAttribute("success", model.asMap().get("success").toString());
@@ -125,18 +126,19 @@ public class ManagerController {
 
 	}
 
-	@GetMapping(value = "/manager/addCategory")
+	@GetMapping(value = "/manager/addCategory")//kich hoat action pt get
 	public String addCategory(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
-			HttpServletRequest request) {
+			HttpServletRequest request) {//lấy thông tin entity
 
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			    //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
-					this.userService.findByPhone(cookies[i].getValue()).get();
-					model.addAttribute("category", new Category());
+					this.userService.findByPhone(cookies[i].getValue()).get();//sử dụng serviceimpl để lấy thông tin entity
+					model.addAttribute("category", new Category());//sử dụng pt addtribute để lấy đối tượng entity
 					getName(request, model);
-					return "/manager/category/addCategory";
+					return "/manager/category/addCategory";//trả về view addcategory
 				}
 			}
 		}
@@ -157,9 +159,10 @@ public class ManagerController {
 	public String updateCategory(ModelMap model, @PathVariable(name = "idCategory") int idCategory,
 			@CookieValue(value = "accountuser", required = false) String username, 
 			HttpServletRequest request) {//chinh sua tt entity
-		Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
 		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			  //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
 					this.userService.findByPhone(cookies[i].getValue()).get();//import cts goi thuc hien pt finbyphone
 					getName(request, model);
@@ -183,7 +186,7 @@ public class ManagerController {
 	public String deleteCategory(@PathVariable(name = "idCategory") int idCategory,//khai báo PathVariable
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			RedirectAttributes redirect) {
-		Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; ++i) {
 				if (cookies[i].getName().equals("accountuser")) {
