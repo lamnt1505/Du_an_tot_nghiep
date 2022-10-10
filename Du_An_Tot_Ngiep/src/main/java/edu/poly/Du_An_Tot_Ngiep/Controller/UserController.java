@@ -45,10 +45,13 @@ public class UserController {
 	}
 
 	void getName(HttpServletRequest request, ModelMap model) {
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
+	    //đọc cookie từ trình duyệt
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+		    //so sánh phần tử i trong cookie với accountuser
 			if (cookies[i].getName().equals("accountuser")) {
 				User user = this.userService.findByPhone(cookies[i].getValue()).get();
+				//đưa các giá trị vào model
 				model.addAttribute("fullname", user.getFullname());
 				model.addAttribute("image", user.getImageBase64());
 				model.addAttribute("ma", user.getUserId());
@@ -62,36 +65,47 @@ public class UserController {
 		}
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/login")//định nghĩa action login
 	public String login(@RequestParam("phone") String phone, @RequestParam("password") String password, ModelMap model,
 			HttpServletResponse response) {
+	    //đăng nhập với vai trò admin
+	    //nếu sdt người dùng tồn tại lưu giá trị vào user
 		if (userService.findByPhone(phone).isPresent()) {
 			User users = userService.findByPhone(phone).get();
+			//tạo đối tượng lưu trữ cookie lấy sđt của entity
 			Cookie cookie = new Cookie("accountuser", users.getPhone());
-
+			//kiểm tra xem pass có nhập cùng với dữ liệu hay không
 			if (users.getPassword().equals(password)) {
+			    //sd ptresponse.addCookie() để thêm các cookie 
 				response.addCookie(cookie);
+				//sd setMaxAge để xác định thời gian cookie lưu trữ có hiệu lực
 				cookie.setMaxAge(7 * 24 * 60 * 60);
+				//sau đó trả về trang manager
 				return "redirect:/manager";
-			} else {
-				model.addAttribute("errorpass", "Mật khẩu không chính xác");
-				return "login/login1";
+			} else {//ngược lại đăng nhập không đúng
+				model.addAttribute("errorpass", "Mật khẩu không chính xác"); //đưa ra tb sai mk 
+				return "login/login1";//trả về trang login
 			}
+			//nếu đăng nhập với tài khoản khách hàng
 		} else if (customerService.findByPhoneCus(phone).isPresent()) {
-			Customer customer = customerService.findByPhoneCus(phone).get();
+			Customer customer = customerService.findByPhoneCus(phone).get();//sd jpa để lấy câu lệnh tìm theo sdt customer
 			Cookie cookie = new Cookie("accountcustomer", customer.getPhone());
-
+			//kiểm tra xem pass có nhập cùng với dữ liệu hay không
 			if (customer.getPassword().equals(password)) {
+			  //sd ptresponse.addCookie() để thêm các cookie 
 				response.addCookie(cookie);
+				//sd setMaxAge để xác định thời gian cookie lưu trữ có hiệu lực
 				cookie.setMaxAge(7 * 24 * 60 * 60);
+				//sau đó trả về trang index
 				return "redirect:/index";
-			} else {
+			} else {//ngược lại đăng nhập không đúng
 				model.addAttribute("errorpass", "Mật khẩu không chính xác");
-				return "login/login1";
+				return "login/login1";//trả về trang login
 			}
 		}
-		model.addAttribute("error", "Tài khoản không tồn tại");
-		return "login/login1";
+		//ngược lại nếu không đúng tài khoản và mk 
+		model.addAttribute("error", "Tài khoản không tồn tại");//đưa ra tb 
+		return "login/login1";//trả về trang login
 
 	}
 
@@ -111,18 +125,21 @@ public class UserController {
 	@GetMapping(value = "/manager/listUser")
 	public String listProduct(ModelMap model, @CookieValue(value = "accountuser") String phone,
 			HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
-					if (user.isRole() == false) {
+					if (user.isRole() == false) {//thiết lập phân quyền
+					    //đưa dữ liệu addAttribute vào trong model
 						model.addAttribute("listuser", this.userService.findAll());
 						model.addAttribute("username", phone);
 						getName(request, model);
 						return "/manager/users/listUser";
 					} else {
+					    //ngược lại nếu sử dụng tài khoản nv đưa tb 
 						redirect.addFlashAttribute("fail", "Vui lòng sử dụng tài khoản admin!");
+						//trả về trang listCategory
 						return "redirect:/manager/listCategory";
 					}
 				}
@@ -154,10 +171,12 @@ public class UserController {
 	public String addCategory(@ModelAttribute(value = "userId") @Validated User userId, BindingResult result,
 			RedirectAttributes redirect, @RequestParam("phone") String phone, ModelMap model,
 			@RequestParam(value = "image") MultipartFile image) {
+	    //so sánh sdt mới và sdt của user và customer đã có,nếu giống nhau sẽ đưa ra thông báo đã tồn tại
 		if (userService.findByPhone(phone).isPresent() || customerService.findByPhoneCus(phone).isPresent()) {
-			model.addAttribute("error", "Số điện thoại đã tồn tại");
-			return "/manager/users/addUser";
+			model.addAttribute("error", "Số điện thoại đã tồn tại");//đưa ra thông báo đã tồn tại
+			return "/manager/users/addUser";//trả về trang quản lý user
 		} else {
+		    //ngược lại sẽ thêm 1 tài khoản mới
 			User us = new User();
 			us.setFullname(userId.getFullname());
 			us.setImage(userId.getImage());
@@ -168,12 +187,13 @@ public class UserController {
 			us.setGender(userId.isGender());
 			us.setAddress(userId.getAddress());
 			userService.save(us);
+			//sau khi save sẽ đưa ra tb thêm mới thành công 
 			redirect.addFlashAttribute("success", "Tạo tài khoản mới thành công!");
-			return "redirect:/manager/listUser";
+			return "redirect:/manager/listUser";//trả về trang list user
 		}
 	}
 
-	@GetMapping(value = "/manager/updateUser/{userId}")
+	@GetMapping(value = "/manager/updateUser/{userId}")//cập nhật tài khoản theo id
 	public String updateProduct(ModelMap model, @PathVariable(name = "userId") int id, HttpServletRequest request) {
 		model.addAttribute("listuser", this.userService.findAll());
 		model.addAttribute("usernameID",

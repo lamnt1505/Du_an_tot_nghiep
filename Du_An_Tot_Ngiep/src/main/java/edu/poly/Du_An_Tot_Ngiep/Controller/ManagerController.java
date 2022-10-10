@@ -77,12 +77,13 @@ public class ManagerController {
 		}
 	}
 
-	@GetMapping(value = "/manager")
+	@GetMapping(value = "/manager")//kich hoat action pt get
 	public String manager(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
 			MultipartFile image, HttpServletRequest request, HttpServletResponse response) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			    //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
 
@@ -106,12 +107,12 @@ public class ManagerController {
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
 		if (cookies != null) {//kiểm tra cookie
 			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
-			  //sd length lấy tt phần tử cookies
+			            //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {//kiểm tra cookie
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
 					if (model.asMap().get("success") != null)
 						redirect.addFlashAttribute("success", model.asMap().get("success").toString());
-
+					    //sử dụng addFlashAttribute tránh submit lại form 
 					List<Category> list = categoryService.listCategory();//goi thuc hien pt findall tra ve ds 
 					model.addAttribute("category", list);
 					model.addAttribute("username", username);
@@ -133,7 +134,7 @@ public class ManagerController {
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
 		if (cookies != null) {//kiểm tra cookie
 			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
-			    //sd length lấy tt phần tử cookies
+			            //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
 					this.userService.findByPhone(cookies[i].getValue()).get();//sử dụng serviceimpl để lấy thông tin entity
 					model.addAttribute("category", new Category());//sử dụng pt addtribute để lấy đối tượng entity
@@ -147,7 +148,7 @@ public class ManagerController {
 
 	@PostMapping(value = "/manager/addCategory")//kich hoat action pt post
 	public String addCategory(@ModelAttribute(value = "category") @Valid Category category,
-			RedirectAttributes redirect) {////chinh sua tt entity
+			RedirectAttributes redirect) {//chinh sua tt entity
 
 		this.categoryService.save(category);//goi thuc hien pt luu 
 		redirect.addFlashAttribute("success", "Thêm mới danh mục thành công!");//dua ra tb da luu entity
@@ -187,8 +188,9 @@ public class ManagerController {
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			RedirectAttributes redirect) {
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
-		if (cookies != null) {
+		if (cookies != null) {//sd vl for để duyệt qua cookie
 			for (int i = 0; i < cookies.length; ++i) {
+			    //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
 					this.userService.findByPhone(cookies[i].getValue()).get();//goi thực hiện pt find byphone để lấy user
 
@@ -205,10 +207,10 @@ public class ManagerController {
 	// table product
 	@GetMapping(value = "/manager/listProduct")
 	public String listProduct(Model model, HttpServletRequest request, RedirectAttributes redirect) {
-
 		request.getSession().setAttribute("product", null);
 		if (model.asMap().get("success") != null)
 			redirect.addFlashAttribute("success", model.asMap().get("success").toString());
+		    //sử dụng addFlashAttribute tránh submit lại form
 		return "redirect:/listProduct/page/1";
 	}
 
@@ -279,6 +281,7 @@ public class ManagerController {
 		}
 		return "redirect:/login";
 	}
+	
 	//onsubmit="return checkempty(form)";
 	@PostMapping(value = "/manager/addProduct")
 	public String addProduct(@RequestParam(value = "image") MultipartFile image,
@@ -341,7 +344,6 @@ public class ManagerController {
 			product.setImage(productService.findById(product.getIdProduct()).get().getImage());
 
 		}
-
 		return "redirect:/manager/listProduct";
 	}
 
