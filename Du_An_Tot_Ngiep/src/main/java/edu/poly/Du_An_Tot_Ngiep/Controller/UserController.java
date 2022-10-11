@@ -111,18 +111,22 @@ public class UserController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
+	    //đọc cookie từ trình duyệt
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+		    //nếu trùng với tài khoản trong account thì cho tg hiệu lực cookie là 0
 			if (cookies[i].getName().equals("accountuser")) {
 				cookies[i].setMaxAge(0);
+				//gọi pt addcookie để thêm các cooike và HttpServlet
 				response.addCookie(cookies[i]);
 				break;
 			}
 		}
+		//trả về trang login
 		return "redirect:/login";
 	}
 
-	@GetMapping(value = "/manager/listUser")
+	@GetMapping(value = "/manager/listUser")//action dẫn đến trang list user
 	public String listProduct(ModelMap model, @CookieValue(value = "accountuser") String phone,
 			HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) {
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
@@ -145,6 +149,7 @@ public class UserController {
 				}
 			}
 		}
+		//trả về trang login
 		return "redirect:/login";
 	}
 
@@ -202,10 +207,13 @@ public class UserController {
 		return "/manager/users/updateUser";
 	}
 
-	@InitBinder
+	@InitBinder//đánh dấu 1 phương thức tùy biến ràng buộc tham số yêu cầu
+	//định dạng biểu mẫu
+	//Chuyển đổi các giá trị yêu cầu dựa trên chuỗi 
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws ServletException {
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
+	
 	@PostMapping(value = "/manager/updateUser")
 	public String updateProduct(@ModelAttribute(name = "usernameID") @Validated User usernameID,
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
@@ -242,11 +250,15 @@ public class UserController {
 			@PathVariable(name = "userId") int id, RedirectAttributes redirect, HttpServletRequest request) {
 
 		Cookie[] cookies = request.getCookies();
+		//sử dụng rqck trả về danh sách các cookie
 		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 				if (cookies[i].getName().equals("accountuser")) {
+				    //xóa tài khoản theo id
 					userService.deleteById(id);
+					//đưa ra tb tài khoản đã được xóa
 					redirect.addFlashAttribute("success", "Tài khoản đã được xóa!");
+					//trả về trang list user
 					return "redirect:/manager/listUser";
 				}
 

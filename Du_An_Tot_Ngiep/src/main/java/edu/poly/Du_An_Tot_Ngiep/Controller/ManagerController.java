@@ -161,7 +161,7 @@ public class ManagerController {
 			@CookieValue(value = "accountuser", required = false) String username, 
 			HttpServletRequest request) {//chinh sua tt entity
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
-		if (cookies != null) {
+		if (cookies != null) {//kiểm tra cookie
 			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 			  //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
@@ -188,8 +188,8 @@ public class ManagerController {
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			RedirectAttributes redirect) {
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
-		if (cookies != null) {//sd vl for để duyệt qua cookie
-			for (int i = 0; i < cookies.length; ++i) {
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 			    //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
 					this.userService.findByPhone(cookies[i].getValue()).get();//goi thực hiện pt find byphone để lấy user
@@ -219,15 +219,15 @@ public class ManagerController {
 	        HttpServletRequest request,
 			HttpServletResponse response, @PathVariable int pageNumber, Model model) {
 
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
 
-					PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("product");
-					int pagesize = 5;
-					List<Product> list = productService.listProduct();
+					PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("product");//đánh số trang = 0
+					int pagesize = 5;//cho số trang mặc định là 5
+					List<Product> list = productService.listProduct();//sử dụng jpa hiển thị list prd
 					if (pages == null) {
 						pages = new PagedListHolder<>(list);
 						pages.setPageSize(pagesize);
