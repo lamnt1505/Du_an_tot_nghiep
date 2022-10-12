@@ -66,10 +66,14 @@ public class ManagerController {
 	StatisticalService statisticalService;
 
 	void getName(HttpServletRequest request, ModelMap model) {
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
+	    //đọc cookie từ trình duyệt
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 			if (cookies[i].getName().equals("accountuser")) {
-				User user = this.userService.findByPhone(cookies[i].getValue()).get();
+			  //so sánh phần tử i trong cookie với accountuser
+			    //
+				User user = this.userService.findByPhone(cookies[i].getValue()).get();//sử dụng câu lệnh findbyphone để tìm số đt
+				//đưa các giá trị vào model
 				model.addAttribute("fullname", user.getFullname());
 				model.addAttribute("image", user.getImageBase64());
 				break;
@@ -86,7 +90,7 @@ public class ManagerController {
 			    //sd length lấy tt phần tử cookies
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
-
+					//đưa các giá trị vào model
 					model.addAttribute("username", username);
 					model.addAttribute("fullname", user.getFullname());
 					model.addAttribute("image", user.getImageBase64());
@@ -225,11 +229,13 @@ public class ManagerController {
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
 
-					PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("product");//đánh số trang = 0
-					int pagesize = 5;//cho số trang mặc định là 5
+					PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("product");
+					//ép session sang đt PagedListHolder
+					int pagesize = 5;//giá trị ngầm định 5 phần từ trên 1 trang
 					List<Product> list = productService.listProduct();//sử dụng jpa hiển thị list prd
 					if (pages == null) {
-						pages = new PagedListHolder<>(list);
+					    //nếu đối tượng page null thì sẽ khởi tạo và thiết lập pagesize
+						pages = new PagedListHolder<>(list);//dùng at PagedListHolder phân trang theo danh sách
 						pages.setPageSize(pagesize);
 					} else {
 						final int goToPage = pageNumber - 1;
@@ -239,12 +245,15 @@ public class ManagerController {
 					}
 
 					request.getSession().setAttribute("product", pages);
-					int current = pages.getPage() + 1;
-					int begin = Math.max(1, current - list.size());//thực hiện tính toán kích thức của trang
-					int end = Math.min(begin + 5, pages.getPageCount());
-					int totalPageCount = pages.getPageCount();
+					int current = pages.getPage() + 1;//bắt đầu 1
+					int begin = Math.max(1, current - list.size());
+					//thực hiện tính toán kích thức của trang
+					//Thiết lập trang mà chúng ta muốn hiện lên View
+					int end = Math.min(begin + 5, pages.getPageCount());//+5 thêm các trang sau
+					int totalPageCount = pages.getPageCount();//tính toán số trang hiển thị trên view
 					String baseUrl = "/listProduct/page/";
-
+					//hiển thị dữ liệu trở lại trên view
+					//gọi th pt addAttribute thiết lập các tt
 					model.addAttribute("beginIndex", begin);
 					model.addAttribute("endIndex", end);
 					model.addAttribute("currentIndex", current);
@@ -254,7 +263,7 @@ public class ManagerController {
 					model.addAttribute("username", username);
 					model.addAttribute("fullname", user.getFullname());
 					model.addAttribute("image", user.getImageBase64());
-
+					//trả về trang list product
 					return "/manager/product/listProduct";
 				}
 
@@ -266,14 +275,17 @@ public class ManagerController {
 	@GetMapping(value = "/manager/addProduct")
 	public String addProduct(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
 			HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
-				if (cookies[i].getName().equals("accountuser")) {
-					this.userService.findByPhone(cookies[i].getValue()).get();
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			        //sd length lấy tt phần tử cookies
+				if (cookies[i].getName().equals("accountuser")) {//kiểm tra nếu i khác entity
+					this.userService.findByPhone(cookies[i].getValue()).get();//sử dụng userService lấy tt người đăng nhập
 					getName(request, model);
+					//đưa các giá trị vào model
 					model.addAttribute("product", new Product());
 					model.addAttribute("listCategory", categoryService.findAll());
+					//trả về trang thêm sản phẩm
 					return "/manager/product/addProduct";
 				}
 
@@ -287,12 +299,15 @@ public class ManagerController {
 	public String addProduct(@RequestParam(value = "image") MultipartFile image,
 			@ModelAttribute(name = "product") @Valid Product product, BindingResult result,
 			RedirectAttributes redirect) {
-		if (result.hasErrors()) {
+		if (result.hasErrors()) {//kiểm tra nếu có lỗi
+		    //trả về view 
 		  return "/manager/addProduct";
 		} else {
-			this.productService.save(product);
+			this.productService.save(product);//sử dụng productService
+			//đưa ra tb lưu thành công
 			redirect.addFlashAttribute("success", "Thêm mới thông tin sản phẩm thành công!");
 		}
+		//trả về trang listproduct
 		return "redirect:/manager/listProduct";
 	}
 

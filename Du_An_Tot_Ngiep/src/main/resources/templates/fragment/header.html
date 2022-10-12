@@ -95,10 +95,11 @@
 					<li class="nav-item"><a th:href="@{/index/feedback}" class="nav-link">Liên Hệ</a></li>
 					<li class="nav-item cta cta-colored">
 						<a th:href="@{/cart}" class="nav-link"><span id="so_luong_in_cart" class="icon-shopping_cart"
-							th:utext="${#lists.size(session.cart)}">  
+							>  
 						</a>
 					</li>
 				</ul>
+				<!-- th:utext="${#lists.size(session.cart)}" -->
 			</div>
 		</div>
 	</nav>
