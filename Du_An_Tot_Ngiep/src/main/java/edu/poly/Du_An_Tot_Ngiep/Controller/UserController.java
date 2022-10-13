@@ -214,16 +214,20 @@ public class UserController {
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
 	
-	@PostMapping(value = "/manager/updateUser")
-	public String updateProduct(@ModelAttribute(name = "usernameID") @Validated User usernameID,
+	@PostMapping(value = "/manager/updateUser")//action updateuser
+	public String updateProduct(@ModelAttribute(name = "usernameID")
+	    //cho modelAttribute usernameID truyền dữ liệu qua các entity
+	    @Validated User usernameID,
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
-			@RequestParam(value = "image") MultipartFile image, ModelMap model) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
-				if (cookies[i].getName().equals("accountuser")) {
+			@RequestParam(value = "image") MultipartFile image, ModelMap model) { 
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			  //sd length lấy tt phần tử cookies
+				if (cookies[i].getName().equals("accountuser")) {//kiểm tra nếu i khác entity
 					User us = this.userService.findByPhone(cookies[i].getValue()).get();
-					if (us.isRole() == true) {
+					//sử dụng userService lấy tt người đăng nhập
+					if (us.isRole() == true) {//kiểm tra nếu role đăng nhập là true thì k đc chỉnh sửa
 						usernameID.setFullname(usernameID.getFullname());
 						usernameID.setImage(userService.findById(usernameID.getUserId()).get().getImage());
 						usernameID.setRole(true);
@@ -232,8 +236,9 @@ public class UserController {
 						usernameID.setPassword(usernameID.getPassword());
 						usernameID.setGender(usernameID.isGender());
 						usernameID.setAddress(usernameID.getAddress());
-						this.userService.save(usernameID);
+						this.userService.save(usernameID);//gọi pt save userService
 						return "redirect:/manager/listUser";
+						//forwart về trang list user
 					} else {
 						userService.save(usernameID);
 						return "redirect:/manager/listUser";

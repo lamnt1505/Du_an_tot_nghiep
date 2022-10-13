@@ -311,7 +311,9 @@ public class ManagerController {
 		return "redirect:/manager/listProduct";
 	}
 
-	@InitBinder
+	@InitBinder//đánh dấu 1 phương thức tùy biến ràng buộc tham số yêu cầu
+	//định dạng biểu mẫu
+    //Chuyển đổi các giá trị yêu cầu dựa trên chuỗi 
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws ServletException {
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
