@@ -330,8 +330,7 @@ public class ManagerController {
 					//đưa các giá trị vào model
 					model.addAttribute("listCategory", this.categoryService.findAll());//sử dụng câu lệnh tìm tất cả
 					model.addAttribute("product",
-							this.productService.findById(id).isPresent() ? this.productService.findById(id).get()
-									: null);
+					this.productService.findById(id).isPresent() ? this.productService.findById(id).get(): null);
 					//đưa các giá trị vào model
 					getName(request, model);
 					//trả về trang update
@@ -375,18 +374,21 @@ public class ManagerController {
 			RedirectAttributes redirect) {
 
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie 
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua các cookie
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
 
-					this.productService.deleteById(id);
+					this.productService.deleteById(id);//sử dụng câu lệnh xóa theo id
+					//đưa ra tb xóa thành công
 					redirect.addFlashAttribute("success", "Xóa sản phẩm thành công!");
+					//trả về trang list product
 					return "redirect:/manager/listProduct";
 				}
 
 			}
 		}
+		//trả về trang login
 		return "redirect:/login";
 	}
 
@@ -394,17 +396,18 @@ public class ManagerController {
 	@GetMapping(value = "/manager/feedback")
 	public String listFeedBack(ModelMap model, @CookieValue(value = "accountuser") String username,
 			HttpServletRequest request, HttpServletResponse response) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie 
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua các cookie
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
-
+					//đưa các giá trị vào model
 					model.addAttribute("username", username);
 					model.addAttribute("fullname", user.getFullname());
 					model.addAttribute("image", user.getImageBase64());
-
+					//sử dụng câu lệnh tìm tất cả
 					this.feedBackService.findAll();
+					//trả về trang feedback
 					return "/manager/feedback/feedback";
 				}
 
