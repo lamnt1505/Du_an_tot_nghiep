@@ -87,7 +87,7 @@ public class CustomerController {
 			HttpServletRequest request) {
 		model.addAttribute("listuser", this.customerService.findAll());
 		model.addAttribute("customer",
-				this.customerService.findById(customerId).isPresent() ? this.customerService.findById(customerId).get()
+		this.customerService.findById(customerId).isPresent() ? this.customerService.findById(customerId).get()
 						: null);
 		getName(request, model);
 		return "/manager/users/updateProfile";

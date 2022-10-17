@@ -322,16 +322,19 @@ public class ManagerController {
 	public String updateProduct(ModelMap model, @PathVariable(name = "idProduct") int id,
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
-				if (cookies[i].getName().equals("accountuser")) {
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sử dụng vòng lặp for
+				if (cookies[i].getName().equals("accountuser")) {//kiểm tra nếu khác entity
 					this.userService.findByPhone(cookies[i].getValue()).get();
-
-					model.addAttribute("listCategory", this.categoryService.findAll());
+					//sử dụng entityphone để lấy tên người đăng nhập
+					//đưa các giá trị vào model
+					model.addAttribute("listCategory", this.categoryService.findAll());//sử dụng câu lệnh tìm tất cả
 					model.addAttribute("product",
 							this.productService.findById(id).isPresent() ? this.productService.findById(id).get()
 									: null);
+					//đưa các giá trị vào model
 					getName(request, model);
+					//trả về trang update
 					return "/manager/product/updateProduct";
 				}
 
@@ -340,25 +343,27 @@ public class ManagerController {
 		return "redirect:/login";
 	}
 
-	@PostMapping(value = "/manager/updateProduct")
+	@PostMapping(value = "/manager/updateProduct")//action update
 	public String updateProduct(@RequestParam(value = "image") MultipartFile image,
 			@ModelAttribute(name = "product") @Valid Product product, BindingResult result,
 			RedirectAttributes redirect) {
-		if (result.hasErrors()) {
+		if (result.hasErrors()) {//kiểm tra nếu có lỗi
+		    //trả về trang view update
 			return "/manager/updateProduct";
-		} else {
-			this.productService.save(product);
+		} else {//entity
+			this.productService.save(product);//sd câu lệnh lưu tt entity
+			//đưa ra tb đã lưu thành công
 			redirect.addFlashAttribute("success", "Cập nhập thông tin sản phẩm thành công!");
 		}
 
-		if (!image.isEmpty()) {
+		if (!image.isEmpty()) {//kiểm tra nếu hình ảnh bị trống
 			try {
-				product.setImage(image.getBytes());
-			} catch (Exception e) {
-				e.printStackTrace();
+				product.setImage(image.getBytes());//kiểm tra mức lưu KB ha
+			} catch (Exception e) {//xuất ra tb lỗi
+				e.printStackTrace();//đưa ra tb lỗi trong console
 			}
 		} else {
-			product.setImage(productService.findById(product.getIdProduct()).get().getImage());
+			product.setImage(productService.findById(product.getIdProduct()).get().getImage());//sd câu lệnh set tìm theo id
 
 		}
 		return "redirect:/manager/listProduct";
@@ -369,7 +374,7 @@ public class ManagerController {
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			RedirectAttributes redirect) {
 
-		Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie 
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; ++i) {
 				if (cookies[i].getName().equals("accountuser")) {

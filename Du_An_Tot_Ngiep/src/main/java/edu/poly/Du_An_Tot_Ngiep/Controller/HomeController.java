@@ -79,21 +79,14 @@ public class HomeController {
 					if (session.getAttribute("cart") == null) {
 						session.setAttribute("cart", new ArrayList<>());
 					}
-					// show user
 					model.addAttribute("fullname", customer.getFullname());
 					model.addAttribute("customerId", customer.getCustomerId());
-//					this.initHomeResponse(model);
-//					return "home/index";
 				}
 			}
 		} else {
 			if (session.getAttribute("cart") == null) {
 				session.setAttribute("cart", new ArrayList<>());
 			}
-			// show user
-//			getName(request, model);
-//			this.initHomeResponse(model);
-//			return "home/index";
 		}
 		this.initHomeResponse(model);
 		return "home/index";
