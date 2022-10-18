@@ -39,10 +39,14 @@ public class ImportController {
 	private UserService userService;
 
 	void getName(HttpServletRequest request, ModelMap model) {
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
+	    //đọc cookie từ trình duyệt
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 			if (cookies[i].getName().equals("accountuser")) {
+			    //so sánh phần tử i trong cookie với accountuser
 				User user = this.userService.findByPhone(cookies[i].getValue()).get();
+				//sử dụng câu lệnh findbyphone để tìm số đt
+				//đưa các giá trị vào model
 				model.addAttribute("fullname", user.getFullname());
 				model.addAttribute("image", user.getImageBase64());
 				break;
@@ -50,39 +54,48 @@ public class ImportController {
 		}
 	}
 
-	@GetMapping(value = "/manager/import")
+	@GetMapping(value = "/manager/import")//action list
 	public String listImport(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
 			HttpServletRequest request, HttpServletResponse response) {
+	    //gọi thực hiện pt findall trả về danh sách
 		List<Imports> list = (List<Imports>) importService.findAll();
+		//đưa giá trị vào model
 		model.addAttribute("import", list);
 		model.addAttribute("username", username);
 		getName(request, model);
+		//trả về trang manager import
 		return "/manager/import/import";
 	}
 
-	@GetMapping(value = "/manager/addImport")
+	@GetMapping(value = "/manager/addImport")//action thêm
 	public String addImport(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
 			HttpServletRequest request) {
+	    //đưa các giá trị vào model
 		model.addAttribute("import", new Imports());
 		model.addAttribute("username", username);
+		//gọi thực hiện pt findall đưa giá trị vào model
 		model.addAttribute("listProduct", productService.findAll());
 		getName(request, model);
+		//trả về trang import
 		return "/manager/import/addImport";
 	}
 
-	@PostMapping(value = "/manager/addImport")
+	@PostMapping(value = "/manager/addImport")//action thêm mới 
 	public String addImport(@ModelAttribute(value = "import") Imports import1, HttpServletRequest request,
 			ModelMap model, RedirectAttributes redirect) {
-
-		Imports impl = new Imports();
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
-			if (cookies[i].getName().equals("accountuser")) {
+	    
+		Imports impl = new Imports();//sử dụng pt import
+		//đọc cookie từ trình duyệt
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			if (cookies[i].getName().equals("accountuser")) {//so sánh phần tử i trong cookie với accountuser
+			    //sử dụng pt findbyphone ghi cookie
 				User user = this.userService.findByPhone(cookies[i].getValue()).get();
 				model.addAttribute("fullname", user.getFullname());
+				//lấy tên và đưa giá trị vào model
 				impl.setUsers(user.getFullname());
 				model.addAttribute("image", user.getImageBase64());
-				break;
+				break;//kết thúc vòng lặp 
 			}
 		}
 		if(!this.importService.findById(import1.getProduct().getIdProduct()).isPresent()) {

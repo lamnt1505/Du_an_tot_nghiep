@@ -70,8 +70,7 @@ public class ManagerController {
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
 		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 			if (cookies[i].getName().equals("accountuser")) {
-			  //so sánh phần tử i trong cookie với accountuser
-			    //
+			    //so sánh phần tử i trong cookie với accountuser
 				User user = this.userService.findByPhone(cookies[i].getValue()).get();//sử dụng câu lệnh findbyphone để tìm số đt
 				//đưa các giá trị vào model
 				model.addAttribute("fullname", user.getFullname());
@@ -418,10 +417,11 @@ public class ManagerController {
 
 	@PostMapping(value = "index/contact")
 	public String addFeedBack(@ModelAttribute(name = "feedback") @Valid FeedBack feedBack, BindingResult result) {
-		if (result.hasErrors()) {
+		if (result.hasErrors()) {//nếu có lỗi xảy ra 
+		    //trả về trag contact
 			return "shop/contact";
 		}
-		this.feedBackService.save(feedBack);
+		this.feedBackService.save(feedBack);//sử dụng câu lệnh save
 		return "shop/contact";
 	}
 
@@ -429,16 +429,19 @@ public class ManagerController {
 	@GetMapping("/manager/order")
 	public String listOrder(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
 			HttpServletRequest request, HttpServletResponse response) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie 
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua các cookie
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
-
+					//sử dụng userService lấy tt người đăng nhập
+					//đưa các giá trị vào model
 					model.addAttribute("username", username);
 					model.addAttribute("fullname", user.getFullname());
 					model.addAttribute("image", user.getImageBase64());
+					//hiển thị danh sách hóa đơn
 					List<Invoice> list = this.oders.listInvoice();
+					//đưa các giá trị vào model
 					model.addAttribute("listOrder", list);
 					return "manager/order/order";
 				}
@@ -452,23 +455,26 @@ public class ManagerController {
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int j = 0; j < cookies.length; ++j) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie 
+		if (cookies != null) {//kiểm tra cookie
+			for (int j = 0; j < cookies.length; ++j) {//sd vl for để duyệt qua các cookie
 				if (cookies[j].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[j].getValue()).get();
-
+					//sử dụng userService lấy tt người đăng nhập
+					//đưa các giá trị vào model
 					model.addAttribute("username", username);
 					model.addAttribute("fullname", user.getFullname());
 					model.addAttribute("image", user.getImageBase64());
-
+					//hiển thị danh sách hóa đơn chi tiết
 					List<InvoiceDetail> list = this.orderDetailsService.findDetailByInvoiceId(id);
+					//hiên thị danh sách product
 					List<Product> productorder = new ArrayList<>();
-					for (int i = 0; i < list.size(); i++) {
+					for (int i = 0; i < list.size(); i++) {//sd vl for để duyệt qua các product,order
 						Product odrProduct = productService.findByIdProduct(list.get(i).getProduct().getIdProduct());
 						odrProduct.setAmount(list.get(i).getAmount());
 						productorder.add(odrProduct);
 					}
+					//đưa các giá trị vào model
 					model.addAttribute("listOrderDetail", productorder);
 					return "manager/order/orderDetail";
 				}
