@@ -98,55 +98,69 @@ public class ImportController {
 				break;//kết thúc vòng lặp 
 			}
 		}
-		if(!this.importService.findById(import1.getProduct().getIdProduct()).isPresent()) {
+		if(!this.importService.findById(import1.getProduct().getIdProduct()).isPresent()) {//sử dụng pt findbyid lấy 1 product 
 			impl.setProduct(import1.getProduct());
+			//sử dụng pt improt lấy sản phẩm
 			impl.setQuantity(import1.getQuantity());
+			//sử dụng pt improt lấy số lượng
 			this.importService.save(impl);
+			//sử dụng pt save 
 			redirect.addFlashAttribute("success", "Nhập kho thành công!");
-		}else {
-		redirect.addFlashAttribute("success", "Sản phẩm đang tồn tại trong kho!");
+			//đưa ra tb lưu thành công
+		}else {//ngược lại 
+		    //sản phẩm tồn tại đưa ra tb 
+		    redirect.addFlashAttribute("success", "Sản phẩm đang tồn tại trong kho!");
 		}
-		return "redirect:/manager/import";
+		    return "redirect:/manager/import";
 	}
 
 	@GetMapping(value = "/manager/updateImport/{idImport}")
 	public String updateImport(ModelMap model, @PathVariable(name = "idImport") int id,
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request) {
+	    //đưa giá trị username vào model
 		model.addAttribute("username", username);
 		getName(request, model);
+		//sử dụng pt findadll và đưa giá trị vào model
 		model.addAttribute("listProduct", productService.findAll());
 		model.addAttribute("import",
 				this.importService.findById(id).isPresent() ? this.importService.findById(id).get() : null);
+		//trả về trang update
 		return "/manager/import/updateImport";
 	}
 
 	@PostMapping(value = "/manager/updateImport")
 	public String updateImport(@ModelAttribute(value = "import") Imports import1, @RequestParam int idImport,
 			RedirectAttributes redirect, HttpServletRequest request, ModelMap model) {
-		Imports impl = new Imports();
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
-			if (cookies[i].getName().equals("accountuser")) {
+		Imports impl = new Imports();//sử dụng pt import
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sử dụng vòng lặp for
+			if (cookies[i].getName().equals("accountuser")) {//so sánh phần tử i trong cookie với accountuser
+			    //sử dụng pt findbyphone để lấy tt đăng nhập
 				User user = this.userService.findByPhone(cookies[i].getValue()).get();
+				//sử dụng pt getfulname đưa giá trị vào model
 				model.addAttribute("fullname", user.getFullname());
 				import1.setUsers(user.getFullname());
 				model.addAttribute("image", user.getImageBase64());
 				break;
 			}
 		}
+		
 		int a = this.importService.findByIdImport(idImport).getQuantity();
 		impl.setProduct(import1.getProduct());
 		import1.setQuantity((a + import1.getQuantity()));
+		//sd pt save product
 		this.importService.save(import1);
+		//đưa ra tb cập nhật thành công
 		redirect.addFlashAttribute("success", "Cập nhập kho hàng thành công!");
 
 		return "redirect:/manager/import";
 	}
 
-	@GetMapping(value = "/manager/deleteImport/{idImport}")
+	@GetMapping(value = "/manager/deleteImport/{idImport}")//action xóa kho hàng
 	public String deleteImport(@PathVariable(name = "idImport") int idImport, RedirectAttributes redirect) {
-		this.importService.deleteById(idImport);
+		this.importService.deleteById(idImport);//sử dụng pt xóa id import
 		redirect.addFlashAttribute("success", "Xoá kho hàng thành công!");
+		//đưa ra tb xóa thành công
 		return "redirect:/manager/import";
 	}
 }
