@@ -33,10 +33,13 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	void getName(HttpServletRequest request, ModelMap model) {
+	  //đọc cookie từ trình duyệt
 		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
-			if (cookies[i].getName().equals("accountcustomer")) {
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+			if (cookies[i].getName().equals("accountcustomer")) {//kiểm tra cookie
+			    //so sánh phần tử i trong cookie với accountuser
 				Customer cus = this.customerService.findByPhoneCus(cookies[i].getValue()).get();
+				//đưa giá trị vào model
 				model.addAttribute("fullname", cus.getFullname());
 				model.addAttribute("customerId", cus.getCustomerId());
 				break;
@@ -44,7 +47,7 @@ public class CustomerController {
 		}
 	}
 
-	@GetMapping(value = "/manager/listCustomer")
+	@GetMapping(value = "/manager/listCustomer")//action ht ds customer
 	public String listProduct(ModelMap model, @CookieValue(value = "accountuser", required = false) String phone,
 			HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();

@@ -59,20 +59,27 @@ public class CartController {
 		return "redirect:/product/list";//tra ve trang prodcut
 	}
 
-	@GetMapping("/cart")
+	@GetMapping("/cart")//action hướng đến giỏ hàng 
 	public String viewCart(ModelMap model, HttpServletRequest request, HttpSession session) {
+	    //sử dụng pt findadll đưa giá trị vào model
 		model.addAttribute("product", this.productService.findAll());
+		//sử dụng pt findadll đưa giá trị vào model
 		model.addAttribute("category", this.categoryService.findAll());
 		int id = -1;
-		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
+		//đọc cookie từ trình duyệt
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
+		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
+		  //so sánh phần tử i trong cookie với accountuser
 			if (cookies[i].getName().equals("accountcustomer")) {
+			    //sử dụng pt findbyphone 
 				Customer customer = this.customerService.findByPhoneCus(cookies[i].getValue()).get();
+				//đưa giá trị vào model
 				model.addAttribute("fullname", customer.getFullname());
-				if (customer != null) {
+				if (customer != null) {//kiểm tra nếu cs khac null
 					id = customer.getCustomerId();
 				}
 				break;
+				//kết thúc vòng lặp 
 			}
 		}
 
@@ -87,11 +94,12 @@ public class CartController {
 		return "shop/cart";
 	}
 
-	@GetMapping(value = "/orderdetails/{id}")
+	@GetMapping(value = "/orderdetails/{id}")//action hóa đơn chi tiết
 	public String viewOrderdetails(@PathVariable("id") int id, ModelMap model, HttpServletRequest request) {
+	    //sử dụng pt tìm ct hóa đơn đưa giá trị vào list
 		List<InvoiceDetail> list = this.orderDetailsService.findDetailByInvoiceId(id);
 		List<Product> productorder = new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {//sử dụng vòng lặp for
 			Product odrProduct = productService.findByIdProduct(list.get(i).getProduct().getIdProduct());
 			odrProduct.setAmount(list.get(i).getAmount());
 			productorder.add(odrProduct);
