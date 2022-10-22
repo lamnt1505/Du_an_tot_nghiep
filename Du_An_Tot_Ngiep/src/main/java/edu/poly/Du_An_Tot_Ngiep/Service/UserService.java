@@ -5,7 +5,7 @@ import java.util.Optional;
 import edu.poly.Du_An_Tot_Ngiep.Entity.User;
 
 public interface UserService {
-
+    
 	void deleteById(Integer id);
 
 	Iterable<User> findAll();
