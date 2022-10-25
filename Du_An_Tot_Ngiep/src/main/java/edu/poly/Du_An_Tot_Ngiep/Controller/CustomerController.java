@@ -50,11 +50,13 @@ public class CustomerController {
 	@GetMapping(value = "/manager/listCustomer")//action ht ds customer
 	public String listProduct(ModelMap model, @CookieValue(value = "accountuser", required = false) String phone,
 			HttpServletRequest request, HttpServletResponse response) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
+		Cookie[] cookies = request.getCookies();//đọc cookie từ trình duyệt
+		if (cookies != null) {//kiểm tra cookie
 			for (int i = 0; i < cookies.length; ++i) {
 				if (cookies[i].getName().equals("accountuser")) {
+				  //so sánh phần tử i trong cookie với accountuser
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
+					//đưa giá trị vào model sử dụng pt findall
 					model.addAttribute("listcustomer", this.customerService.findAll());
 					model.addAttribute("username", phone);
 					model.addAttribute("fullname", user.getFullname());
@@ -65,37 +67,47 @@ public class CustomerController {
 		}
 		return "redirect:/login";
 	}
-
+	
+	//action đăng kí 
 	@GetMapping(value = "/registration")
 	public String registration(ModelMap model) {
+	    //đưa giá trị vào model
 		model.addAttribute("registration", new Customer());
 		return "/login/registred";
 	}
 
+	//action đăng kí
 	@PostMapping(value = "/registration")
 	public String addProduct(@ModelAttribute(name = "registration") Customer registration, ModelMap model,
 			@RequestParam boolean gender, @RequestParam Date birthday, @RequestParam("phone") String phone) {
+	    //đưa giá trị vào model thêm mới 1 cus
 		model.addAttribute("registration", new Customer());
 		if (customerService.findByPhoneCus(phone).isPresent() || userService.findByPhone(phone).isPresent()) {
+		    //đưa ra tb sđt đã có trong db
 			model.addAttribute("error", "Số điện thoại đã tồn tại");
 			return "/login/registred";
-		} else {
+		} else {//ngược lại nếu lwuu thành công
 			customerService.save(registration);
+			model.addAttribute("succes", "Đăng Ký Thành Công!");
 			return "redirect:login";
 		}
 	}
-
+	
+	//action updatecus
 	@GetMapping(value = "/updateProfile/{customerId}")
 	public String updateCus(ModelMap model, @PathVariable(name = "customerId") int customerId,
 			HttpServletRequest request) {
+	    //sử dụng pt findall đưa giá trị vào model
 		model.addAttribute("listuser", this.customerService.findAll());
 		model.addAttribute("customer",
 		this.customerService.findById(customerId).isPresent() ? this.customerService.findById(customerId).get()
 						: null);
+		//trả về getname
 		getName(request, model);
 		return "/manager/users/updateProfile";
 	}
 
+	//action updatecus
 	@PostMapping(value = "/updateProfile")
 	public String updateCus(@ModelAttribute(name = "customerId") @Valid Customer customerId,
 			@CookieValue(value = "accountcustomer", required = false) String phone, HttpServletRequest request,
