@@ -16,21 +16,26 @@
 						</div>
 
 						<div class="col-md-6 pr-4 d-flex topper align-items-center text-lg-right">
-							<span th:if="${fullname == null}" class="text" style="margin-left: 320px;">
+							<span th:if="${fullname == null}" class="text" style="margin-right: 50px;">
 								<ul class="header-links pull-right">
+									<!--sử dụng th:href link đến action login controller-->
 									<li>
-										<a th:href="@{/login}"><i class="fa fa-user-o"></i>Đăng Nhập
-									</a>
+										<a th:href="@{/login}"><i class="fa fa-user-o"></i>Đăng Nhập </a>
 									</li>
 								</ul>
 							</span>
 							<span class="text">
+								<!--sửa dụng th:Text lấy giá trị của biến name 
+								liên kết đến đường dẫn update profile controller-->
 								<a th:if="${fullname != null}" th:text="${fullname}"
 									th:href="@{'/updateProfile/'+${customerId}}">
 								</a>
+								<!--sử dụng cú pháp thymeleaf lấy gt customerId nối vào chuỗi 
+								cho phép truyền id tới action sử lý-->
 							</span> 
 							<span class="text"
 								th:if="${fullname != null}" style="width: 150px; margin-left: 50px; cursor: pointer;">
+								<!--sử dụng th:href truyền đến action logiut-->
 								<a
 									th:href="@{/index/logout}" style="color: white;"><i class="fa fa-user-o"></i>Đăng Xuất
 								</a>
@@ -94,8 +99,8 @@
 					<li class="nav-item"><a th:href="@{/index/about}" class="nav-link">Giới Thiệu</a></li>
 					<li class="nav-item"><a th:href="@{/index/feedback}" class="nav-link">Liên Hệ</a></li>
 					<li class="nav-item cta cta-colored">
-						<a th:href="@{/cart}" class="nav-link"><span id="so_luong_in_cart" class="icon-shopping_cart"
-							>  
+						<a th:href="@{/cart}" class="nav-link">
+							<span id="so_luong_in_cart" class="icon-shopping_cart" >  
 						</a>
 					</li>
 				</ul>

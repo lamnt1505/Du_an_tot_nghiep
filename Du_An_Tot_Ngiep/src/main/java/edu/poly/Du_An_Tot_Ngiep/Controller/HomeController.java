@@ -50,16 +50,20 @@ public class HomeController {
 	void getName(HttpServletRequest request, ModelMap model) {
 		// show user
 		Cookie[] cookies = request.getCookies();
-		for (int i = 0; i < cookies.length; ++i) {
+		//đọc cookie từ trình duyệt
+		for (int i = 0; i < cookies.length; ++i) {//sử dụng rqck trả về danh sách các cookie
 			if (cookies[i].getName().equals("accountcustomer")) {
+			    //so sánh phần tử i trong cookie với accountuser
 				Customer customer = this.customerService.findByPhoneCus(cookies[i].getValue()).get();
+				//sử dụng câu lệnh findbyphone để tìm số đt
 				model.addAttribute("fullname", customer.getFullname());
 				model.addAttribute("customerId", customer.getCustomerId());
+				//đưa các giá trị vào model
 				break;
 			}
 		}
 	}
-
+	//action pt truyền dữ liệu
 	void initHomeResponse(ModelMap model) {
 		model.addAttribute("prods", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());

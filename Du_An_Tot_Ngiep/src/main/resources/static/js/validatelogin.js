@@ -3,10 +3,10 @@ function clear() {
 	document.getElementById("matkhau").innerHTML = "";
 }
 
-function checkempty(form) {
+function checkempty1(form) {
 	clear();
 	if (form.phone.value.trim() == "") {
-		document.getElementById("sdt").innerHTML = "Không để trống số điện thoại!";
+		document.getElementById("sdt").innerHTML = "Không để trống số phone!";
 		return false;
 	} 
 	else if (form.password.value.trim() == "") {

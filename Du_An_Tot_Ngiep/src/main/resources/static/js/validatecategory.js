@@ -10,5 +10,6 @@ function checkempty(formproduct) {
 	else {
 		return true;
 	}
-
+	
+	//trang query kiểm tra category
 }

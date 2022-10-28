@@ -2,6 +2,7 @@ function clear() {
 	document.getElementById("soluong").innerHTML = "";
 }
 function checkempty(formproduct) {
+	
 	clear();
 	if (formproduct.quantity.value.trim() == "") {
 		document.getElementById("soluong").innerHTML = "Không để trống số lượng!";

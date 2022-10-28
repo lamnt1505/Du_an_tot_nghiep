@@ -12,6 +12,7 @@ function clear() {
 	document.getElementById("ngaysinh").innerHTML = "";
 }
 
+//trang query kiểm tra trang đăng ký
 
 function checkempty(form) {
 	clear();

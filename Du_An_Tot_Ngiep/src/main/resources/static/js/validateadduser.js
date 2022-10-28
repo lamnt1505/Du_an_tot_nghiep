@@ -12,7 +12,7 @@ function clear() {
 	document.getElementById("sdt").innerHTML = "";
 	document.getElementById("ngaysinh").innerHTML = "";
 }
-
+//trang query kiểm tra quản lý
 
 function checkempty(form) {
 	clear();

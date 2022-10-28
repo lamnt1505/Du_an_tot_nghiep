@@ -64,7 +64,8 @@ public class ManagerController {
 
 	@Autowired
 	StatisticalService statisticalService;
-
+	
+	//show user
 	void getName(HttpServletRequest request, ModelMap model) {
 	    //đọc cookie từ trình duyệt
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie
@@ -80,6 +81,7 @@ public class ManagerController {
 		}
 	}
 
+	
 	@GetMapping(value = "/manager")//kich hoat action pt get
 	public String manager(ModelMap model, @CookieValue(value = "accountuser", required = false) String username,
 			MultipartFile image, HttpServletRequest request, HttpServletResponse response) {
@@ -100,7 +102,6 @@ public class ManagerController {
 
 		}
 		return "redirect:/login";
-
 	}
 
 	@GetMapping(value = "/manager/listCategory")//kich hoat action pt get
@@ -235,10 +236,11 @@ public class ManagerController {
 					if (pages == null) {
 					    //nếu đối tượng page null thì sẽ khởi tạo và thiết lập pagesize
 						pages = new PagedListHolder<>(list);//dùng at PagedListHolder phân trang theo danh sách
-						pages.setPageSize(pagesize);
+						pages.setPageSize(pagesize);//Đặt kích thước trang hiện tại.
 					} else {
 						final int goToPage = pageNumber - 1;
 						if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+						    //Trả lại số trang cho danh sách nguồn hiện tại.
 							pages.setPage(goToPage);
 						}
 					}

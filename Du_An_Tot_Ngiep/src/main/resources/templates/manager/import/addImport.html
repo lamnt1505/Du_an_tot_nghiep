@@ -54,6 +54,9 @@ span {
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Thêm kho hàng</h4>
+									<!--sd thymeleaf form action-->
+									<!--trong nd của th:object lay nd import thiet lap trong model --> 
+									<!--khai bao th:object thao tac vs cac tt -->
 									<form th:object="${import}" th:action="@{/manager/addImport}"
 										method="post" onsubmit="return checkempty(form)" name="form">
 										
@@ -67,6 +70,7 @@ span {
 										<div class="form-group">
 											<label class="label">Sản phẩm</label>
 											<div class="input-group">
+											<!--sử dụng th:field lấy thông tin product-->
 												<select th:field="*{product}" class="form-control">
 													<option th:each="product : ${listProduct}" 
 														th:value="${product.idProduct}" 
@@ -88,6 +92,7 @@ span {
 													</div>
 										<div class="form-group">
 											<button class="btn btn-primary">Thêm</button>
+											<!-- sử dụng th:href liên kết đến manager import-->
 											<a th:href="@{/manager/import}">Quay về</a>
 										</div>
 									</form>

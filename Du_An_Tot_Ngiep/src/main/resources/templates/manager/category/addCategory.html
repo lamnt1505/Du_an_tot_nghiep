@@ -43,18 +43,18 @@ span {
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-
-
             <div id="textCenter" class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Thêm Danh Mục</h4>
+                  <!--sd thymeleaf form action-->
+                  <!--trong nd sd th:object lay nd category thiet lap trong model --> <!--khai bao th:object thao tac vs cac tt -->
                   <form th:object="${category}" th:action="@{/manager/addCategory}"  method="post" onsubmit="return checkempty(form)" name="form">
                     <div class="form-group">
+                    <!--th:field thuoc tinh category id, name-->
                       <label class="label">Tên Danh mục sản phẩm</label>
                       <div class="input-group">
                         <input th:field="*{name}" name="name" type="text" class="form-control">
-                        
                       </div>
                     </div>
                     <div class="error">
@@ -62,15 +62,12 @@ span {
 					</div>
                     <div class="form-group">
                       <button class="btn btn-primary">Thêm</button>
+                      <!-- sử dụng th:href trả về trang listcategory -->
                       <a th:href="@{/manager/listCategory}">Quay Về</a>
                     </div>
-                    
-                    
                   </form>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -85,6 +82,7 @@ span {
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
+  <!-- sử dụng query để checkform -->
   <script src="../js/validatecategory.js"></script>
   <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
   <script src="../assets/vendors/js/vendor.bundle.addons.js"></script>
