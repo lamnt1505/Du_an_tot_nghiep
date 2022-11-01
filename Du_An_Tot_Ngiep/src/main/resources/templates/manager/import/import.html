@@ -56,13 +56,12 @@
 			<!-- partial -->
 			<div class="main-panel">
 				<div class="content-wrapper">
-
 					<div class="row">
-
-
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
+									<!--đưa ra tb-->
+									<!--kiểm tra tb và ht-->
 									<div th:if="${success}" class="row alert alert-success alert-dismissible"
 										style="width: 850px; margin-left: 50px;">
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -70,11 +69,10 @@
 										</button>
 										<span th:text="${success}"></span>
 									</div>
-									
 									<h4 class="card-title">Danh Sách Kho Hàng</h4>
 									<p class="card-description">
-										<a class="btn btn-inverse-success btn-fw"
-											th:href="@{/manager/addImport}">Thêm Kho Hàng</a>
+										<!--sử dụng th:href liên kết đến action manager addImport controller-->
+										<a class="btn btn-inverse-success btn-fw" th:href="@{/manager/addImport}">Thêm Kho Hàng</a>
 									</p>
 									<th:block th:if="${#lists.isEmpty(import)}">
 										<h3>No product</h3>
@@ -92,16 +90,17 @@
 											</tr>
 										</thead>
 										<tbody id="dataForm">
+											<!--lấy ds các import-->
 											<tr th:each="import : ${import}">
 												<td th:text="${import.users}"></td>
 												<td th:text="${import.product.name}"></td>
 												<td th:text="${import.createDate}"></td>
 												<td th:text="${import.updateDate}"></td>
 												<td th:text="${import.quantity}"></td>
-												<td><a class="btn btn-info"
-													th:href="@{'/manager/updateImport/'+${import.idImport}}">Cập
-														Nhập</a> <a class="btn btn-danger"
-													th:href="@{'/manager/deleteImport/'+${import.idImport}}">Xóa</a></td>
+												<td>
+													<!--sử dụng pt nối chuỗi liên kết đến action xóa và cập nhật-->
+													<a class="btn btn-info" th:href="@{'/manager/updateImport/'+${import.idImport}}">Cập Nhập</a> 
+													<a class="btn btn-danger" th:href="@{'/manager/deleteImport/'+${import.idImport}}">Xóa</a></td>
 											</tr>
 										</tbody>
 									</table>

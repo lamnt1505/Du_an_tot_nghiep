@@ -60,13 +60,16 @@ span {
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Sửa Danh Mục</h4>
+									<!--sử dụng jquery kiểm tra form-->
+									<!--sử dụng pt action manager updateImport-->
 									<form th:action="@{/manager/updateImport}"
 										th:object="${import}" method="post"
 										onsubmit="return checkempty(form)" name="form">
 										<div class="form-group">
+											<!--fullname không thể thay thế chỉ đọc -> readonly-->
+											<!--sử dụng th:filef lấy tt entity-->
 											<div class="input-group">
 												<input type="hidden" th:field="*{idImport}">
-
 											</div>
 										</div>
 										<div class="form-group">
@@ -87,8 +90,7 @@ span {
 												</select>
 											</div>
 										</div>
-
-
+										<!---->
 										<div class="form-group">
 											<label class="label">Số lượng</label>
 											<div class="input-group">
@@ -102,13 +104,9 @@ span {
 										<div class="form-group">
 											<button class="btn btn-primary">Sửa</button>
 										</div>
-
-
 									</form>
 								</div>
 							</div>
-
-
 						</div>
 					</div>
 				</div>

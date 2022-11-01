@@ -61,9 +61,12 @@
 										<a class="btn btn-inverse-success btn-fw" th:href="@{/manager/addCategory}">Thêm
 											Danh Mục</a>
 									</p>
+									<!--sử dụng th:if đưa ra No product 
+											nếu không có sản phẩm trong csdl-->
 									<th:block th:if="${#lists.isEmpty(category)}">
 										<h3>No product</h3>
 									</th:block>
+									<!--sử dụng th:if đưa ra sản phẩm có 0 csdl-->
 									<th:block th:unless="${#lists.isEmpty(category)}">
 										<table id="dataTable-listCategory" class="table table-hover">
 											<thead>

@@ -55,12 +55,14 @@ span {
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-
-
 						<div id="textCenter" class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Thêm Sản Phẩm</h4>
+									<!--sd thymeleaf form action-->
+									<!--trong nd của th:object lay nd product thiet lap trong model --> 
+									<!--khai bao th:object thao tac vs cac tt -->
+									<!--sử dụng pt post-->
 									<form th:object="${product}" th:action="@{/manager/addProduct}"
 										method="post" name="form" enctype="multipart/form-data" action="/">
 										<div class="col-lg-12">
@@ -69,16 +71,20 @@ span {
 													<div class="form-group">
 														<label class="label">Tên danh mục sản phẩm</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy thông tin category-->
 															<select th:field="*{category}" class="form-control">
 																<option th:each="category : ${listCategory}"
 																	th:value="${category.idCategory}"
-																	th:utext="${category.name}"></option>
+																	th:utext="${category.name}">
+																	<!--lấy các giá của một biến-->
+																</option>
 															</select>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="label">Tên sản phẩm</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy biến name được chỉ định-->
 															<input th:field="*{name}" name="name" type="text"
 																class="form-control">
 														</div>
@@ -92,13 +98,12 @@ span {
 															<input th:field="*{image}" name="image" type="file"
 																onchange="readURL(this);"
 																accept="image/x-png,image/jpeg,image/jpg">
-
+															<!--sử dụng jquery để đọc file ảnh-->
 														</div>
 														<div
 															style="height: 150px; width: 120px; border: 1px solid black; margin-top: 10px; margin-left: 0px;">
 															<img style="height: 150px; width: 120px;" id="blah" />
 														</div>
-
 													</div>
 													<div class="error">
 														<span id="anh"></span>
@@ -151,6 +156,7 @@ span {
 										</div>
 										<div class="form-group">
 											<button type="submit" class="btn btn-primary">Thêm</button>
+											<!--sử dụng th:href liên kết đến action manager listCategory controller-->
 											<a th:href="@{/manager/listCategory}">Quay Về</a>
 										</div>
 									</form>
@@ -191,12 +197,12 @@ span {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 
-				reader.onload = function(e) {
+				reader.onload = function(e) {//gan pt su ly sk onload
 					$('#blah').attr('src', e.target.result).width(120).height(
-							150);
+							150);//sd cu phap jquery 
 				};
 
-				reader.readAsDataURL(input.files[0]);
+				reader.readAsDataURL(input.files[0]);//sd pt read doc tt cua nd file
 			}
 		}
 		function readURL_2(input) {

@@ -54,8 +54,6 @@ span {
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-
-
 						<div id="textCenter" class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
@@ -69,22 +67,25 @@ span {
 													<div class="form-group">
 														<div class="input-group">
 															<input type="hidden" th:field="*{idProduct}">
-
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="label">Tên danh mục sản phẩm</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy thông tin category-->
 															<select th:field="*{category}" class="form-control">
 																<option th:each="category : ${listCategory}"
 																	th:value="${category.idCategory}"
-																	th:utext="${category.name}"></option>
+																	th:utext="${category.name}">
+																</option>
+																	<!--lấy các giá của một biến-->
 															</select>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="label">Tên sản phẩm</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy biến name được chỉ định-->
 															<input th:field="*{name}" type="text" name="ten"
 																class="form-control">
 														</div>
@@ -98,6 +99,7 @@ span {
 															<input th:field="*{image}" type="file" name="image"
 																onchange="readURL(this);"
 																accept="image/x-png,image/jpeg,image/jpg">
+																<!--sử dụng jquery để đọc file ảnh-->
 
 														</div>
 														<div
@@ -115,6 +117,7 @@ span {
 													<div class="form-group">
 														<label class="label">Giá</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy biến giá được chỉ định-->
 															<input th:field="*{price}" type="number" name="price"
 																class="form-control">
 														</div>
@@ -154,10 +157,9 @@ span {
 										</div>
 										<div class="form-group">
 											<button class="btn btn-primary">Sửa</button>
+											<!--sử dụng th:href liên kết đến action manager/listProduct controller-->
 											<a th:href="@{/manager/listProduct}">Quay Về</a>
 										</div>
-
-
 									</form>
 								</div>
 							</div>
@@ -197,12 +199,12 @@ span {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 
-				reader.onload = function(e) {
+				reader.onload = function(e) {//gan pt su ly sk onload
 					$('#blah').attr('src', e.target.result).width(120).height(
-							150);
+							150);//sd cu phap jquery 
 				};
 
-				reader.readAsDataURL(input.files[0]);
+				reader.readAsDataURL(input.files[0]);//sd pt read doc tt cua nd file
 			}
 		}
 		function readURL_2(input) {

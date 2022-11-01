@@ -34,10 +34,10 @@
 	<!-- End Layout styles -->
 	<link rel="shortcut icon" th:href="@{/assets/images/favicon.png}" />
 	<style type="text/css">
-	#img{
-	height: 150px;
-	width: 120px;
-	}
+		#img{
+		height: 150px;
+		width: 120px;
+		}
 	</style>
 
 </head>
@@ -58,14 +58,14 @@
 								<div class="card-body">
 									<h4 class="card-title">Danh Sách Hóa Đơn Hóa Đơn Chi Tiết Theo Mã Hóa Đơn</h4>
 									<p class="card-description">
-								 	<a class="btn btn-inverse-success btn-fw" th:href="@{/manager/order}">Quay Về Hóa Đơn</a> 
+										<!--sử dụng th:href liên kết đến action order-->
+								 		<a class="btn btn-inverse-success btn-fw" th:href="@{/manager/order}">Quay Về Hóa Đơn</a> 
 									</p>
 
 									<table id="dataTable-listProduct" class="table table-hover">
 										<thead>
 											<tr>
 												<th>Ảnh</th>
-												 <!-- <th>Tên Khách Hàng</th>  -->
 												<th>Tên Sản Phẩm</th>
 												<th>Giá</th>
 												<th>Số Lượng</th>
@@ -73,6 +73,8 @@
 											</tr>
 										</thead>
 										<tbody id="myTable">
+											<!--sử dụng th:each để duyệt mảng-->
+											<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 											<tr th:each="order : ${listOrderDetail}">
 											<td class="image-prod"><img id="img"
 												th:src="'data:image/png;base64,' + ${order.getImageBase64()}"

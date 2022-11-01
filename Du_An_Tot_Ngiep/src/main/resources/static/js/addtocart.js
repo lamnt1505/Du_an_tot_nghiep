@@ -3,14 +3,13 @@ $(document).ready(function() {
 	$('.procart').click(function(e) {
 		e.preventDefault();
 		console.log("---start function--");
-		// var amount = parseInt($('#quantity').val());
 		var amount = 1;
 		var idproduct = $(this).data('productid');
 		$.post("/insertproduct}", {
 			idproduct : idproduct,
 			amount : amount
 		}, function(data, status) {
-			console.log(data);
+			console.log(data);//show ra giá trị của biến
 			if (data == "1") { // them thanh cong. san pham chua nam trong gio
 								// hang
 //				alert("Thêm thành công !");

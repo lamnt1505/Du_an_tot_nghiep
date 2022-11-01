@@ -52,9 +52,7 @@
 								<div class="card-body">
 									<h4 class="card-title">Danh Sách Hóa Đơn</h4>
 									<p class="card-description">
-									<!-- <a class="btn btn-inverse-success btn-fw" th:href="@{/manager/orderDetail}">Xem Hóa Đơn Chi Tiết</a> -->
 									</p>
-
 									<div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true" style="display: none;">
 										<div class="modal-dialog modal-sm" role="document">
 											<div class="modal-content">
@@ -94,9 +92,15 @@
 											</tr>
 										</thead>
 										<tbody id="myTable">
+												<!--sử dụng th:each để duyệt mảng-->
+												<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 											<tr th:each="order : ${listOrder}">
 												<td>
-												   <a class="btn btn-inverse-success btn-fw" th:href="@{'/manager/orderDetail/'+${order.invoiceId}}" th:text="${order.invoiceId}"> </a>
+													<!--sử dụng pt nối chuỗi liên kết đến action manager/orderDetail controller
+													 sử dụng th:text để lấy dữ liệu hóa đơn-->
+												  	 <a class="btn btn-inverse-success btn-fw" 
+												   		th:href="@{'/manager/orderDetail/'+${order.invoiceId}}" th:text="${order.invoiceId}"> 
+													</a>
 												</td> 
 												<td th:text="${order.customerId.phone}"></td>
 												<td th:text="${order.dateorders}"></td>
@@ -150,7 +154,5 @@
 		});
 	</script>
 	<script src="../js/oder.js"></script>
-
-
 </body>
 </html>

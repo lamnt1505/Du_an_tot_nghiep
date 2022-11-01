@@ -59,19 +59,20 @@ span {
 									<!--khai bao th:object thao tac vs cac tt -->
 									<form th:object="${import}" th:action="@{/manager/addImport}"
 										method="post" onsubmit="return checkempty(form)" name="form">
-										
+										<!--sử dụng jquery return checkempty(form) pt'post'-->
 										<div class="form-group">
 											<label class="label">Nhân viên</label>
 											<div class="input-group" >
+												<!--fullname không thể thay thế chỉ đọc -> readonly-->
 												<input readonly="readonly" th:value="${fullname}" class="form-control">
 											</div>
 										</div>
-										
 										<div class="form-group">
 											<label class="label">Sản phẩm</label>
 											<div class="input-group">
 											<!--sử dụng th:field lấy thông tin product-->
 												<select th:field="*{product}" class="form-control">
+													<!--lấy danh sách các product-->
 													<option th:each="product : ${listProduct}" 
 														th:value="${product.idProduct}" 
 														th:utext="${product.name}">												
@@ -79,8 +80,6 @@ span {
 												</select>
 											</div>
 										</div>
-										
-										
 										<div class="form-group">
 											<label class="label">Số lượng</label>
 											<div class="input-group">
@@ -88,11 +87,11 @@ span {
 											</div>
 										</div>
 										<div class="error">
-														<span id="soluong"></span>
-													</div>
+												<span id="soluong"></span>
+										</div>
 										<div class="form-group">
 											<button class="btn btn-primary">Thêm</button>
-											<!-- sử dụng th:href liên kết đến manager import-->
+											<!-- sử dụng th:href liên kết đến action managerimport controller-->
 											<a th:href="@{/manager/import}">Quay về</a>
 										</div>
 									</form>

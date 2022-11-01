@@ -228,31 +228,30 @@ public class ManagerController {
 			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 				if (cookies[i].getName().equals("accountuser")) {
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
-
+					//khởi tạo PagedListHolder tên pages
 					PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("product");
 					//ép session sang đt PagedListHolder
-					int pagesize = 5;//giá trị ngầm định 5 phần từ trên 1 trang
+					int pagesize = 5;//giá trị 5 phần từ trên 1 trang
 					List<Product> list = productService.listProduct();//sử dụng jpa hiển thị list prd
-					if (pages == null) {
+					if (pages == null) {//kiểm tra PagedListHolder đã có dữ liệu chưa
 					    //nếu đối tượng page null thì sẽ khởi tạo và thiết lập pagesize
 						pages = new PagedListHolder<>(list);//dùng at PagedListHolder phân trang theo danh sách
 						pages.setPageSize(pagesize);//Đặt kích thước trang hiện tại.
-					} else {
+					} else {//người lại
 						final int goToPage = pageNumber - 1;
 						if (goToPage <= pages.getPageCount() && goToPage >= 0) {
 						    //Trả lại số trang cho danh sách nguồn hiện tại.
 							pages.setPage(goToPage);
 						}
 					}
-
 					request.getSession().setAttribute("product", pages);
-					int current = pages.getPage() + 1;//bắt đầu 1
-					int begin = Math.max(1, current - list.size());
+					int current = pages.getPage() + 1;//trang hiện tại
+					int begin = Math.max(1, current - list.size()); //bắt đầu
 					//thực hiện tính toán kích thức của trang
 					//Thiết lập trang mà chúng ta muốn hiện lên View
-					int end = Math.min(begin + 5, pages.getPageCount());//+5 thêm các trang sau
+					int end = Math.min(begin + 5, pages.getPageCount());//kết thúc
 					int totalPageCount = pages.getPageCount();//tính toán số trang hiển thị trên view
-					String baseUrl = "/listProduct/page/";
+					String baseUrl = "/listProduct/page/";//
 					//hiển thị dữ liệu trở lại trên view
 					//gọi th pt addAttribute thiết lập các tt
 					model.addAttribute("beginIndex", begin);
@@ -373,7 +372,6 @@ public class ManagerController {
 	public String deleteProduct(@PathVariable(name = "idProduct") int id,
 			@CookieValue(value = "accountuser", required = false) String username, HttpServletRequest request,
 			RedirectAttributes redirect) {
-
 		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về danh sách các cookie 
 		if (cookies != null) {//kiểm tra cookie
 			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua các cookie

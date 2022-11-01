@@ -53,8 +53,7 @@
 							<h1 class="mb-2">Chúng tôi phục vụ các mặt hàng nông sản
 								chất lượng</h1>
 							<p>
-								<a th:href="@{/index/product}" class="btn btn-primary">Xem
-									Chi Tiết</a>
+								<a th:href="@{/index/product}" class="btn btn-primary">Xem Chi Tiết</a>
 							</p>
 						</div>
 					</div>
@@ -168,11 +167,11 @@
 							</div>
 							<div class="bottom-area d-flex px-3">
 								<div class="m-auto d-flex">
-									<a
-										class="buy-now d-flex justify-content-center align-items-center mx-1">
-										<span class="procart"
-										th:attr="data-productid=${product.idProduct}"><i
-											class="ion-ios-cart"></i></span>
+									<a class="buy-now d-flex justify-content-center align-items-center mx-1">
+										<!---->
+										<span class="procart" th:attr="data-productid=${product.idProduct}">
+											<i class="ion-ios-cart"></i>
+										</span>
 									</a>
 								</div>
 							</div>

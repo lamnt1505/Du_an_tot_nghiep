@@ -19,6 +19,6 @@ public interface CategoryService {
 
 	void updateCategory(Category category);
 
-	Category findCateById(int id);
+	Category findCateById(Integer id);
 
 }

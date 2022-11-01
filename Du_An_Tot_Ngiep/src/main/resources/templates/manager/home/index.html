@@ -33,8 +33,7 @@
         <!-- partial:partials/_sidebar.html -->
          <nav class="sidebar sidebar-offcanvas" id="sidebar" th:replace="manager/fragment/listNav_1::nav_1"></nav>
         <div class="main-panel">
-          <div class="content-wrapper">
-            
+          <div class="content-wrapper"> 
             <div class="row">
               <div class="col-md-12 grid-margin">
                 <div class="card">
@@ -44,8 +43,9 @@
                         <div class="d-flex">
                           <div class="wrapper">
                             <!-- <h3 class="mb-0 font-weight-semibold">32,451</h3> -->
+                            <!--sử dụng th:href liên kết đến action manager listCategory controller-->
                             <h5 class="mb-0 font-weight-medium text-primary"><a th:href="@{/manager/listCategory}">Danh Mục</a></h5>
-                           <!--  <p class="mb-0 text-muted">+14.00(+0.50%)</p> -->
+                            <!--  <p class="mb-0 text-muted">+14.00(+0.50%)</p> -->
                           </div>
                           <div class="wrapper my-auto ml-auto ml-lg-4">
                             <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
@@ -56,6 +56,7 @@
                         <div class="d-flex">
                           <div class="wrapper">
                             <!-- <h3 class="mb-0 font-weight-semibold">15,236</h3> -->
+                            <!--sử dụng th:href liên kết đến action manager listCategory product-->
                             <h5 class="mb-0 font-weight-medium text-primary"><a th:href="@{/manager/listProduct}">Sản Phẩm</a> </h5>
                             <!-- <p class="mb-0 text-muted">+138.97(+0.54%)</p> -->
                           </div>
@@ -68,6 +69,7 @@
                         <div class="d-flex">
                           <div class="wrapper">
                             <!-- <h3 class="mb-0 font-weight-semibold">7,688</h3> -->
+                            <!--sử dụng th:href liên kết đến action manager order controller-->
                             <h5 class="mb-0 font-weight-medium text-primary"><a th:href="@{/manager/order}">Giỏ Hàng</a></h5>
                             <!-- <p class="mb-0 text-muted">+57.62(+0.76%)</p> -->
                           </div>
@@ -80,6 +82,7 @@
                         <div class="d-flex">
                           <div class="wrapper">
                             <!-- <h3 class="mb-0 font-weight-semibold">1,553</h3> -->
+                             <!--sử dụng th:href liên kết đến action manager listuser controller-->
                             <h5 class="mb-0 font-weight-medium text-primary"><a th:href="@{/manager/listUser}">Tài Khoản</a></h5>
                             <!-- <p class="mb-0 text-muted">+138.97(+0.54%)</p> -->
                           </div>

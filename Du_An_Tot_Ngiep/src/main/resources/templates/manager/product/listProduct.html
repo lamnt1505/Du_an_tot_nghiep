@@ -1,103 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Admin Manage</title>
-<!-- plugins:css -->
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Admin Manage</title>
+	<!-- plugins:css -->
 
-<link rel="stylesheet"
-	th:href="@{/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
-<link rel="stylesheet"
-	th:href="@{/assets/vendors/iconfonts/ionicons/css/ionicons.css}">
-<link rel="stylesheet"
-	th:href="@{/assets/vendors/iconfonts/typicons/src/font/typicons.css}">
-<link rel="stylesheet"
-	th:href="@{/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css}">
-<link rel="stylesheet"
-	th:href="@{/assets/vendors/css/vendor.bundle.base.css}">
-<link rel="stylesheet"
-	th:href="@{/assets/vendors/css/vendor.bundle.addons.css}">
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
-<!-- endinject -->
-<!-- plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<link rel="stylesheet" th:href="@{/assets/css/shared/style.css}">
-<!-- endinject -->
-<!-- Layout styles -->
-<link rel="stylesheet" th:href="@{/assets/css/demo_1/style.css}">
-<!-- End Layout styles -->
-<link rel="shortcut icon" th:href="@{/assets/images/favicon.png}" />
-<style>
-.table td {
-	max-width: 300px;
-	white-space: normal;
-	line-height: inherit;
-}
+	<link rel="stylesheet" th:href="@{/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+	<link rel="stylesheet" th:href="@{/assets/vendors/iconfonts/ionicons/css/ionicons.css}">
+	<link rel="stylesheet" th:href="@{/assets/vendors/iconfonts/typicons/src/font/typicons.css}">
+	<link rel="stylesheet" th:href="@{/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css}">
+	<link rel="stylesheet" th:href="@{/assets/vendors/css/vendor.bundle.base.css}">
+	<link rel="stylesheet" th:href="@{/assets/vendors/css/vendor.bundle.addons.css}">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<!-- endinject -->
+	<!-- plugin css for this page -->
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<link rel="stylesheet" th:href="@{/assets/css/shared/style.css}">
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" th:href="@{/assets/css/demo_1/style.css}">
+	<!-- End Layout styles -->
+	<link rel="shortcut icon" th:href="@{/assets/images/favicon.png}" />
+	<style>
+		.table td {
+			max-width: 300px;
+			white-space: normal;
+			line-height: inherit;
+		}
 
-.table td:nth-child(8) {
-	width: 200px;
-}
+		.table td:nth-child(8) {
+			width: 200px;
+		}
 
-.table td:nth-child(6) {
-	width: 300px;
-}
- td p { 
-overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
- } 
-</style>
+		.table td:nth-child(6) {
+			width: 300px;
+		}
+
+		td p {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-line-clamp: 2;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+		}
+	</style>
 
 </head>
 
 <body>
 	<div class="container-scroller">
 		<!-- partial:partials/_navbar.html -->
-		<nav
-			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+		<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
 			th:replace="manager/fragment/listNav::nav"></nav>
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<!-- partial:partials/_sidebar.html -->
-			<nav class="sidebar sidebar-offcanvas" id="sidebar"
-				th:replace="manager/fragment/listNav_1::nav_1"></nav>
+			<nav class="sidebar sidebar-offcanvas" id="sidebar" th:replace="manager/fragment/listNav_1::nav_1"></nav>
 			<!-- partial -->
 			<div class="main-panel">
 				<div class="content-wrapper">
-
 					<div class="row">
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
-
 								<div class="card-body">
-									<div th:if="${success}"
-										class="row alert alert-success alert-dismissible"
+									<!--đưa ra tb -> ${success} -->
+									<div th:if="${success}" class="row alert alert-success alert-dismissible"
 										style="width: 850px; margin-left: 50px;">
-										<button type="button" class="close" data-dismiss="alert"
-											aria-label="Close">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">×</span>
 										</button>
+										<!--đưa ra tb -> ${success} -->
 										<span th:text="${success}"></span>
 									</div>
+									<!--table-->
 									<h4 class="card-title">Danh Sách Thông Tin Sản Phẩm</h4>
 									<p class="card-description">
-										<a class="btn btn-inverse-success btn-fw"
-											th:href="@{/manager/addProduct}">Thêm Sản Phẩm</a>
+										<a class="btn btn-inverse-success btn-fw" th:href="@{/manager/addProduct}">Thêm
+											Sản Phẩm</a>
+										<!--sử dụng th:href liên kết đến action /manager/addProduct controller-->
 									</p>
-
+									<!--sử dụng th:if đưa ra No product 
+											nếu không có sản phẩm trong csdl-->
 									<th:block th:if="${#lists.isEmpty(product.pageList)}">
 										<h3>No product</h3>
 									</th:block>
+									<!--sử dụng th:if đưa ra sản phẩm có 0 csdl-->
 									<th:block th:unless="${#lists.isEmpty(product.pageList)}">
 										<table id="dataTable-listProduct" class="table table-hover">
 											<thead>
@@ -113,6 +105,8 @@ overflow: hidden;
 												</tr>
 											</thead>
 											<tbody id="myTable">
+												<!--sử dụng th:each để duyệt mảng-->
+												<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 												<tr th:each="product : ${product.pageList}">
 													<td th:text="${product.name}"></td>
 													<td th:text="${#numbers.formatCurrency(product.price)}"></td>
@@ -123,34 +117,39 @@ overflow: hidden;
 													<td th:text="${product.origin}"></td>
 													<td><p th:text="${product.description}"></p></td>
 													<td th:text="${product.category.name}"></td>
-													<td><a class="btn btn-info"
-														th:href="@{'/manager/updateProduct/'+${product.idProduct}}">Cập
-															Nhập</a> <a class="btn btn-danger"
+													<td>
+														<a class="btn btn-info"
+														th:href="@{'/manager/updateProduct/'+${product.idProduct}}">Cập Nhập</a> 
+														<!--sử dụng pt nối chuỗi + th:href liên kết đến action manager/updateProduct controller-->
+														<a class="btn btn-danger"
 														th:href="@{'/manager/deleteProduct/'+${product.idProduct}}">Xóa</a>
+														<!--sử dụng pt nối chuỗi + th:href liên kết đến action manager/deleteProduct controller-->
 													</td>
 												</tr>
 											</tbody>
 										</table>
-
+										<!--/table-->
+										<!--phân trang-->
 										<ul class="pagination"
 											style="margin-left: 40%; margin-top: 25px;">
-											<li
-												th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+											<!--sử dụng th:class thiết lập thuộc tính current-->
+											<li th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+												<!--sử dụng th:href liên kết đến trang đầu tiên-->
 												<a class="page-link" th:href="@{/manager/listProduct}">First</a>
 											</li>
-											<li
-												th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+											<li th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+												<!--dùng thẻ class thực hiện đk nếu currentIndex == 1 -->
 												<a class="page-link" aria-label="Previous"
 												th:href="@{|${baseUrl}${currentIndex - 1}|}"
 												title='Go to previous page'><span aria-hidden="true">«</span>
+												<!-- sử dụng pt nối chuỗi baseurl và currentIndex trang 2-3-4 -->
 													<span class="sr-only">Previous</span></a>
 											</li>
-											<li
-												th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+											<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
 												th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
-												<a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
-													th:text='${item}'>1</span>
-											</a>
+												<a class="page-link" th:href="@{|${baseUrl}${item}|}"> 
+													<span th:text='${item}'>1</span>
+												</a>
 											</li>
 											<li
 												th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
@@ -165,6 +164,7 @@ overflow: hidden;
 												th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
 											</li>
 										</ul>
+										<!--/phân trang-->
 									</th:block>
 								</div>
 							</div>
