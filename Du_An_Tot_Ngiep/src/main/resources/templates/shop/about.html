@@ -56,8 +56,9 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span>Giới
-							Thiệu</span>
+						<!--sd th:href liên kết đến trang action index controller-->
+						<span class="mr-2"><a th:href="@{/index}">Home</a></span> 
+						<span>Giới Thiệu</span>
 					</p>
 					<h1 class="mb-0 bread">Giới Thiệu</h1>
 				</div>
@@ -86,7 +87,8 @@
 					<div class="pb-md-5">
 						<p></p>
 						<p></p>
-						<p> <a th:href="@{/index/product}" class="btn btn-primary">Mua ngay</a> </p>
+						<p><a th:href="@{/index/product}" class="btn btn-primary">Mua ngay</a></p>
+						<!--sd th:href liên kết đến trang action index/product controller-->
 					</div>
 				</div>
 			</div>
@@ -123,9 +125,8 @@
 				<div class="col-md-7 heading-section ftco-animate text-center">
 					<span class="subheading">Ý Kiến</span>
 					<h2 class="mb-4">Ý kiến phản hồi của khách hàng</h2>
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in</p>
+					<p>Organicfood.vn chuỗi cửa hàng thực phẩm hữu cơ với mục tiêu giúp người tiêu dùng có một cuộc sống khỏe mạnh 
+					thông qua những loại thực phẩm hữu cơ có chứng nhận, thực phẩm tự nhiên và không có nguồn gốc biến đổi gene (GMO).</p>
 				</div>
 			</div>
 			<div class="row ftco-animate">
@@ -134,36 +135,41 @@
 						<div class="item">
 							<div class="testimony-wrap p-4 pb-5">
 								<div class="user-img mb-5"
-									style="background-image: url(/images/person_1.jpg)">
+									style="background-image: url(/images/BDPT.jpg)">
 									<span
 										class="quote d-flex align-items-center justify-content-center">
 										<i class="icon-quote-left"></i>
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
-									<span class="position">Marketing Manager</span>
+									<p class="mb-5 pl-4 line">
+										Vào thời điểm dịch bệnh, việc tăng sức đề kháng và lựa chọn thực phẩm sạch, vệ sinh là vô cùng quan trọng. 
+										Từ những ngày đầu thành lập, mục tiêu của Organicfood.vn 
+										là mang đến cho người Việt những bữa ăn lành mạnh được chế biến từ những nguyên liệu hữu cơ có nguồn gốc, chứng nhận rõ ràng. Khi mua sắm ở Organicfood.vn, khách hàng có thể hoàn toàn yên tâm về nguồn gốc, chất lượng thực phẩm,
+	 									đảm bảo cho sức khỏe của bạn và gia đình.
+									</p>
+									<p class="name">Đào Phương Thảo</p>
+									<span class="position">Phụ trách phòng thu mua organicfood.vn</span>
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<div class="testimony-wrap p-4 pb-5">
 								<div class="user-img mb-5"
-									style="background-image: url(/images/person_2.jpg)">
+									style="background-image: url(/images/BSNYD.jpg)">
 									<span
 										class="quote d-flex align-items-center justify-content-center">
 										<i class="icon-quote-left"></i>
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
-									<span class="position">Interface Designer</span>
+									<p class="mb-5 pl-4 line">
+										Organic" là cái gì liên hệ tới các bộ phận của sinh vật. Về phương diện hóa học thì organic có phân tử Carbon. Còn chất inorganic thì không có Carbon, không có cấu trúc hoặc đặc tính của một sinh vật, như là đá, khoáng chất.
+										Thực phẩm hữu cơ (Organic Food) còn được gọi là Thực Phẩm Tự Nhiên (Natural food) hoặc Thực Phẩm Lành Mạnh (health food), là vấn đề mà nhiều người rất quan tâm tới và đã được thảo luận từ lâu. 
+										Cách đây mươi năm, loại thực phẩm này chưa phổ biến và thường chỉ được bán ở các tiệm Health Food
+									</p>
+									<p class="name">Nguyễn Ý Đức</p>
+									<span class="position">Bác sĩ</span>
 								</div>
 							</div>
 						</div>
@@ -206,18 +212,20 @@
 						<div class="item">
 							<div class="testimony-wrap p-4 pb-5">
 								<div class="user-img mb-5"
-									style="background-image: url(/images/person_1.jpg)">
+									style="background-image: url(/images/Tungyki.jpg)">
 									<span
 										class="quote d-flex align-items-center justify-content-center">
 										<i class="icon-quote-left"></i>
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
-									<span class="position">System Analyst</span>
+									<p class="mb-5 pl-4 line">
+										Mong muốn tạo dựng một cộng đồng thực phẩm sạch, 
+										dựa trên nền tảng hữu cơ (organic) và thuần từ thiên nhiên, 
+										nhằm mang lại sức khoẻ tốt nhất cho cộng đồng.
+									</p>
+									<p class="name">Tùng Yuki</p>
+									<span class="position">Diễn viên</span>
 								</div>
 							</div>
 						</div>

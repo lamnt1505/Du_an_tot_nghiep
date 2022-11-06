@@ -43,9 +43,6 @@
 		<nav
 			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
 			th:replace="manager/fragment/listNav::nav"></nav>
-
-
-
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<!-- partial:partials/_sidebar.html -->
@@ -68,15 +65,16 @@
 									</div>
 									<h4 class="card-title">Thông tin tài khoản</h4><i class="zmdi zmdi-email"></i>
 									<p class="card-description">
-										<a class="btn btn-inverse-success btn-fw"
-											th:href="@{'/manager/updateUser/'+${ma}}">Cập nhật thông
-											tin cá nhân </a>
+										<!--sd th:href liên kết đến action updateuser + pt nối chuỗi điên iduser-->
+										<a class="btn btn-inverse-success btn-fw" th:href="@{'/manager/updateUser/'+${ma}}">
+											Cập nhật thông tin cá nhân </a>
 									</p>
 									<div class="info">
 										<div class="image">
 											<img id="anh" th:src="@{'data:image/png;base64,' + ${image}}">
 										</div>
 										<div class="information">
+											<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 											<h1 th:text="${fullname}"></h1>
 											<p th:text="'Số điện thoại: '+${phone}"></p>
 											<p th:text="'Ngày sinh: '+${#dates.format(birthday,'dd-MM-yyyy')}"></p>
@@ -97,9 +95,6 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-
-
-
 	<!-- container-scroller -->
 	<!-- plugins:js -->
 	<script src="../assets/vendors/js/vendor.bundle.base.js"></script>

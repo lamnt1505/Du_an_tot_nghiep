@@ -57,7 +57,10 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span>Products</span>
+						<span class="mr-2">
+							<a th:href="@{/index}">Home</a>
+						</span> 
+						<span>Products</span>
 					</p>
 					<h1 class="mb-0 bread">Products</h1>
 				</div>
@@ -68,13 +71,15 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-lg-3 ftco-animate"
-					th:each="product : ${searchProduct}">
+				<div class="col-md-6 col-lg-3 ftco-animate" th:each="product : ${searchProduct}">
 					<div class="product">
 						<a th:href="@{'/index/showProductSingle/'+${product.idProduct}}"
-							class="img-prod"><img class="img-fluid"
+							class="img-prod">
+						<img class="img-fluid"
 							th:src="@{'data:image/png;base64,' + ${product.getImageBase64()}}"
-							alt="Colorlib Template"> <span class="status"></span> </a>
+							alt="Colorlib Template"> 
+							<span class="status"></span> 
+						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
 							<h3>
 								<a href="#" th:text="${product.name}"></a>
@@ -91,7 +96,9 @@
 									<a
 										th:href="@{'/index/showProductSingle/'+${product.idProduct}}"
 										class="buy-now d-flex justify-content-center align-items-center mx-1">
-										<span><i class="ion-ios-cart"></i></span>
+										<span>
+											<i class="ion-ios-cart"></i>
+										</span>
 									</a>
 								</div>
 							</div>

@@ -55,8 +55,6 @@ span {
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-
-
 						<div id="textCenter" class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
@@ -70,25 +68,28 @@ span {
 										<span th:text="${success}"></span>
 									</div>
 									<h4 class="card-title">Tạo tài khoản mới</h4>
+									<!--sd th:ation liên kết đến manager/addUser controller 
+										sd pt post -->
+									<!--trong nd của th:object lay nd userId thiet lap trong model -->
 									<form th:action="@{/manager/addUser}" th:object="${userId}"
 										method="post" onsubmit="return checkempty(form)" name="form"
 										enctype="multipart/form-data">
+										<!--sd jquery form onsubmit="return checkempty(form)-->
 										<div class="col-lg-12">
 											<div class="form-group">
 												<div class="input-group">
-													<input type="hidden" th:field="*{userId}"
-														class="form-control">
+													<!--sử dụng th:field lấy biến name được chỉ định-->
+													<input type="hidden" th:field="*{userId}" class="form-control">
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="label">Họ Và Tên</label>
 												<div class="input-group">
+													<!--sử dụng th:field lấy biến fullname được chỉ định-->
 													<input type="text" placeholder="Họ Tên"
 														class="form-control" th:field="*{fullname}"
 														name="fullname">
-
-												</div>
-												
+												</div>												
 												<div class="error">
 													<span id="ten"></span>
 												</div>
@@ -99,8 +100,8 @@ span {
 													<input th:field="*{image}" type="file" name="image"
 														onchange="readURL(this);"
 														accept="image/x-png,image/jpeg,image/jpg">
-
 												</div>
+												<!--sd jqery đọc hình ảnh-->
 												<div
 												style="height: 150px; width: 120px; border: 1px solid black; margin-top: 10px; margin-left: 0px;">
 												<img style="height: 150px; width: 120px;" id="blah" />
@@ -112,6 +113,7 @@ span {
 											<div class="form-group">
 												<label class="label">Số điện thoại:</label>
 												<div class="input-group">
+													<!--sử dụng th:field lấy biến phone được chỉ định-->
 													<input type="text" placeholder="Số điện thoại"
 														class="form-control" th:field="*{phone}" name="phone">
 												</div>
@@ -123,6 +125,7 @@ span {
 											<div class="form-group">
 												<label class="label">Ngày sinh:</label>
 												<div class="input-group">
+													<!--sử dụng th:field lấy biến birthday được chỉ định-->
 													<input type="date" placeholder="birthday"
 														class="form-control" th:field="*{birthday}"
 														name="birthday">
@@ -144,14 +147,17 @@ span {
 											</div>
 											<div class="form-group">
 												<div class="form-check-inline">
-													<label style="padding-right: 20px; font-size: 16px;">Giới
-														tính: </label> <label class="form-check-label" for="radio1"
-														style="font-size: 16px;"> <input type="radio"
-														class="form-check-input" id="radio1" name="optradio"
+													<label style="padding-right: 20px; font-size: 16px;">Giới tính: </label> 
+													<label class="form-check-label" for="radio1"
+														style="font-size: 16px;"> 
+														<input type="radio" class="form-check-input" 
+														id="radio1" name="optradio"
 														value="false" checked th:field="*{gender}">Nam
-													</label> <label class="form-check-label" for="radio2"
-														style="font-size: 16px;"> <input type="radio"
-														class="form-check-input" id="radio2" name="optradio"
+													</label> 
+													<label class="form-check-label" for="radio2"
+														style="font-size: 16px;"> 
+														<input type="radio" class="form-check-input" 
+														id="radio2" name="optradio"
 														value="true" th:field="*{gender}"
 														style="margin-left: 20px;">Nữ
 													</label>
@@ -170,15 +176,12 @@ span {
 									</form>
 								</div>
 							</div>
-
-
 						</div>
 					</div>
 				</div>
 				<!-- content-wrapper ends -->
 				<!-- partial:partials/_footer.html -->
 				<footer class="footer" th:replace="manager/fragment/footer::footer"></footer>
-
 				<!-- partial -->
 			</div>
 			<!-- main-panel ends -->
@@ -204,12 +207,12 @@ span {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 
-				reader.onload = function(e) {
-					$('#blah').attr('src', e.target.result).width(120).height(
+				reader.onload = function(e) {//gan pt su ly sk onload
+					$('#blah').attr('src', e.target.result).width(120).height(//sd cu phap jquery 
 							150);
 				};
 
-				reader.readAsDataURL(input.files[0]);
+				reader.readAsDataURL(input.files[0]);//sd pt read doc tt cua nd file
 			}
 		}
 		function readURL_2(input) {

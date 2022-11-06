@@ -76,14 +76,18 @@
 													</tr>
 												</thead>
 												<tbody>
+												<!--sử dụng th:each để duyệt mảng lấy danh sách thống kê theo tháng-->
+												<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 													<tr th:each="month : ${months}">
-														<td class="py-1"
-															th:text="${month.orderMonth + '/' + month.orderYear}">
+														<td class="py-1" th:text="${month.orderMonth + '/' + month.orderYear}">
+														<!--sử dụng th:text để hiển thị sl giao dịch-->
 														<td th:text="${month.orderCount }"></td>
+														<!--sử dụng th:text để hiển thị tổng doanh thu-->
 														<td th:text="${#numbers.formatCurrency(month.total)}"></td>
+														<!--sử dụng th:text để hiển thị doanh thu thấp nhất-->
 														<td th:text="${#numbers.formatCurrency(month.minTotal)}"></td>
+														<!--sử dụng th:text để hiển thị doanh thu cao nhất-->
 														<td th:text="${#numbers.formatCurrency(month.maxTotal)}"></td>
-
 													</tr>
 												</tbody>
 											</table>
@@ -102,6 +106,8 @@
 												</thead>
 												<tbody>
 													<tr th:each="year : ${years}">
+														<!--sử dụng th:each để duyệt mảng lấy danh sách thống kê theo năm-->
+														<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 														<td class="py-1" th:text=${year.orderYear}>
 														<td th:text=${year.orderCount}></td>
 														<td th:text=${#numbers.formatCurrency(year.total)}></td>
@@ -123,9 +129,14 @@
 												</thead>
 												<tbody>
 													<tr th:each="product : ${products}">
+														<!--sử dụng th:each để duyệt mảng lấy danh sách thống kê theo sản phẩm-->
+														<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 														<td class="py-1" th:text="${product.name}">
+														<!--sử dụng th:text để hiển thị tên product-->
 														<td th:text="${product.soLuongBanDuoc}"></td>
+														<!--sử dụng th:text để hiển thị slbd-->
 														<td th:text="${product.tongTienThuDuoc}"></td>
+														<!--sử dụng th:text để hiển thị tttd-->
 													</tr>
 												</tbody>
 											</table>

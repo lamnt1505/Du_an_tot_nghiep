@@ -54,7 +54,11 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span>Products</span>
+						<!--sử dụng th:href liên kết đến action index controller-->
+						<span class="mr-2">
+							<a th:href="@{/index}">Home</a>
+						</span> 
+						<span>Products</span>
 					</p>
 					<h1 class="mb-0 bread">Products</h1>
 				</div>
@@ -67,6 +71,8 @@
 			<div class="row">
 				<div class="col-md-6 col-lg-3 ftco-animate"
 					th:each="product : ${showProductByIdCategory}">
+					<!--sử dụng th:each để duyệt mảng-->
+					<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 					<div class="product">
 						<a th:href="@{'/index/showProductSingle/'+${product.idProduct}}"
 							class="img-prod">
@@ -78,13 +84,15 @@
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
 							<h3>
+								<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 								<a href="#" th:text="${product.name}"></a>
 							</h3>
 							<div class="d-flex">
 								<div class="pricing">
 									<p class="price">
 										<span class="price-sale"
-											th:text="${#numbers.formatCurrency(product.price)}"></span>
+											th:text="${#numbers.formatCurrency(product.price)}">
+										</span>
 									</p>
 								</div>
 							</div>
@@ -93,8 +101,9 @@
 									<a
 										class="buy-now d-flex justify-content-center align-items-center mx-1">
 										<span class="procart"
-										th:attr="data-productid=${product.idProduct}"><i
-											class="ion-ios-cart"></i></span>
+											th:attr="data-productid=${product.idProduct}">
+											<i class="ion-ios-cart"></i>
+										</span>
 									</a>
 								</div>
 							</div>

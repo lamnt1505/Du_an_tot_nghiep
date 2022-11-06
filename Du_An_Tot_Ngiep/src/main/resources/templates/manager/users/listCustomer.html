@@ -44,9 +44,6 @@
 	<div class="container-scroller">
 		<!-- partial:partials/_navbar.html -->
 		<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row" th:replace="manager/fragment/listNav::nav"></nav>
-		
-		
-		
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<!-- partial:partials/_sidebar.html -->
@@ -59,7 +56,6 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Danh Sách Tài Khoản Khách Hàng</h4>
-
 									<table id="dataTable-listProduct" class="table table-hover">
 										<thead>
 											<tr>
@@ -68,22 +64,21 @@
 												<th>Ngày sinh</th>
 												<th>Số điện thoại</th>
 												<th>Địa chỉ</th>
-<!-- 												<th></th> -->
 											</tr>
 										</thead>
 										<tbody id="dataForm">
+											<!--hiển thị danh sách customer-->
+											<!--sử dụng th:each để duyệt mảng-->
+											<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 												<tr th:each="listcustomer : ${listcustomer}">
 												<td th:text="${listcustomer.fullname}"></td>
 												<td th:text="${listcustomer.gender} ? 'Nữ' : 'Nam'">
 												<td th:text="${listcustomer.birthday}"></td>
 												<td th:text="${listcustomer.phone}"></td>
 												<td th:text="${listcustomer.address}"></td>
-<!-- 												<td><a class="btn btn-info" th:href="@{'/manager/updateUser/'+${listuser.userId}}" > -->
-<!-- 												Cập Nhập</a></td> -->
 											</tr>
 										</tbody>
 									</table>
-
 								</div>
 							</div>
 						</div>

@@ -139,6 +139,7 @@ public class UserController {
 						model.addAttribute("listuser", this.userService.findAll());
 						model.addAttribute("username", phone);
 						getName(request, model);
+						//thêm mới thành trả về trang listUser
 						return "/manager/users/listUser";
 					} else {
 					    //ngược lại nếu sử dụng tài khoản nv đưa tb 

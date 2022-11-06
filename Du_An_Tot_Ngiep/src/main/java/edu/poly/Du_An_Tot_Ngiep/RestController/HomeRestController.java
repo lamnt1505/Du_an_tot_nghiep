@@ -70,22 +70,26 @@ public class HomeRestController {
 
 	@GetMapping("/index/listProductNewBest")
 	public ResponseEntity<?> showListProductNewBest() {
+	    //sử dụng productService tìm sản phẩm mới nhất. 
 		return ResponseEntity.ok(this.productService.listProductNewBest());
 	}
 
 	@GetMapping("/index/listProductPriceDesc")
 	public ResponseEntity<?> showListProductPriceDesc() {
+	    //sử dụng câu lện tìm giá sản phẩm từ cao đến thấp
 		return ResponseEntity.ok(this.productService.listProductPriceDesc());
 	}
 
 	@GetMapping("/index/listProductPriceAsc")
 	public ResponseEntity<?> showListProductPriceAsc() {
+	  //sử dụng productService tìm sản phẩm mới nhất. 
 		return ResponseEntity.ok(this.productService.listProductPriceAsc());
 	}
 
 	@PostMapping("/index/listProductByIdCategoryFilter/{idCategory}")
 	@ResponseBody
 	public List<Product> showListProductByIdCategory(@PathVariable("idCategory") int id, Product p) {
+	    //tìm theo gt id 
 		Optional<Product> list = this.productService.findById(id);
 		return this.productService.showListProductByIdCategoryFilter(id);
 	}
@@ -101,6 +105,7 @@ public class HomeRestController {
 		if (productOrder == null || amount <= 0) {
 			return "3";
 		}
+		
 		if (session.getAttribute("cart") != null) {
 			List<Product> list = (List<Product>) session.getAttribute("cart");
 			boolean flag = false;

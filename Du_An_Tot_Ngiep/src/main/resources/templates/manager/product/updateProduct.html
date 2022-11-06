@@ -58,6 +58,8 @@ span {
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Sửa Danh Mục</h4>
+									<!--sd th:action liên kết đến /manager/updateProduct controller 
+									sd pt post dùng jquery checkform-->
 									<form th:action="@{/manager/updateProduct}"
 										th:object="${product}" enctype="multipart/form-data"
 										method="post" onsubmit="return checkempty(form)" name="form">
@@ -66,6 +68,7 @@ span {
 												<div class="col-lg-6">
 													<div class="form-group">
 														<div class="input-group">
+															<!--sd th:field để lấy tt idProduct,chỉ đọc hidden-->
 															<input type="hidden" th:field="*{idProduct}">
 														</div>
 													</div>
@@ -128,6 +131,7 @@ span {
 													<div class="form-group">
 														<label class="label">Ngày Hết Hạn</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy biến giá được chỉ định-->
 															<input th:field="*{dateOfManufacture}" type="date" name="dateOfManufacture"
 																class="form-control">
 														</div>
@@ -138,6 +142,7 @@ span {
 													<div class="form-group">
 														<label class="label">Nguồn Gốc Sản Phẩm</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy biến giá được chỉ định-->
 															<input th:field="*{origin}" type="text" name="origin"
 																class="form-control">
 														</div>
@@ -148,6 +153,7 @@ span {
 													<div class="form-group">
 														<label class="label">Chi Tiết Sản Phẩm</label>
 														<div class="input-group">
+															<!--sử dụng th:field lấy biến giá được chỉ định-->
 															<textarea class="form-control" th:field="*{description}"
 																rows="4" cols="30"></textarea>
 														</div>

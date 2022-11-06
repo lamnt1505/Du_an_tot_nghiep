@@ -63,9 +63,9 @@
 					class="row no-gutters slider-text align-items-center justify-content-center">
 					<div class="col-md-9 ftco-animate text-center">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span
-								class="mr-2"><a th:href="@{/index/product}">Product</a></span> <span>Product
-								Single</span>
+							<span class="mr-2"><a th:href="@{/index}">Home</a></span> 
+							<span class="mr-2"><a th:href="@{/index/product}">Product</a></span> 
+							<span>Product Single</span>
 						</p>
 						<h1 class="mb-0 bread">Chi Tiết Sản Phẩm</h1>
 					</div>
@@ -76,21 +76,31 @@
 		<section class="ftco-section">
 			<div class="container">
 				<div class="row" th:object="${showProductSingle}">
+				<!-- lấy thông tin id hiển thị từng sản phẩm chi tiết-->
 					<input id="idProduct" hidden=true th:value="*{idProduct}">
 					<div class="col-lg-6 mb-5 ftco-animate">
+					<!--hiển thị hình ảnh sản phẩm-->
 						<a href="#" class="image-popup"><img id="idImage"
 							th:src="@{'data:image/png;base64,' + *{getImageBase64()}}"
 							class="img-fluid" alt="Colorlib Template"></a>
 					</div>
 					<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+						<!--sd text hiển thị từng tên từng list-->
 						<h3 th:text="*{name}"></h3>
 						<h2 th:text="*{#numbers.formatCurrency(price)}"></h2>
 						<ul class="list">
-							<li><span>Danh mục: </span><a class="active" href="#"
-								th:text=*{category.name}></a></li>
-							<li><span>Nguồn gốc: </span><a href="#" th:text="*{origin}"></a></li>
-							<li><span>Ngày hết hạn: </span><a href="#"
-								th:text="*{dateOfManufacture}"></a></li>
+							<li>
+								<span>Danh mục: </span>
+								<a class="active" href="#" th:text=*{category.name}></a>
+							</li>
+							<li>
+								<span>Nguồn gốc: </span>
+								<a href="#" th:text="*{origin}"></a>
+							</li>
+							<li>
+							<span>Ngày hết hạn: </span>
+								<a href="#" th:text="*{dateOfManufacture}"></a>
+							</li>
 						</ul>
 						<p>
 							<span>Thông tin chi tiết: </span>
@@ -113,8 +123,6 @@
 					<div class="col-md-12 heading-section text-center ftco-animate">
 						<span class="subheading">Sản Phẩm</span>
 						<h2 class="mb-4">Sản phẩm liên quan</h2>
-						<!-- <p>Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia</p> -->
 					</div>
 				</div>
 			</div>
@@ -200,6 +208,7 @@
 <script
 		src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	
 	<script>
 		$(document).ready(function() {
 
@@ -275,6 +284,5 @@
 
 		});
 	</script>
-
 </body>
 </html>

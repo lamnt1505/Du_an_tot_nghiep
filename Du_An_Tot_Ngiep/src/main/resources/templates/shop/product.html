@@ -46,7 +46,11 @@
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a th:href="@{/index}">Home</a></span> <span>Products</span>
+						<span class="mr-2">
+						<!-- sử dụng th:href liên kết đến action index controller-->
+							<a th:href="@{/index}">Home</a>					
+						</span> 
+						<span>Products</span>
 					</p>
 					<h1 class="mb-0 bread">Products</h1>
 				</div>
@@ -62,15 +66,21 @@
 			<a style="margin-right: 10px;" href="#">Sắp Xếp theo:</a>
 			<button class="btn btn-primary" type="button"
 				onclick="listProductNewBest()">Mới Nhất</button>
-			<button class="btn btn-primary dropdown-toggle" type="button"
-				data-toggle="dropdown">
-				Giá <span class="caret"></span>
+			<!--sử dụng jquery listProductNewBest tìm sản phẩm mới nhất-->
+			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+					Giá <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li><button style="hover: color=red;" class="dropdown-item"
-						onclick="listProductPriceDesc()">Giá cao đến thấp</button></li>
-				<li><button class="dropdown-item"
-						onclick="listProductPriceAsc()">Giá thấp đến cao</button></li>
+				<li>
+					<button style="hover: color=red;" class="dropdown-item"
+						onclick="listProductPriceDesc()">Giá cao đến thấp
+						<!---->
+						</button>
+				</li>
+				<li>
+					<button class="dropdown-item"
+						onclick="listProductPriceAsc()">Giá thấp đến cao</button>
+				</li>
 			</ul>
 		</div>
 		<div class="container">
@@ -114,11 +124,17 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Danh mục</h4>
 				</div>
+				<!--sử dụng th:each để duyệt mảng-->
+				<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 				<div class="modal-body" th:each="cate : ${category}">
 					<ul>
-						<li><input type="radio" name="idCategory"
-							th:value="${cate.idCategory}"> <span
-							th:text="${cate.name}"></span></li>
+						<li>
+							<input type="radio" name="idCategory"
+								th:value="${cate.idCategory}"> 
+								<!--lấy idCategory -->
+							<span th:text="${cate.name}"></span>
+								<!--lấy tên Category -->
+						</li>
 					</ul>
 				</div>
 				<div class="modal-footer">
@@ -151,7 +167,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 	<script type="text/javascript">
 		$( document ).ready(function() {
-			getProducts();
+			getProducts();//
 		});
 		
 		var listProduct = [];
@@ -401,7 +417,7 @@
 		           id.push($(this).val());
 		       });
 			$.ajax({
-				type: "POST",
+				type: "POST",//sd pt post
 				contentType : "application/json; charset=utf-8",
 				dataType : 'json',
 				url : "/index/listProductByIdCategoryFilter/" +id,
@@ -466,8 +482,6 @@
 						});
 			});
 		});
-		
-		
 	</script>
 </body>
 </html>

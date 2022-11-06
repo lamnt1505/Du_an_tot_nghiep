@@ -56,7 +56,9 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a th:href="@{/index}">Trang chủ</a></span> <span>Giỏ hàng</span>
+						<!--sd th:href liên kết đến trang action index controller-->
+						<span class="mr-2"><a th:href="@{/index}">Trang chủ</a></span> 
+						<span>Giỏ hàng</span>
 					</p>
 					<h1 class="mb-0 bread">Giỏ hàng của tôi</h1>
 				</div>
@@ -67,7 +69,7 @@
 	<!-- Content cart-->
 	<section class="ftco-section ftco-cart">
 		<div class="container">
-
+			<!--giỏ hàng lớn 0-->
 			<div class="row" th:if="${#lists.size(session.cart) > 0}">
 				<div class="col-md-12 ftco-animate">
 					<div class="cart-list">
@@ -84,40 +86,53 @@
 								</tr>
 							</thead>
 							<tbody>
-
+								<!--sử dụng th:each để duyệt mảng-->
+								<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 								<tr class="text-center" th:each="product : ${session.cart}">
 									<input type="hidden" class="idproduct" th:value="${product.idProduct}" />
+									<!--x-->
 									<td class="product-remove"
-										th:attr="data-productid=${product.idProduct}"><a href="#"
-										title="Xóa"><span class="ion-ios-close"></span></a></td>
+										th:attr="data-productid=${product.idProduct}">
+										<a href="#" title="Xóa">
+											<span class="ion-ios-close"></span>
+										</a>
+									</td>
 									<td class="image-prod">
 									<img class="img"
 										th:src="'data:image/png;base64,' + ${product.getImageBase64()}"
-										alt="Colorlib Template"></td>
+										alt="Colorlib Template">
+									</td>
+									<!--image-->
 									<td class="product-name">
+										<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 										<h3 th:text="${product.name}"></h3>
 										<p th:text="${product.description}"></p>
 									</td>
+									<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 									<td class="price" th:text="${product.price}"></td>
 									<td class="quantity">
 										<div class="input-group mb-3">
 											<input type="text" name="quantity"
 												class="quantityinput form-control input-number" min="1"
-												max="100" th:value="${product.amount}" />
+												max="100" th:value="${product.amount}"/>
+									<!--sd th:value thể hiện giá trị của dòng sl-->
 										</div>
 									</td>
+									<!--sử dụng formatCurrency lấy giá x số lượng = tổng-->
 									<td class="total" th:text="${#numbers.formatCurrency(product.price*product.amount)}"></td>
-									<td class="product-remove"><a href="#" title="Update"><span
-											class="updateclick"
-											th:attr="data-productid=${product.idProduct}">Cập nhật</span></a></td>
+									<td class="product-remove">
+										<a href="#" title="Update">
+											<!--sử dụng jquery set giá trị product-id -->
+											<span class="updateclick" th:attr="data-productid=${product.idProduct}">Cập nhật</span>
+										</a>
+									</td>
 								</tr>
-
 							</tbody>
-							
 							<tfoot>
 								<tr>
 									<td colspan="7">
 										<center>
+											<!--sử dụng jqeury submitorders-->
 											<a href="#" title="Update"><span id="submitorders">Đặt hàng</span></a>
 										</center>
 									</td>
@@ -127,10 +142,9 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="row" th:unless="${#lists.size(session.cart) > 0}">
 				<div class="text-center">
-					<p >Chưa chọn sản phẩm nào!</p>
+					<h2>Chưa chọn sản phẩm nào!</h2>
 				</div>
 			</div>
 			<!--Hiển thị danh sách đã mua-->
@@ -150,11 +164,17 @@
 								</tr>
 							</thead>
 							<tbody>
-
+								<!--sử dụng th:each để duyệt mảng-->
+								<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 								<tr class="text-center" th:each="oneinvoice : ${orders}">
-									<td class="price"><a 
-										th:href="@{'/orderdetails/'+${oneinvoice.invoiceId}}"
-										th:text="${oneinvoice.invoiceId}"> </a></td>
+									<td class="price">
+										<a 
+											th:href="@{'/orderdetails/'+${oneinvoice.invoiceId}}"
+											th:text="${oneinvoice.invoiceId}"> 
+											<!--sử dụng pt nối chuỗi orderdetails controller 
+												+ pt hóa đơn chi tiết-->
+										</a>
+									</td>
 									<td class="price" th:text="${oneinvoice.dateorders}"></td>
 									<td class="price" th:text="${oneinvoice.status}"></td>
 									<td class="price" th:text="${#numbers.formatCurrency(oneinvoice.total)}"></td>
@@ -164,10 +184,8 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</section>
-	
 	<!-- Email contect -->
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 		<div class="container py-4">

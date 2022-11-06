@@ -75,14 +75,16 @@ public class HomeController {
 	public String Home(ModelMap model, HttpServletRequest request,
 			@CookieValue(value = "accountcustomer", required = false) String phone, HttpServletResponse response,
 			HttpSession session) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; ++i) {
+		Cookie[] cookies = request.getCookies();//sử dụng rqck trả về 1 mảng người dùng yêu cầu
+		if (cookies != null) {//kiểm tra cookie
+			for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 				if (cookies[i].getName().equals("accountcustomer")) {
 					Customer customer = this.customerService.findByPhoneCus(cookies[i].getValue()).get();
+					//goi thực hiện pt find byphone để lấy customer
 					if (session.getAttribute("cart") == null) {
 						session.setAttribute("cart", new ArrayList<>());
 					}
+					//đưa các giá trị vào model
 					model.addAttribute("fullname", customer.getFullname());
 					model.addAttribute("customerId", customer.getCustomerId());
 				}
@@ -92,6 +94,7 @@ public class HomeController {
 				session.setAttribute("cart", new ArrayList<>());
 			}
 		}
+		//gọi pt home trả về model
 		this.initHomeResponse(model);
 		return "home/index";
 	}
@@ -99,32 +102,39 @@ public class HomeController {
 	@GetMapping("/product")
 	public String ShowListProduct(ModelMap model, RedirectAttributes redirect, HttpServletRequest request,
 			HttpServletResponse response) {
+		//sử dụng pt findall đưa các giá trị vào model		
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 		// show user
 		getName(request, model);
+		//gọi pt home trả về model
 		initHomeResponse(model);
+		//sử dụng pt listProduct đưa các giá trị vào model
 		model.addAttribute("showProduct", this.productService.listProduct());
 		return "shop/product";
 	}
 
 	@GetMapping("/about")
 	public String ShowAbout(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		//sử dụng pt findall đưa các giá trị vào model	
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 		// show user
 		getName(request, model);
+		//gọi pt home trả về model
 		initHomeResponse(model);
 		return "shop/about";
 	}
 
 	@GetMapping("/feedback")
 	public String ShowContact(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		//sử dụng pt findall đưa các giá trị vào model
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 		model.addAttribute("feedback", new FeedBack());
 		// show user
 		getName(request, model);
+		//gọi pt home trả về model
 		initHomeResponse(model);
 		return "shop/feedback";
 	}
@@ -133,7 +143,7 @@ public class HomeController {
 	@GetMapping(value = "/showProductByIdCategory/{idCategory}")
 	public String ShowProductByIdCategory(ModelMap model, @PathVariable("idCategory") int idCategory,
 			HttpServletRequest request, HttpServletResponse response) {
-
+		//sử dụng pt findall đưa các giá trị vào model
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 		Optional<Product> p = this.productService.findById(idCategory);
@@ -143,7 +153,7 @@ public class HomeController {
 		// show user
 		getName(request, model);
 		initHomeResponse(model);
-
+		//sử dụng pt showProductByIdCategory đưa các giá trị vào model
 		model.addAttribute("showProductByIdCategory", this.productService.showListProductByIdCategory(idCategory));
 
 		return "shop/productByIdCategory";
@@ -152,7 +162,7 @@ public class HomeController {
 	@GetMapping(value = "/showProductSingle/{idProduct}")
 	public String ShowProductByIdProductDetail(ModelMap model, @PathVariable("idProduct") int id,
 			HttpServletRequest request, HttpServletResponse response) {
-
+		//sử dụng pt findall đưa các giá trị vào model
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 

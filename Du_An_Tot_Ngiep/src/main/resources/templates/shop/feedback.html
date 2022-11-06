@@ -60,15 +60,17 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a th:href="@{/index}">Trang Chủ</a></span> <span>Liên
-							Hệ</span>
+						<span class="mr-2">
+							<!--sử dụng th:href để liên kết đến action index-->
+							<a th:href="@{/index}">Trang Chủ</a>
+						</span> 
+						<span>LiênHệ</span>
 					</p>
 					<h1 class="mb-0 bread">Liên Hệ</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<section class="ftco-section contact-section bg-light">
 		<div class="container">
 			<div class="row d-flex mb-5 contact-info">
@@ -83,29 +85,30 @@
 				<div class="col-md-3 d-flex">
 					<div class="info bg-white p-4">
 						<p>
-							<span>Số Điện Thoại:</span> <a href="tel://1234567920">
-								+84 916 808 376</a>
+							<span>Số Điện Thoại:</span> 
+							<a href="tel://1234567920"> +84 916 808 376</a>
 						</p>
 					</div>
 				</div>
 				<div class="col-md-3 d-flex">
 					<div class="info bg-white p-4">
 						<p>
-							<span>Email:</span> <a href="mailto:info@yoursite.com">banhangnongsan@gmail.com</a>
+							<span>Email:</span> 
+							<a href="mailto:info@yoursite.com">banhangnongsan@gmail.com</a>
 						</p>
 					</div>
 				</div>
 				<div class="col-md-3 d-flex">
 					<div class="info bg-white p-4">
 						<p>
-							<span>Website:</span> <a href="#">banhangnongsan.com.vn</a>
+							<span>Website:</span> 
+							<a href="#">banhangnongsan.com.vn</a>
 						</p>
 					</div>
 				</div>
 			</div>
 			<div class="row block-9">
 				<div class="col-md-6 order-md-last d-flex">
-
 					<form class="bg-white p-5 contact-form">
 						<p style="color: green; font-size: 20px;">Góp ý kiến Của Bạn</p>
 						<div class="form-group">
@@ -122,27 +125,29 @@
 						</div>
 						<div class="form-group">
 							<textarea name="" id="contentAddFeedBack" cols="30" rows="7"
-								class="form-control" placeholder="nội dung góp ý"></textarea>
+								class="form-control" placeholder="nội dung góp ý">
+							</textarea>
 						</div>
 						<div class="form-group">
+							<!--sd jqeury để gửi sự kiện feedback-->
 							<button type="button" onclick="addFeedBack()"
-								class="btn btn-primary py-2 px-4">Gửi</button>
+								class="btn btn-primary py-2 px-4">Gửi
+							</button>
 						</div>
 					</form>
-
 				</div>
-
 				<div class="col-md-6 d-flex">
 					<div id="map" class="bg-white">
 						<iframe
 							src="https://www.google.com/maps/d/u/0/embed?mid=1-YLW3kYD35kcbPJ9GZII-DgO-_30ji9H"
-							width="540" height="560"></iframe>
+							width="540" height="560">
+						</iframe>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+
 	<footer class="ftco-footer ftco-section"
 		th:replace="fragment/footer::footer">
 	</footer>
@@ -161,6 +166,7 @@
 	<script th:src="@{/js/scrollax.min.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
 	<script type="text/javascript">
+		//action sự kiện feedback
 		function addFeedBack() {
 			var dataFeeBack = {
 				"name" : $('#nameAddFeedBack').val(),
@@ -169,13 +175,13 @@
 				"content" : $('#contentAddFeedBack').val()
 			};
 			$.ajax({
-				type : "POST",
-				contentType : "application/json; charset=utf-8",
+				type : "POST",//pt post
+				contentType : "application/json; charset=utf-8",//pt json tv 
 				dataType : 'json',
-				url : "/manager/addFeedBackAjax",
+				url : "/manager/addFeedBackAjax",//đường dẫn
 				data : JSON.stringify(dataFeeBack),
 				success : function(result) {
-					alert("cảm ơn đã góp ý");
+					alert("cảm ơn đã góp ý");//đưa ra tb gửi thành công
 					$('#nameAddFeedBack').val('');
 					$('#emailAddFeedBack').val('');
 					$('#subjectsAddFeedBack').val('');
