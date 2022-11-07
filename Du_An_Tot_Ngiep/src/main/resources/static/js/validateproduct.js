@@ -1,14 +1,15 @@
-function clear() {
+function clear() {//pt làm mới
 	document.getElementById("ten").innerHTML = "";
 	document.getElementById("anh").innerHTML = "";
 	document.getElementById("tien").innerHTML = "";
 	document.getElementById("ngayhethang").innerHTML = "";
 	document.getElementById("nguongoc").innerHTML = "";
 }
-function checkempty(formproduct) {
-	clear();
+function checkempty(formproduct) {//kiểm tra các box
+	clear();//pt xóa
 	var date1 = new Date().getTime(); // current date
 	var date2 = new Date(formproduct.dateOfManufacture.value).getTime();
+	//thay đổi phần tử nội dung html
 	if (formproduct.name.value.trim() == "") {
 		document.getElementById("ten").innerHTML = "Không để trống tên!";
 		return false;

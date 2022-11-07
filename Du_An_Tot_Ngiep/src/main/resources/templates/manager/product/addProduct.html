@@ -148,9 +148,6 @@ span {
 																name="description" rows="4" cols="30"></textarea>
 														</div>
 													</div>
-													
-
-
 												</div>
 											</div>
 										</div>
@@ -193,16 +190,19 @@ span {
 	<script src="../assets/js/demo_1/dashboard.js"></script>
 
 	<script type="text/javascript">
+		//sử dụng function định nghĩa hàm
+		//định nghĩa hàm read url
 		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
+			if (input.files && input.files[0]) {//kiểm tra nd có lựa chọn file 
+				var reader = new FileReader();//đọc tt hình được lựa chọn
 
-				reader.onload = function(e) {//gan pt su ly sk onload
+				reader.onload = function(e) {//gan pt su ly sk  khi hình được nạp xxong
 					$('#blah').attr('src', e.target.result).width(120).height(
 							150);//sd cu phap jquery 
+								//thay đổi gt thuộc tính
 				};
 
-				reader.readAsDataURL(input.files[0]);//sd pt read doc tt cua nd file
+				reader.readAsDataURL(input.files[0]);//sd pt read doc dữ liệu của file input
 			}
 		}
 		function readURL_2(input) {

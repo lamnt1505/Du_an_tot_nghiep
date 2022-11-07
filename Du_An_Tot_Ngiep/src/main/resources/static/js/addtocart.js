@@ -1,11 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function() {//quản lý sự kiện
 
-	$('.procart').click(function(e) {
-		e.preventDefault();
+	$('.procart').click(function(e) {//sự kiện click
+		e.preventDefault();//hủy bỏ event
 		console.log("---start function--");
+		//in ra tb bắt đầu function
 		var amount = 1;
 		var idproduct = $(this).data('productid');
-		$.post("/insertproduct}", {
+		$.post("/insertproduct}", {//pt post thêm 1 product
 			idproduct : idproduct,
 			amount : amount
 		}, function(data, status) {

@@ -166,18 +166,24 @@ public class HomeController {
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
 
+		//sử dụng pt findbyid tìm theo id 
 		model.addAttribute("showProductSingle", this.productService.findById(id).get());
 		// show user
 		getName(request, model);
+		//gọi pt home trả về model
 		initHomeResponse(model);
+		//gọi pt productService tìm theo id 
 		Product product = this.productService.findById(id).get();
 		Product p = this.productService.findByIdProduct(product.getIdProduct());
+		//cho product là p 
+		//pt get lấy theo id
 		p.setName(product.getName());
+		//lất gt,giá, hình ảnh
 		p.setPrice(product.getPrice());
 		p.setImage(product.getImage());
+		//lấy theo ds idCategory
 		List<Product> list = this.productService.findByIdCategory(p.getCategory().getIdCategory());
-
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {//sử dụng vòng lặp 
 			p = list.get(i);
 			if (p.getIdProduct() == product.getIdProduct()) {
 				list.remove(list.get(i));
@@ -192,28 +198,36 @@ public class HomeController {
 	@GetMapping("/searchProduct")
 	public String searchProductByIdCategory(ModelMap model, @RequestParam("key") String key, Product product,
 			RedirectAttributes redirect, HttpServletRequest request, HttpServletResponse response) {
+		//sử dụng pt findAll lấy tất cả tt 
 		model.addAttribute("product", this.productService.findAll());
 		model.addAttribute("category", this.categoryService.findAll());
+		//lấy ds products sử dụng pt searchListProductByIdCategory
 		List<Product> products = this.productService.searchListProductByIdCategory(key);
 		
+		//show user
 		getName(request, model);
+		//gọi pt home trả về model
 		initHomeResponse(model);
-
-		if (products.isEmpty() || products.contains(product)) {
+		if (products.isEmpty() || products.contains(product)) {//kiểm tra nếu product trống 
 			return "shop/searchProduct";
 		}
-
+		//sử dụng pt searchListProductByIdCategory giá trị vào model
 		model.addAttribute("searchProduct", this.productService.searchListProductByIdCategory(key));
 		return "shop/searchProduct";
 	}
 
+	//action logout
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		initHomeResponse(model);
+		//gọi pt home trả về model
 		Cookie cookie = new Cookie("accountcustomer", null);
+		//làm mới cookie khi logout
 		cookie.setMaxAge(0);
+		//thiết lập cookie
 		cookie.setPath("/");
 		response.addCookie(cookie);
+		//chuyển đến trang index
 		return "redirect:/index";
 	}
 

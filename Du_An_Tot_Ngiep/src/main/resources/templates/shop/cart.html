@@ -57,7 +57,9 @@
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
 						<!--sd th:href liên kết đến trang action index controller-->
-						<span class="mr-2"><a th:href="@{/index}">Trang chủ</a></span> 
+						<span class="mr-2">
+							<a th:href="@{/index}">Trang chủ</a>
+						</span> 
 						<span>Giỏ hàng</span>
 					</p>
 					<h1 class="mb-0 bread">Giỏ hàng của tôi</h1>
@@ -90,7 +92,7 @@
 								<!--sử dụng th:text để hiển thị mô tả từng dòng của list box-->
 								<tr class="text-center" th:each="product : ${session.cart}">
 									<input type="hidden" class="idproduct" th:value="${product.idProduct}" />
-									<!--x-->
+									<!---->
 									<td class="product-remove"
 										th:attr="data-productid=${product.idProduct}">
 										<a href="#" title="Xóa">
@@ -133,7 +135,9 @@
 									<td colspan="7">
 										<center>
 											<!--sử dụng jqeury submitorders-->
-											<a href="#" title="Update"><span id="submitorders">Đặt hàng</span></a>
+											<a href="#" title="Update">
+												<span id="submitorders">Đặt hàng</span>
+											</a>
 										</center>
 									</td>
 								</tr>
@@ -209,7 +213,8 @@
 		</div>
 	</section>
 	
-	<footer class="ftco-footer ftco-section" th:replace="fragment/footer::footer"></footer>
+	<footer class="ftco-footer ftco-section" th:replace="fragment/footer::footer">
+	</footer>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
