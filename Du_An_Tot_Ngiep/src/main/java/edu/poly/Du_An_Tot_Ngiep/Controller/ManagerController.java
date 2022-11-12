@@ -282,8 +282,9 @@ public class ManagerController {
 				if (cookies[i].getName().equals("accountuser")) {//kiểm tra nếu i khác entity
 					this.userService.findByPhone(cookies[i].getValue()).get();//sử dụng userService lấy tt người đăng nhập
 					getName(request, model);
-					//đưa các giá trị vào model
+					//tạo form trống
 					model.addAttribute("product", new Product());
+					//đưa các giá trị vào model
 					model.addAttribute("listCategory", categoryService.findAll());
 					//trả về trang thêm sản phẩm
 					return "/manager/product/addProduct";

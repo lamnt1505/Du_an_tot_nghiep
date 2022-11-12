@@ -228,7 +228,7 @@ public class UserController {
 				if (cookies[i].getName().equals("accountuser")) {//kiểm tra nếu i khác entity
 					User us = this.userService.findByPhone(cookies[i].getValue()).get();
 					//sử dụng userService lấy tt người đăng nhập
-					if (us.isRole() == true) {//kiểm tra nếu role đăng nhập là true thì k đc chỉnh sửa
+					if (us.isRole() == false) {//kiểm tra nếu role đăng nhập là true thì k đc chỉnh sửa
 						usernameID.setFullname(usernameID.getFullname());
 						usernameID.setImage(userService.findById(usernameID.getUserId()).get().getImage());
 						usernameID.setRole(true);

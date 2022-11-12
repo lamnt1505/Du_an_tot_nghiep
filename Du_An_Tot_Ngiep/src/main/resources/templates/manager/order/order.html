@@ -28,6 +28,7 @@
 	<link rel="stylesheet" th:href="@{/assets/css/demo_1/style.css}">
 	<!-- End Layout styles -->
     <link rel="shortcut icon" th:href="@{/assets/images/logo_s.png}"/>
+    <link rel="icon" href="/images/logo_s.png" type="image/x-icon">
 	<style>
 		.table td {
 			max-width: 200px;
@@ -143,13 +144,17 @@
 	<script th:src="@{/assets/vendors/datatables/dataTables.bootstrap4.js}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	<!--bộ lọc filter-->
 	<script type="text/javascript">
+		//jQuery sử dụng để lặp qua từng hàng của bảng
 		$(document).ready(function(){
 		  $("#myInput").on("keyup", function() {
 		    var value = $(this).val().toLowerCase();
 		    $("#myTable tr").filter(function() {
 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		    });
+			//pt toggle ẩn hàng
+			//pt 
 		  });
 		});
 	</script>

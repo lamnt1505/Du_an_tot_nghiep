@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -34,7 +34,7 @@
 	<link rel="stylesheet" th:href="@{/css/slick-theme.css}">
 	<link rel="stylesheet" th:href="@{/css/slick.css}">
 	<link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
-
+	<link rel="icon" href="/images/logo_s.png" type="image/x-icon">
 </head>
 <body class="goto-here">
 	<!-- Header -->
@@ -74,7 +74,6 @@
 				<li>
 					<button style="hover: color=red;" class="dropdown-item"
 						onclick="listProductPriceDesc()">Giá cao đến thấp
-						<!---->
 						</button>
 				</li>
 				<li>
@@ -103,7 +102,8 @@
 					<form action="#" class="subscribe-form">
 						<div class="form-group d-flex">
 							<input type="text" class="form-control"
-								placeholder="Enter email address"> <input type="submit"
+								placeholder="Enter email address"> 
+							<input type="submit"
 								value="Subscribe" class="submit px-3">
 						</div>
 					</form>
@@ -167,7 +167,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 	<script type="text/javascript">
 		$( document ).ready(function() {
-			getProducts();//
+			getProducts();//lấy pt products
 		});
 		
 		var listProduct = [];
@@ -197,7 +197,8 @@
 		    var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
 		    return  n2.split('').reverse().join('') + 'VNĐ';
 		}
-		
+		//lấy thông tin sản phẩm
+		//
 		function getProducts(){
 			$.ajax({
 				type : "GET",
@@ -244,7 +245,7 @@
 						+'<div class="d-flex">'
 							+'<div class="pricing">'
 							+'<p class="price">'
-							+'<span class="price-sale formatPrice" id="fomatPrice">' +listProduct[i]['price']+ '</span> <span class="price-sale"> đ</span>'
+							+'<span class="price-sale formatPrice" id="fomatPrice">' +listProduct[i]['price']+ '</span> <span class="price-sale"> VNĐ</span>'
 							+'</p>'
 							+'</div>'
 							+'</div>'
@@ -352,28 +353,29 @@
 				detailHtmlPage(pageNext,pageTotal);
 			});
 		}
-		
+		//action tìm sản phẩm mới nhất
 		function listProductNewBest(){
 				$.ajax({
-					type: "GET",
-					contentType : "application/json; charset=utf-8",
-					dataType : 'json',
-					async : false,
-					url : "/index/listProductNewBest",
-					success : function(result){
+					type: "GET",//sử dụng request  pt get
+					contentType : "application/json; charset=utf-8",//kdl nd gửi lên server
+					dataType : 'json',// dữ liệu trả về json
+					async : false,//thiết lập giá trị false th request đồng bộ
+					url : "/index/listProductNewBest",//sử dụng /index/listProductNewBest rest controller
+					success : function(result){//request thành công 
 						listProduct = result;
-						pageCheck = 1;
+						//in ra listProduct
+						pageCheck = 1;//tra
 						pageTotal = listProduct.length / pageProduct;
 						detailHtml(pageTotal,listProduct.length);
 					},
 					error: function(result){
-						
 						console.log(result);
 						alert('failedd');
 					}
 					
 				});
 			}
+		//action tìm giá từ cao đến thấp
 		function listProductPriceDesc(){
 				$.ajax({
 					type: "GET",
@@ -391,7 +393,8 @@
 					}
 				});
 			}
-		
+
+		//action tìm giá từ thấp đến cao
 		function listProductPriceAsc(){
 				$.ajax({
 					type: "GET",
@@ -435,7 +438,6 @@
 		}
 		
 		$(document).ready(function() {
-		
 			$(document).on('click',".procart",function(e) {
 				e.preventDefault();
 				console.log("---start function--");

@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="../assets/css/demo_1/style.css">
 <!-- End Layout styles -->
 <link rel="shortcut icon" href="../assets/images/favicon.png" />
+<link rel="icon" href="/images/logo_s.png" type="image/x-icon">
 <style type="text/css">
 span {
 	color: red;
@@ -84,7 +85,8 @@ span {
 													<div class="form-group">
 														<label class="label">Tên sản phẩm</label>
 														<div class="input-group">
-															<!--sử dụng th:field lấy biến name được chỉ định-->
+															<!--sử dụng th:field 
+																được chỉ định đổ vào trường text-->
 															<input th:field="*{name}" name="name" type="text"
 																class="form-control">
 														</div>
@@ -145,7 +147,8 @@ span {
 														<label class="label">Chi Tiết Sản Phẩm</label>
 														<div class="input-group">
 															<textarea class="form-control" th:field="*{description}"
-																name="description" rows="4" cols="30"></textarea>
+																name="description" rows="4" cols="30">
+															</textarea>
 														</div>
 													</div>
 												</div>

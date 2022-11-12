@@ -38,7 +38,7 @@ public class Product {
 	private byte[] image;
 	@Column(columnDefinition = "nvarchar(100)", name = "origin")
 	private String origin;
-	@Column(columnDefinition = "nvarchar(255)", name = "description")
+	@Column(columnDefinition = "nvarchar(500)", name = "description")
 	private String description;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

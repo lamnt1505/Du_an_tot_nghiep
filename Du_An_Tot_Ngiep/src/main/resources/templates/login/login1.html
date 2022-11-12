@@ -11,6 +11,7 @@
 	href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 <!-- STYLE CSS -->
 <link rel="stylesheet" href="css/style2.css">
+<link rel="icon" href="/images/logo_s.png" type="image/x-icon">
 <style type="text/css">
 .home {
 	width: 100%;
@@ -33,7 +34,7 @@
 
 <body>
 
-	<div class="wrapper" style="background-image: url('images/d2.jpg');">
+	<div class="wrapper" style="background-image: url('images/image_5.jpg');">
 		<div class="inner">
 
 			<div class="image-holder" style="margin-top: -20px;">
@@ -41,7 +42,7 @@
 			</div>
 			<form th:action="@{/login}" method="post"
 				onsubmit="return checkempty1(form)" name="form">
-				<h3>Đăng nhập</h3>
+				<h3 style="color: rgb(8, 167, 100);">Đăng nhập</h3>
 				<div class="spanerror"
 					style="width: 320px; margin-top: -20px; height: 40px;">
 					<span th:text="${error}"
@@ -59,7 +60,8 @@
 						class="form-control"> <i class="zmdi zmdi-lock"></i>
 				</div>
 				<div class="error">
-					<span id="matkhau"></span> <span th:text="${errorpass}"></span>
+					<span id="matkhau"></span> 
+					<span th:text="${errorpass}"></span>
 				</div>
 				<div style="width: 100%">
 					<button style="width: 50%; border-radius: 10px;">Đăng nhập</button>
