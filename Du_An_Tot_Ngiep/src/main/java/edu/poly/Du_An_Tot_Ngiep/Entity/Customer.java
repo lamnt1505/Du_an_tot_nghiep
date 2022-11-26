@@ -32,7 +32,7 @@ public class Customer {
 	private String address;
 
 	public Customer() {
-		super();
+		
 	}
 
 	public Customer(int customerId, String fullname, boolean gender, Date birthday, String phone, String password,

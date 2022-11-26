@@ -30,7 +30,7 @@ public class Product {
 
 	@Column(columnDefinition = "nvarchar(150)")
 	private String name;
-
+	
 	private double price;
 	@JsonIgnore
 	@Lob
@@ -44,16 +44,18 @@ public class Product {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "dateOfManufacture")
 	private Date dateOfManufacture;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "idCategory", insertable = true, updatable = true)
 	private Category category;
-
+	
+	//trường k lưu csdl 
+	//dùng cho gt st
 	@Transient
 	private int amount;
 
 	public Product() {
-		super();
+		
 	}
 
 	public Product(int idProduct, String name, double price, byte[] image, String origin, String description,

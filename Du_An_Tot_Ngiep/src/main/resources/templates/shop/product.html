@@ -64,20 +64,22 @@
 			<button class="btn btn-primary" style="margin-right: 10px;"
 				data-toggle="modal" data-target="#modalFilter">Lọc theo danh mục</button>
 			<a style="margin-right: 10px;" href="#">Sắp Xếp theo:</a>
+			<!--sd pt ajax tìm sản phẩm mới nhất -->
 			<button class="btn btn-primary" type="button"
 				onclick="listProductNewBest()">Mới Nhất</button>
 			<!--sử dụng jquery listProductNewBest tìm sản phẩm mới nhất-->
 			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					Giá <span class="caret"></span>
+					Giá 
+				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
 				<li>
-					<button style="hover: color=red;" class="dropdown-item"
+					<button style="hover: color=red;" class="dropdown-item1"
 						onclick="listProductPriceDesc()">Giá cao đến thấp
 						</button>
 				</li>
 				<li>
-					<button class="dropdown-item"
+					<button class="dropdown-item1"
 						onclick="listProductPriceAsc()">Giá thấp đến cao</button>
 				</li>
 			</ul>
@@ -140,6 +142,7 @@
 				<div class="modal-footer">
 					<button onclick="showListProductByIdFilter()" type="button"
 						class="btn btn-default" data-dismiss="modal">Lọc</button>
+						<!--tìm kiếm theo id sd jquery-->
 					<button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
 				</div>
 			</div>
@@ -225,7 +228,7 @@
 				listPageProduct(0,max,true);
 			 }	
 		}
-		
+		//pt hiển thị sản phẩm product
 		function listPageProduct(start, max, donit){
 			$('#dataProduct').empty();
 			var j = 0;
@@ -294,7 +297,7 @@
 			});
 		});
 		
-					
+		//phân trang 
 		function detailHtmlPage(indexPage , page, active ){
 			$('#pageproduct').empty();
 		 	var html = 
@@ -357,20 +360,24 @@
 		function listProductNewBest(){
 				$.ajax({
 					type: "GET",//sử dụng request  pt get
-					contentType : "application/json; charset=utf-8",//kdl nd gửi lên server
+					contentType : "application/json; charset=utf-8",
+					//nội dung được gửi lên server
 					dataType : 'json',// dữ liệu trả về json
 					async : false,//thiết lập giá trị false th request đồng bộ
-					url : "/index/listProductNewBest",//sử dụng /index/listProductNewBest rest controller
+					url : "/index/listProductNewBest",
+					//sử dụng /index/listProductNewBest rest controller
 					success : function(result){//request thành công 
 						listProduct = result;
 						//in ra listProduct
-						pageCheck = 1;//tra
+						pageCheck = 1;//trang đầu tiên
 						pageTotal = listProduct.length / pageProduct;
 						detailHtml(pageTotal,listProduct.length);
 					},
-					error: function(result){
+					error: function(result){//request lỗi
 						console.log(result);
+						//in ra danh sách
 						alert('failedd');
+						//đưa ra tb fail
 					}
 					
 				});
@@ -378,18 +385,24 @@
 		//action tìm giá từ cao đến thấp
 		function listProductPriceDesc(){
 				$.ajax({
-					type: "GET",
+					type: "GET",//sử dụng request  pt get
 					contentType : "application/json; charset=utf-8",
+					//nội dung được gửi lên server
 					dataType : 'json',
+					// dữ liệu trả về json
 					url : "/index/listProductPriceDesc",
-					success : function(result){
+					//sử dụng /index/listProductPriceDesc rest controller 
+					//tìm sản phẩm cao đến thấp
+					success : function(result){//request thành công 
 						listProduct = result;
+						//in ra listProduct
 						pageCheck = 1;
 						pageTotal = listProduct.length / pageProduct;
 						detailHtml(pageTotal,listProduct.length);
 					},
-					error: function(result){
+					error: function(result){//request thành công 
 						alert('failedd');
+						//đưa ra tb fail
 					}
 				});
 			}
@@ -397,18 +410,24 @@
 		//action tìm giá từ thấp đến cao
 		function listProductPriceAsc(){
 				$.ajax({
-					type: "GET",
+					type: "GET",//sử dụng request  pt get
 					contentType : "application/json; charset=utf-8",
+					//nội dung được gửi lên server
 					dataType : 'json',
+					// dữ liệu trả về json
 					url : "/index/listProductPriceAsc",
-					success : function(result){
+					//sử dụng /index/listProductPriceDesc rest controller 
+					//tìm sản phẩm thấp đến cao
+					success : function(result){//request thành công
 						listProduct = result;
+						//in ra listProduct
 						pageCheck = 1;
 						pageTotal = listProduct.length / pageProduct;
 						detailHtml(pageTotal,listProduct.length);
 					},
-					error: function(result){
+					error: function(result){//request thành công 
 						alert('failedd');
+						//đưa ra tb fail
 					}
 				});
 			}
@@ -422,8 +441,12 @@
 			$.ajax({
 				type: "POST",//sd pt post
 				contentType : "application/json; charset=utf-8",
+				//nội dung được gửi lên server
 				dataType : 'json',
+				// dữ liệu trả về json
 				url : "/index/listProductByIdCategoryFilter/" +id,
+				//sử dụng /index/listProductByIdCategoryFilter rest controller 
+				//tìm sản phẩm theo id
 				success : function(result){
 					listProduct = result;
 					pageTotal = listProduct.length / pageProduct;

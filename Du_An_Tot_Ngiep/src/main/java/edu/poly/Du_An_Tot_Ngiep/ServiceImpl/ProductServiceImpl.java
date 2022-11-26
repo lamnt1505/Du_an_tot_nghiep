@@ -15,7 +15,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
-
+	//khai báo Repository
+	
 	@Override
 	public <S extends Product> S save(S entity) {
 		return productRepository.save(entity);

@@ -5,6 +5,7 @@ function clear() {//pt làm mới
 	document.getElementById("ngayhethang").innerHTML = "";
 	document.getElementById("nguongoc").innerHTML = "";
 }
+
 function checkempty(formproduct) {//kiểm tra các box
 	clear();//pt xóa
 	var date1 = new Date().getTime(); // current date
@@ -39,7 +40,7 @@ function checkempty(formproduct) {//kiểm tra các box
 		return false;
 	}
 	else {
-		return false;
+		return true;
 	}
 
 }

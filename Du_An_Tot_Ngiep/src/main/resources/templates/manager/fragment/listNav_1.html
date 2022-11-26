@@ -5,6 +5,7 @@
               <!--th:href liên kết đến action manager-->
               <a th:href="@{/manager}" class="nav-link">
                 <div class="profile-image">
+                 <!--sử dụng th:src  lấy giá trị hình + pt nối chuỗi đến image-->
                   <img class="img-xs rounded-circle" th:src="@{'data:image/png;base64,' + ${image}}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>

@@ -25,7 +25,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	@Query(value = " select top 8 * from product order by id_product desc ", nativeQuery = true)
 	List<Product> showListProductForIndex();
-
+	
 	@Query(value = "select * from product", nativeQuery = true)
 	List<Product> listProduct();
 

@@ -65,6 +65,7 @@ public class HomeRestController {
 
 	@GetMapping("/index/listProductAjax")
 	public ResponseEntity<?> showListProduct() {
+	  //sử dụng productService lấy danh sách sản phẩm
 		return ResponseEntity.ok(this.productService.listProduct());
 	}
 
@@ -101,7 +102,8 @@ public class HomeRestController {
 			HttpSession session) {
 
 		Product productOrder = this.productService.findByIdProduct(idProduct);
-
+		//sử dụng productService tìm theo id
+		
 		if (productOrder == null || amount <= 0) {
 			return "3";
 		}

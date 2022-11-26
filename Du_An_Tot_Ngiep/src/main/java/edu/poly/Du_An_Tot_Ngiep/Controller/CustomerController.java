@@ -33,7 +33,7 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	void getName(HttpServletRequest request, ModelMap model) {
-	  //đọc cookie từ trình duyệt
+	  //tạo mới 1 cookie
 		Cookie[] cookies = request.getCookies();
 		for (int i = 0; i < cookies.length; ++i) {//sd vl for để duyệt qua cookie
 			if (cookies[i].getName().equals("accountcustomer")) {//kiểm tra cookie
@@ -46,21 +46,28 @@ public class CustomerController {
 			}
 		}
 	}
-
-	@GetMapping(value = "/manager/listCustomer")//action ht ds customer
+	
+	//action ht ds customer
+	@GetMapping(value = "/manager/listCustomer")
 	public String listProduct(ModelMap model, @CookieValue(value = "accountuser", required = false) String phone,
 			HttpServletRequest request, HttpServletResponse response) {
-		Cookie[] cookies = request.getCookies();//đọc cookie từ trình duyệt
+	    //tạo mới 1 cookie
+		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {//kiểm tra cookie
 			for (int i = 0; i < cookies.length; ++i) {
 				if (cookies[i].getName().equals("accountuser")) {
 				  //so sánh phần tử i trong cookie với accountuser
 					User user = this.userService.findByPhone(cookies[i].getValue()).get();
+					//lấy sđt users
 					//đưa giá trị vào model sử dụng pt findall
 					model.addAttribute("listcustomer", this.customerService.findAll());
+					//lấy tất cả customer đưa listcustomer
 					model.addAttribute("username", phone);
+					//lấy hình ảnh và họ tên
 					model.addAttribute("fullname", user.getFullname());
+					model.addAttribute("image", user.getImageBase64());
 					return "/manager/users/listCustomer";
+					//trả về trang listcustomer
 				}
 			}
 
@@ -78,17 +85,21 @@ public class CustomerController {
 
 	//action đăng kí
 	@PostMapping(value = "/registration")
-	public String addProduct(@ModelAttribute(name = "registration") Customer registration, ModelMap model,
+	public String addProduct(@ModelAttribute(name = "registration") Customer registration, 
+	        ModelMap model,
 			@RequestParam boolean gender, @RequestParam Date birthday, @RequestParam("phone") String phone) {
 	    //đưa giá trị vào model thêm mới 1 cus
 		model.addAttribute("registration", new Customer());
+		//sd csmS lấy sdt user và customer kiểm tra sdt
 		if (customerService.findByPhoneCus(phone).isPresent() || userService.findByPhone(phone).isPresent()) {
 		    //đưa ra tb sđt đã có trong db
 			model.addAttribute("error", "Số điện thoại đã tồn tại");
 			return "/login/registred";
 		} else {//ngược lại nếu lwuu thành công
+		    //sd pt save 
 			customerService.save(registration);
 			model.addAttribute("succes", "Đăng Ký Thành Công!");
+			//chuyển hướng đến trang login
 			return "redirect:login";
 		}
 	}
@@ -100,11 +111,13 @@ public class CustomerController {
 	    //sử dụng pt findall đưa giá trị vào model
 		model.addAttribute("listuser", this.customerService.findAll());
 		model.addAttribute("customer",
-		this.customerService.findById(customerId).isPresent() ? this.customerService.findById(customerId).get()
+		this.customerService.findById(customerId).isPresent() 
+		 ? this.customerService.findById(customerId).get()
 						: null);
 		//trả về getname
 		getName(request, model);
 		return "/manager/users/updateProfile";
+		//trả về trang user updateprofile
 	}
 
 	//action updatecus
@@ -113,7 +126,9 @@ public class CustomerController {
 			@CookieValue(value = "accountcustomer", required = false) String phone, HttpServletRequest request,
 			ModelMap model) {
 		customerService.save(customerId);
+		//sd pt save lấy từ customerService
 		getName(request, model);
+		//trả về trang index
 		return "redirect:/index";
 	}
 

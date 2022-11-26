@@ -43,14 +43,13 @@ public class User {
 	private String address;
 
 	public User() {
-		super();
+		
 	}
 
 	public User(int userId, String fullname, boolean gender, Date birthday, String phone, String password, byte[] image,
 			boolean role, String address) {
 		super();
 		this.userId = userId;
-//		this.email = email;
 		this.fullname = fullname;
 		this.gender = gender;
 		this.birthday = birthday;
